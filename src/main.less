@@ -1,0 +1,75 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+#app{
+    height: 100%;
+    .App {
+        height: 100%;
+        background-color: #ececec;
+    }
+}
+
+//左侧导航
+#leftMenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background: #fff;
+    border-right: 1px solid #e9e9e9;
+    width: 180px;
+    min-width: 180px;
+    max-width: 180px;
+    .ant-menu{
+        height: 100%;
+    }
+}
+
+//头部模块
+#admin_top{
+    position: absolute;
+    top: 0;
+    left: 190px;
+    background: #fff;
+    border-bottom: 1px solid #e9e9e9;
+    height: 60px;
+    right: 0;
+    bottom: 0;
+    box-sizing: border-box;
+}
+
+//右侧主要信息
+#main_right {
+    position: absolute;
+    top: 70px;
+    left: 190px;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    box-sizing: border-box;
+    .searchbar { //搜索框总样式
+        width: 100%;
+        .field {
+            display: inline-block;
+            padding-right: 20px;
+            .input{
+                .title, .input {
+                    display: inline-block;
+                    text-align: right;
+                    margin-right: 5px;
+                }
+            }
+        }
+        .buttonGroup{
+            display: inline-block;
+            button{
+                margin-right: 20px;
+            }
+        }
+    }
+    .users {  //公司列表
+        padding: 24px;
+    }
+}
