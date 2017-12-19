@@ -7,6 +7,7 @@ var webpackConfig = require('./webpack.config');
 var portfinder = require('portfinder'); //用于获取port
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
+
 const devWebpackConfig = merge(webpackConfig, {
     devtool: 'eval-source-map',
     module: {
@@ -18,12 +19,13 @@ const devWebpackConfig = merge(webpackConfig, {
             'HOST': config.dev.env.NODE_ENV === '"development"' ? JSON.stringify('/api') : JSON.stringify('')
         }),
         // new webpack.optimize.OccurrenceOrderPlugin(),
-        // new webpack.HotModuleReplacementPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
         // new webpack.NoErrorsPlugin(),
     ],
     devServer: {
         historyApiFallback: true,       //暂时不明其意
         hot: true,
+        inline: true,
         host: process.env.HOST || config.dev.host,
         port: process.env.PORT || config.dev.port,
         open: config.dev.autoOpenBrowser,   //是否自动打开浏览器

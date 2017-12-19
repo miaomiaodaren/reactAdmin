@@ -63,6 +63,6 @@ class LoginPage extends React.Component {
     }
 }
 
-//经过 Form.create 包装的组件将会自带 this.props.form 属性
+// 经过 Form.create 包装的组件将会自带 this.props.form 属性
 const Login = Form.create()(LoginPage);
 export default Login;
