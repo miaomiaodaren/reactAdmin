@@ -11,7 +11,6 @@ import User from './components/users/index.jsx'
 class App extends React.Component {
     constructor(props) {
         super(props);
-        console.info(this.props, 2323);
     }
     render() {
         return (

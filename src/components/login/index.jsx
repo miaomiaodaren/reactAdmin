@@ -1,5 +1,7 @@
 import React from 'react'
-import { Form, Icon, Input, Button, Checkbox } from 'antd'
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { connect } from 'react-redux';
+
 
 const FormItem = Form.Item;
 
@@ -7,11 +9,17 @@ import './index.less'
 
 import { Loging } from '../../api/api'
 
+@connect(
+    (state) => ({
+        todoList: state.todoList,
+    })
+)
+
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            imgUrl: `/api/user/GetImgCode`
+            // imgUrl: `/api/user/GetImgCode`
         }
     }
     handleSubmit = (e) => {
@@ -27,6 +35,7 @@ class LoginPage extends React.Component {
     }
     render() {
         const { getFieldDecorator } = this.props.form;
+        console.info(this, 888);
         return (
             <div className="adminLogin">
                 <Form onSubmit={this.handleSubmit} className="login-form">
@@ -50,7 +59,7 @@ class LoginPage extends React.Component {
                         })(
                             <Input className="login_input imgcode" prefix={<Icon type="area-chart" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Imgcode" />
                         )}
-                        <img src={this.state.imgUrl} className="imgcodes" />
+                        <img src={this.state.imgUrl || ''} className="imgcodes" />
                     </FormItem>
                     <FormItem>
                         <Button type="primary" htmlType="submit" className="login-form-button">

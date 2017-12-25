@@ -50,7 +50,7 @@ export default class TableCom extends Component {
     }
     render() {
         return (
-            <Table columns={ this.columns } rowClassName={ this.props.rowClass } dataSource={ this.props.data }
+            <Table columns={ this.columns } rowClassName={ this.props.rowClass } dataSource={ this.props.data } rowKey={record => record._id} loading={this.props.loading}
                 pagination={this.props.pagination !== false ? {
                     total: this.props.total,
                     pageSize: this.props.pageSize,
@@ -66,6 +66,6 @@ export default class TableCom extends Component {
     }
 }
 
-TableCom.PropTypes = {
+TableCom.propTypes = {
     pageSize: PropTypes.number,
 }

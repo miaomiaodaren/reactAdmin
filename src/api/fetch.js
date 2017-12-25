@@ -10,7 +10,8 @@ const pardata = (data, type) => {
 export const setUrlPrmt = (obj)=> {
     let _rs = [];
     for (let p in obj) {
-        if (obj[p] != null && obj[p] != '') {
+        //此处用!==''来强制判断一定是空，防止传入的值为false的时候会进不到逻辑
+        if (obj[p] != null && obj[p] !== '') {
             _rs.push(p + '=' + obj[p])
         }
     }
