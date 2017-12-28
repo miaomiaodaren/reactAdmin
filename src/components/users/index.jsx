@@ -1,10 +1,11 @@
 import React from 'react';
 import { Table } from 'antd';
-import SearchBar from '../searchbar.jsx';
+import SearchBar, { SearchForm } from '../searchbar.jsx';
 import TableCom from '../tablecom.jsx';
 import { connect } from 'react-redux';
 import { fetchUserList, AddTodo, fetchUserAdd } from '../../model/actions/user.js'
 import { message } from 'antd';
+import { RemoveU } from '../../api/api.js';   //接口地址
 
 @connect(
     (state) => ({
@@ -115,11 +116,21 @@ export default class Users extends React.Component {
         fetchUserList()(this.props.dispatch)
     }
 
-    tableAction = (key, row) => {
+    tableAction = async (key, row) => {
         if(key === 'edit') {
             //TODO 执行编译
+            console.info(this, 777);
         } else {
-            //TODO 执行删除
+            //TODO 执行删除   (后续添加删除确认,需要确认才能删除)
+            try {
+                const d = await RemoveU({id: row._id});
+                if(d.code === 1) {
+                    message.success('用户删除成功');
+                    fetchUserList()(this.props.dispatch);
+                }
+            } catch(err) {
+                console.error(err);
+            }
         }
     }
 
@@ -151,6 +162,13 @@ export default class Users extends React.Component {
                         />
                     </div>
                 </div>
+                <Modal
+                    title={this.props.hasadd && this.props.hasadd.title}
+                    visible={this.state.showmodel}
+                    footer={null}
+                >
+                    <SearchForm views={this.props.hasadd.addfiles} showCancel={true} onColse={this.onColse} noBtn={false} okText='添加' addClick={this.sub} />
+                </Modal>
             </div>
         )
     }

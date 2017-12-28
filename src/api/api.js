@@ -8,3 +8,6 @@ export const GetUser = (params = {}) => newFetch(`${HOST}/users/GetAllUser`, par
 
 //添加用户
 export const AddUser = (params ={}) => newFetch(`${HOST}/users/UserReginer`, params, 'POST');
+
+//删除用户
+export const RemoveU = (params = {}) => newFetch(`${HOST}/users/RemoveUser`, params, 'POST');
