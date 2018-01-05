@@ -63,30 +63,6 @@ export default class SearchBar extends Component {
             fields: {}
         })
     }
-
-    //打开弹出窗口
-    add = () => {
-        let modeltype = this.props.rd || '';
-        this.setState({
-            showmodel: true
-        })
-    }
-
-    handleOk = () => {
-        this.setState({
-            showmodel: false
-        })
-    }
-    onColse =() => {
-        this.setState({showmodel: false})
-    }
-
-    sub = (value) => {
-        const { onOk } = this.props;
-        onOk && onOk(value);
-        this.setState({showmodel: false});
-    }
-
     render() {
         return (
             <div className="searchbar">
@@ -94,15 +70,7 @@ export default class SearchBar extends Component {
                 <div className="buttonGroup">
                     <Button onClick={this.handleReset} className="reset" icon="reload">重置</Button>
                     <Button onClick={this.handleSubmit} className="search" icon="search">搜索</Button>
-                    { this.props.hasadd ?  <Button onClick={ this.add } className="search" icon="user-add" >添加</Button> : '' }
                 </div>
-                <Modal
-                    title={this.props.hasadd && this.props.hasadd.title}
-                    visible={this.state.showmodel}
-                    footer={null}
-                >
-                    <SearchForm views={this.props.hasadd.addfiles} showCancel={true} onColse={this.onColse} noBtn={false} okText='添加' addClick={this.sub} />
-                </Modal>
             </div>
         )
     }
@@ -114,7 +82,14 @@ export class Isform extends Component {
     constructor(props) {
         super(props)
     }
-
+    //按钮样式循环
+    FormButtions = (fields) => {
+        let compon = [];
+        for(const field of fields) {
+            compon.push(<Button type={field.type} key={field.name} htmlType={field.htmlType} onClick={field.onClick}>{field.name}</Button>)
+        }
+        return compon;
+    }
     FormInputs = (fields) => {
         let components = [];
         let i = 0;
@@ -135,7 +110,7 @@ export class Isform extends Component {
                 case 'select':
                     component = (<Select 
                         placeholder="请选择" 
-                        multiple = { field.multiple } style={{ width: '100%', }}>
+                        multiple = { field.multiple } style={{ width: '100%' }} >
                         {items && items.map(({ mean, value }) => <Select.Option key={ value.toString() } value={ value.toString() }>{ mean }</Select.Option>)}
                     </Select>)
                     break;
@@ -149,10 +124,9 @@ export class Isform extends Component {
             </div>)
         }
         const buttons = (
-            <FormItem wrapperCol={{ span: 14, offset: 6 }}>
+            <FormItem key="control-buttons" wrapperCol={{ span: 14, offset: 6 }}>
                 <div className="buttons">
-                    {this.props.showCancel && <Button onClick={this.doCancel} >取消</Button>}
-                    {!this.props.noBtn && <Button type="primary" htmlType="submit">{this.props.okText || '确定'}</Button>}
+                    {this.FormButtions(this.props.editBtn)}
                 </div>
             </FormItem>
         )
@@ -163,7 +137,7 @@ export class Isform extends Component {
     generateFormItem = ({title, options, component}) => {
         const { getFieldDecorator } = this.props.form;
         return (
-            <FormItem>
+            <FormItem key={title}>
                 {getFieldDecorator(title, options)(component)} 
             </FormItem>
         )
@@ -178,9 +152,9 @@ export class Isform extends Component {
         e && e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                const { addClick } = this.props;
+                const { submitClick } = this.props;
                 values.isAdmin = values.isAdmin == 0 ? true : false;
-                addClick && addClick(values)
+                submitClick && submitClick(values)
                 this.props.form.resetFields();
             }
         })
@@ -190,7 +164,7 @@ export class Isform extends Component {
         return (
             <div>
                 <Form onSubmit={this.handleSubmit} className="login-form">
-                    { this.FormInputs(this.props.views) }
+                    { this.FormInputs(this.props.fields) }
                 </Form>
             </div>
         )
@@ -199,10 +173,36 @@ export class Isform extends Component {
 
 export const SearchForm = Form.create()(Isform);
 
+
+
+
+//views 要生成的列表配置
+//showCancel 是否要显示取消按钮
+//noBtn 不显示确定按钮
+//okText 确定按钮文字
+//submitClick 点击确定按钮时的function
+//title 弹出层的文字 
+//onColse 点击model的关闭与遮罩层的时候关闭的
+//editBtn 显示按钮详情
+//visible  控制model框是否显示
+export class FormModel extends Component {
+    render() {
+        const { title, onColse, fields, editBtn, visible, submitClick, defaultData, modalKey } = this.props
+        return (
+            <Modal footer={null} title={title} onCancel={onColse} visible={visible} key={modalKey}>
+                <SearchForm fields={fields} editBtn={editBtn} submitClick={submitClick} />
+            </Modal>
+        )
+    }
+}
+
+
+
 Isform.propTypes = {
   title: PropTypes.string,
   fields: PropTypes.arrayOf(Object),
-  onOk: PropTypes.func.isRequired,
+//   onOk: PropTypes.func.isRequired,
   onCancel: PropTypes.func,
   okText: PropTypes.string,
 }
+

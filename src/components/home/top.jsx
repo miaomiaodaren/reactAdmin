@@ -9,7 +9,7 @@ export default class TopCompont extends Component {
     render() {
         return (
             <div id="admin_top">
-                wo shi top component
+                大家好,我是喵喵大人
             </div>
         )
     }

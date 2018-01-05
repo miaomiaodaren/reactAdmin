@@ -1,10 +1,10 @@
 import React from 'react';
 import { Table } from 'antd';
-import SearchBar, { SearchForm } from '../searchbar.jsx';
+import SearchBar, { FormModel } from '../searchbar.jsx';
 import TableCom from '../tablecom.jsx';
 import { connect } from 'react-redux';
 import { fetchUserList, AddTodo, fetchUserAdd } from '../../model/actions/user.js'
-import { message } from 'antd';
+import { message, Modal, Button } from 'antd';
 import { RemoveU } from '../../api/api.js';   //接口地址
 
 @connect(
@@ -31,7 +31,11 @@ export default class Users extends React.Component {
             actionList :[
                 {key: 'edit', name: '修改', color: 'blue', icon: 'edit'}, 
                 {key: 'delete', name: '删除', color: 'red', icon: 'delete'}
-            ]
+            ],
+            addDialog: false,  //添加按钮是否显示
+            editDialog: false,  //编辑按钮是否显示
+            editData: {},
+            selectid: ''    //选择的按钮
         }
     }
 
@@ -66,11 +70,47 @@ export default class Users extends React.Component {
         }, {
             title: '密码',
             key: 'psw',
-            type: 'password'
+            type: 'password',
         }, {
             title: '是否管理员',
             key: 'isAdmin',
             type: 'select',
+            items: () => [{
+                value: '0',
+                mean: '管理员'
+            }, {
+                value: '1',
+                mean: '普通用户'
+            }].map(ele => ({
+                value: ele.value,
+                mean: ele.mean
+            }))
+        }]
+    }
+    //编辑时要传过的值
+    editfiles = () => {
+        const editData = this.state.editData;
+        return [{
+            title: '用户名',
+            key: 'name',
+            type: 'input',
+            options: {
+                initialValue: editData.name,
+            }
+        }, {
+            title: '密码',
+            key: 'psw',
+            type: 'password',
+            options: {
+                initialValue: editData.name,
+            }
+        }, {
+            title: '是否管理员',
+            key: 'isAdmin',
+            type: 'select',
+            options: {
+                initialValue: editData.isAdmin ? '0' : '1',
+            },
             items: () => [{
                 value: '0',
                 mean: '管理员'
@@ -103,10 +143,6 @@ export default class Users extends React.Component {
     }
 
     componentDidMount() {
-        // this.props.dispatch(AddTodo({
-        //     id: 222,
-        //     text: '333'
-        // }));
         // this.props.dispatch(fetchUserList({
         //     id: 222,
         //     text: '333',
@@ -119,7 +155,10 @@ export default class Users extends React.Component {
     tableAction = async (key, row) => {
         if(key === 'edit') {
             //TODO 执行编译
-            console.info(this, 777);
+            this.setState({
+                editDialog: true,
+                editData: row
+            })
         } else {
             //TODO 执行删除   (后续添加删除确认,需要确认才能删除)
             try {
@@ -138,9 +177,42 @@ export default class Users extends React.Component {
     submits = (params) => {
         fetchUserAdd({ ...params }, () => {
             message.success('用户添加成功');
+            this.setState({addDialog: false});
             fetchUserList()(this.props.dispatch)
         })(this.props.dispatch)
     } 
+    //用户编辑提交事件
+    Editsubmits = (params) => {
+        console.info(params);
+    }
+  
+    add = () => {
+        this.setState({
+            addDialog: true,
+        })
+    }
+    //添加用户关闭按钮
+    onColse =() => {
+        this.setState({addDialog: false})
+    }
+    //编辑用户关闭按钮
+    editColse = () => {
+        this.setState({editDialog: false})
+    }
+    editBtn = (type) => {
+        return [{
+            name: '取消',
+            onClick: () => {
+               // this.setState({addDialog: false});
+               type === "add" ? this.setState({addDialog: false}) : this.setState({editDialog: false})
+            },
+            htmlType: 'button'
+        }, {
+            name: '确定',
+            type: "primary",
+            htmlType: 'submit'
+        }]
+    }  
 
     render() {
         const { todoList } = this.props;
@@ -148,7 +220,8 @@ export default class Users extends React.Component {
         return (
             <div id="warp"> 
                 <div className="users">
-                    <SearchBar fields={ this.searchFields() } onOk={this.submits} hasadd={{ addfiles: this.addfiles(), rd: 'addUser', title: '用户添加' }} /> 
+                    <SearchBar fields={ this.searchFields() } onOk={this.submits} /> 
+                    <Button onClick={ this.add } className="search" icon="user-add" >添加</Button>
                 </div>
                 <div className="tableBox">
                     <div style={{ padding: 20 }}>
@@ -162,13 +235,8 @@ export default class Users extends React.Component {
                         />
                     </div>
                 </div>
-                <Modal
-                    title={this.props.hasadd && this.props.hasadd.title}
-                    visible={this.state.showmodel}
-                    footer={null}
-                >
-                    <SearchForm views={this.props.hasadd.addfiles} showCancel={true} onColse={this.onColse} noBtn={false} okText='添加' addClick={this.sub} />
-                </Modal>
+                <FormModel modalKey="add" title="用户添加" visible={this.state.addDialog}  onColse={this.onColse} fields={this.addfiles()} editBtn={this.editBtn('add')} submitClick={this.submits}></FormModel>
+                <FormModel modalKey="edit" title="用户编辑" visible={this.state.editDialog}  onColse={this.editColse} fields={this.editfiles()} editBtn={this.editBtn('edit')} submitClick={this.Editsubmits}></FormModel>
             </div>
         )
     }
