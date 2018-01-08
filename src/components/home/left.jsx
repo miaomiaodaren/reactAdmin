@@ -22,12 +22,17 @@ export default class Sidebar extends Component {
                         <Link to="/"><span><Icon type="home" /><span>首页</span></span></Link>
                     </Menu.Item>
                     <SubMenu key="user" title={<span><Icon type="user" /><span>用户模块</span></span>}>
-                        <Menu.Item key="index">
+                        <Menu.Item key="user/index">
                             <Link to="/user"><span><Icon type="user" /><span>用户管理</span></span></Link>
                         </Menu.Item>
                     </SubMenu>
+                    <SubMenu key="blog" title={<span><Icon type="blog" /><span>博客模块</span></span>}>
+                        <Menu.Item key="blog/index">
+                            <Link to="/blog"><span><Icon type="blog" /><span>博客列表</span></span></Link>
+                        </Menu.Item>
+                    </SubMenu>
                     <Menu.Item key="3">
-                        <Link to="/"><span><Icon type="book" /><span>博客模块</span></span></Link>
+                        <Link to="/"><span><Icon type="book" /><span>博客模块1</span></span></Link>
                     </Menu.Item>
                     <Menu.Item key="4">
                         <Link to="/"><span><Icon type="exception" /><span>小说模块</span></span></Link>

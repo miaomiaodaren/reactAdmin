@@ -61,7 +61,16 @@ export default class SearchBar extends Component {
     handleReset = () => {
         this.setState({
             fields: {}
-        })
+        });
+        this.props.onOk && this.props.onOk({})
+    }
+    //提交搜索按钮事件
+    handleSubmit = () => {
+        let params = {};
+        for(let n in this.state.fields) {
+            params[n] = this.state.fields[n];
+        }
+        this.props.onOk && this.props.onOk(params)
     }
     render() {
         return (
@@ -86,7 +95,7 @@ export class Isform extends Component {
     FormButtions = (fields) => {
         let compon = [];
         for(const field of fields) {
-            compon.push(<Button type={field.type} key={field.name} htmlType={field.htmlType} onClick={field.onClick}>{field.name}</Button>)
+            compon.push(<Button type={field.type} key={field.name} htmlType={field.htmlType} onClick={field.onClick} style={{marginRight: 30}}>{field.name}</Button>)
         }
         return compon;
     }
@@ -102,7 +111,7 @@ export class Isform extends Component {
             switch (field.type) {
                 case 'input':
                 default:
-                    component = (<Input />)
+                    component = (<Input disabled={field.disabled || false} type={field.ishide ? 'hidden' : 'text'} />)
                     break;
                 case 'password':
                     component = (<Input type="password" />)
@@ -118,8 +127,8 @@ export class Isform extends Component {
             component = this.generateFormItem({ title: field.key, options: field.options || {}, component });
             components.push(<div key={i++} className="field">
                 <div className="input">
-                    <div className="title" style={{ width: field.labelWidth || 100, display: 'inline-block' }}>{field.title}:</div>
-                    <div style={{ width: field.width || 330, display: 'inline-block' }} className="input">{component}</div>
+                    <div className="title" style={{ width: field.labelWidth || 100, display: field.ishide ? 'none' : 'inline-block' }}>{field.title}:</div>
+                    <div style={{ width: field.width || 330, display: field.ishide ? 'none' : 'inline-block' }} className="input">{component}</div>
                 </div>
             </div>)
         }

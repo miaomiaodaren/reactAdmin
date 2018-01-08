@@ -27,6 +27,7 @@ module.exports = {
         extensions: ['.js', '.jsx', '.json'],
         alias: {
             '@': resolve('src'),
+            '@api': resolve('src/api'),
         }
     },
     //这部分会帮助我们去处理不同类型的文件，其中 test 就是文件的后缀，loaders 是“转译器”，include 是指定文件的目录，exclude 是排除某个目录。  

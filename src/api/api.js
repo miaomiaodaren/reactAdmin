@@ -11,3 +11,12 @@ export const AddUser = (params ={}) => newFetch(`${HOST}/users/UserReginer`, par
 
 //删除用户
 export const RemoveU = (params = {}) => newFetch(`${HOST}/users/RemoveUser`, params, 'POST');
+
+
+
+
+//获取博客列表
+export const GetBlogList = (params = {}) => newFetch(`${HOST}/news/newslist`, params, 'POST');
+
+//获取博客分类列表
+export const GetBlogTypeList = (params = {}) => newFetch(`${HOST}/types/GetTypes`, params, 'GET');

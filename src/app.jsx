@@ -7,6 +7,7 @@ import news from './components/news/index.js'
 import Sidebar from './components/home/left.jsx'
 import TopCompont from './components/home/top.jsx'
 import User from './components/users/index.jsx'
+import Blog from './components/blog/index.jsx'
 
 class App extends React.Component {
     constructor(props) {
@@ -21,6 +22,7 @@ class App extends React.Component {
                     <Switch>
                         <Route path="/news" exact component={news} />
                         <Route path="/user" component={User} />
+                        <Route path="/blog" component={Blog} />
                         <Route path="/" exact component={home} />
                         {/* <Route path="/:type" component={news} /> */}
                     </Switch>

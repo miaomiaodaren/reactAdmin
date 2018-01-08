@@ -1,10 +1,9 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, message, Modal, Button } from 'antd';
 import SearchBar, { FormModel } from '../searchbar.jsx';
 import TableCom from '../tablecom.jsx';
 import { connect } from 'react-redux';
 import { fetchUserList, AddTodo, fetchUserAdd } from '../../model/actions/user.js'
-import { message, Modal, Button } from 'antd';
 import { RemoveU } from '../../api/api.js';   //接口地址
 
 @connect(
@@ -55,7 +54,7 @@ export default class Users extends React.Component {
                 mean: ele.mean
             })),
             onChange: (v) => {
-                let ref = v === 0 ? {} : v === 1 ? {isAdmin: true} : {isAdmin: false}
+                let ref = v === '0' ? {} : v === '1' ? {isAdmin: true} : {isAdmin: false};
                 this.gUserList(ref)
             }
         }]
@@ -91,6 +90,15 @@ export default class Users extends React.Component {
     editfiles = () => {
         const editData = this.state.editData;
         return [{
+            title: '用户id',
+            key: '_id',
+            type: 'input',
+            disabled: true,
+            ishide: true,
+            options: {
+                initialValue: editData._id,
+            }
+        }, {
             title: '用户名',
             key: 'name',
             type: 'input',
@@ -102,7 +110,7 @@ export default class Users extends React.Component {
             key: 'psw',
             type: 'password',
             options: {
-                initialValue: editData.name,
+                initialValue: editData.psw,
             }
         }, {
             title: '是否管理员',
@@ -153,6 +161,7 @@ export default class Users extends React.Component {
     }
 
     tableAction = async (key, row) => {
+        console.info(row);
         if(key === 'edit') {
             //TODO 执行编译
             this.setState({
@@ -184,6 +193,16 @@ export default class Users extends React.Component {
     //用户编辑提交事件
     Editsubmits = (params) => {
         console.info(params);
+        fetchUserAdd({ ...params, method: 'update' }, () => {
+            message.success('用户编辑成功');
+            this.setState({editDialog: false});
+            fetchUserList()(this.props.dispatch)
+        })(this.props.dispatch)
+    }
+
+    searcher = (params) => {
+        console.info(params, 777);
+        fetchUserList({ ...params })(this.props.dispatch)
     }
   
     add = () => {
@@ -220,7 +239,7 @@ export default class Users extends React.Component {
         return (
             <div id="warp"> 
                 <div className="users">
-                    <SearchBar fields={ this.searchFields() } onOk={this.submits} /> 
+                    <SearchBar fields={ this.searchFields() } onOk={this.searcher} /> 
                     <Button onClick={ this.add } className="search" icon="user-add" >添加</Button>
                 </div>
                 <div className="tableBox">
