@@ -43,7 +43,7 @@ module.exports = {
         }, {
             test: /\.css$/,
             loader: 'style-loader!css-loader',
-            include: /components/,
+            // include: /components/,
         }, {
             test: /\.(jpe?g|png|gif|svg|ico)/i,
             loader: 'url-loader',

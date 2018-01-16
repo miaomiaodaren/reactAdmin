@@ -20,3 +20,12 @@ export const GetBlogList = (params = {}) => newFetch(`${HOST}/news/newslist`, pa
 
 //获取博客分类列表
 export const GetBlogTypeList = (params = {}) => newFetch(`${HOST}/types/GetTypes`, params, 'GET');
+
+//删除博客
+export const DelBlogById = (params = {}) => newFetch(`${HOST}/news/delNews`, params, 'POST');
+
+//添加博客分类
+export const AddBlogType = (params = {}) => newFetch(`${HOST}/types/addTypes`, params, 'POST');
+
+//发布博客
+export const AddBlog = (params = {}) => newFetch(`${HOST}/news/addNews`, params, 'POST');

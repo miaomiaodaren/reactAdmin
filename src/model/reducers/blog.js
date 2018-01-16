@@ -9,5 +9,17 @@ export const saveBlogList = handleActions({
     'receive blog list'(state, action) {
         const { res } = action.payload
         return { data: res, loading: false }
+    },
+    'receive blog del'(state, action) {
+        return { loading: false }
     }
 }, blogList)
+
+const typeList = {};
+
+export const saveType = handleActions({
+    'SAVETYPELIST'(state, active) {
+        const { res } = active.payload;
+        return { ...res }
+    }
+}, typeList) 

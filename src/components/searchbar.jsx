@@ -162,7 +162,10 @@ export class Isform extends Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 const { submitClick } = this.props;
-                values.isAdmin = values.isAdmin == 0 ? true : false;
+                if(values.isAdmin) {
+                    //此处不能在这边进行处理，应该在前面拿到值之后能行处理(后期修改)
+                    values.isAdmin = values.isAdmin == 0 ? true : false;
+                }
                 submitClick && submitClick(values)
                 this.props.form.resetFields();
             }

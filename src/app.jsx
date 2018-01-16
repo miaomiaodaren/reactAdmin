@@ -8,12 +8,14 @@ import Sidebar from './components/home/left.jsx'
 import TopCompont from './components/home/top.jsx'
 import User from './components/users/index.jsx'
 import Blog from './components/blog/index.jsx'
+import BlogEdit from './components/blog/blogedit.jsx'
 
 class App extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
+        console.info('22');
         return (
             <div className="App">
                 <Sidebar />
@@ -23,6 +25,7 @@ class App extends React.Component {
                         <Route path="/news" exact component={news} />
                         <Route path="/user" component={User} />
                         <Route path="/blog" component={Blog} />
+                        <Route path="/blogedit" component={BlogEdit} />
                         <Route path="/" exact component={home} />
                         {/* <Route path="/:type" component={news} /> */}
                     </Switch>

@@ -14,13 +14,13 @@ const webpackConfigDev = {
             'process.env': config.dev.env,
             'HOST': config.dev.env.NODE_ENV === '"development"' ? JSON.stringify('/api') : JSON.stringify('')
         }),
-        // new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin()
     ],
     devtool: 'source-map',
     devServer: {
         historyApiFallback: false,       //暂时不明其意
-        // hot: true,
-        // inline: true,
+        hot: true,
+        inline: true,
         host: process.env.HOST || config.dev.host,
         port: process.env.PORT || config.dev.port,
         open: config.dev.autoOpenBrowser,   //是否自动打开浏览器
@@ -31,9 +31,9 @@ const webpackConfigDev = {
         publicPath: config.dev.assetsPublicPath,
         proxy: config.dev.proxyTable,
         // quiet: true, // necessary for FriendlyErrorsPlugin
-        // watchOptions: {
-        //     poll: config.dev.poll,
-        // }
+        watchOptions: {
+            poll: config.dev.poll,
+        }
     }
 }
 
