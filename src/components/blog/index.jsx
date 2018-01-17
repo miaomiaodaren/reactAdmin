@@ -58,7 +58,7 @@ class Blog extends React.Component {
         fetchBlogList()(this.props.dispatch)
         //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
         if(!Object.keys(this.props.saveType).length) {
-            typelistedit({}, (data)=> {
+            typelistedit({}, (data) => {
                 this.setState({
                     typeList: data.list
                 })
@@ -85,7 +85,8 @@ class Blog extends React.Component {
 
     tableAction = (key, row) => {
         if(key === 'edit') {
-
+            const {_id} = row;
+            this.props.history.push(`/blogedit/${_id}`);
         } else {
             delfetchBlog({_id: row._id}, () => {
                 message.success('博客删除成功');
@@ -135,7 +136,7 @@ class Blog extends React.Component {
         let d = await AddBlogType({...data});
         if(d.code == 1) {
             message.success('分类添加成功');
-            typelistedit({}, (data)=> {
+            typelistedit({}, (data) => {
                 this.setState({
                     typeList: data.list,
                     typeDialog: false

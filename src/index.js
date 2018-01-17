@@ -31,7 +31,7 @@ ReactDOM.render(
             <Switch>
                 <Route path="/login" component={Login} />
                 <Route exact path="/" component={App} />
-                <Route exact path="/:type" component={App} />
+                <Route path="/:type" component={App} />
             </Switch>
         </Router>
     </Provider>,

@@ -15,7 +15,6 @@ class App extends React.Component {
         super(props);
     }
     render() {
-        console.info('22');
         return (
             <div className="App">
                 <Sidebar />
@@ -25,9 +24,10 @@ class App extends React.Component {
                         <Route path="/news" exact component={news} />
                         <Route path="/user" component={User} />
                         <Route path="/blog" component={Blog} />
-                        <Route path="/blogedit" component={BlogEdit} />
+                        <Route path="/blogedit" exact component={BlogEdit} />
+                        <Route path="/blogedit/:id" component={BlogEdit} />
                         <Route path="/" exact component={home} />
-                        {/* <Route path="/:type" component={news} /> */}
+                         {/*<Route path="/:type" component={news} /> */}
                     </Switch>
                 </div>
             </div>

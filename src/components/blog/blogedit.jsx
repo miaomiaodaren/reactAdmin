@@ -1,11 +1,15 @@
 import React from 'react';
-import { Row, Col, Card, Button, Input, Select } from 'antd';
+import { Row, Col, Card, Button, Input, Select, message } from 'antd';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 import draftToMarkdown from 'draftjs-to-markdown';
+import { EditorState, convertToRaw, ContentState } from 'draft-js';
+import htmlToDraft from 'html-to-draftjs';   //用来把html的数据还原成富文本框的格式
 import { typelistedit } from '../../model/actions/blog.js';
 import { connect } from 'react-redux';
+import { AddBlog, GetBlogList } from '../../api/api.js';
+import { withRouter } from 'react-router-dom'
 
 @connect(
     (state) => ({
@@ -26,6 +30,7 @@ class blogEdit extends React.Component {
     }
 
     onEditorChange = (editorContent) => {
+        console.info(editorContent, 99);
         this.setState({
             editorContent
         })
@@ -35,7 +40,6 @@ class blogEdit extends React.Component {
         this.setState({
             editorState,
         });
-        console.info(this.state.editorState);
     }
 
     //清空
@@ -46,9 +50,25 @@ class blogEdit extends React.Component {
     }
 
     componentDidMount() {
+        const {params} = this.props.match;
+        if(params.id) {
+            GetBlogList({_id: params.id}).then(res => {
+                const {title = '', type = '', content = ''} = res[0],
+                    contentBlock = htmlToDraft(content);
+                if (contentBlock) {
+                    const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks),
+                        editorState = EditorState.createWithContent(contentState);
+                    this.setState({
+                        title, 
+                        type, 
+                        editorState,
+                    });
+                }
+            })
+        }
         //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
         if(!Object.keys(this.props.saveType).length) {
-            typelistedit({}, (data)=> {
+            typelistedit({}, (data) => {
                 this.setState({
                     typeList: data.list
                 })
@@ -62,8 +82,15 @@ class blogEdit extends React.Component {
     }
 
     addBlog = () => {
-        const { editorContent, title, type } = this.state
-        console.info(editorContent, title, type, 88888);
+        const {params} = this.props.match,
+            { editorContent, title, type } = this.state,
+            data = params.id ? {title, type, content: draftToHtml(editorContent), _id: params.id} : {title, type, content: draftToHtml(editorContent)};
+        AddBlog(data).then(res => {
+            if(res.status == 1) {
+                message.success('博客添加成功');
+                this.props.history.push('/blog');
+            }
+        })
     }
 
     setField(field, value) {
@@ -146,4 +173,4 @@ class blogEdit extends React.Component {
     }
 }
 
-export default blogEdit
+export default withRouter(blogEdit)
