@@ -29,3 +29,9 @@ export const AddBlogType = (params = {}) => newFetch(`${HOST}/types/addTypes`, p
 
 //发布博客
 export const AddBlog = (params = {}) => newFetch(`${HOST}/news/addNews`, params, 'POST');
+
+//获取小说列表
+export const GetBooksList = (params = {}) => newFetch(`${HOST}/books/showbook`, params, 'GET');
+
+//删除小说
+export const RemoveBook = (params = {}) => newFetch(`${HOST}/books/showbook`, params, 'POST')

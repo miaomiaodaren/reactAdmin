@@ -11,6 +11,10 @@ html, body {
     }
 }
 
+:global(.h2) {
+    color: blue;
+}
+
 //左侧导航
 #leftMenu {
     position: fixed;
@@ -22,9 +26,43 @@ html, body {
     width: 180px;
     min-width: 180px;
     max-width: 180px;
+    transition: min-width .1s, max-width .1s;
     .ant-menu{
         height: 100%;
     }
+    .userInfo{
+        height: 80px;
+        padding-bottom: 20px;
+        background-color: #001529;
+        color: #fff;
+        box-sizing: border-box;
+        line-height: 80px;
+        overflow: hidden;
+        .userLogin{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            vertical-align: middle;
+            animation: rotate 15s linear infinite;
+            margin-left: 10px;
+            display: inline-block;
+        }
+        h3{
+            display: inline-block;
+            color: #fff;
+            margin-left: 10px;
+        }
+    }
+}
+
+@keyframes rotate{
+    0% {transform: rotate(0);}
+    100% {transform: rotate(360deg);}
+}
+
+@-webkit-keyframes rotate{
+    0% {transform: rotate(0);}
+    100% {transform: rotate(360deg);}
 }
 
 //头部模块
@@ -89,5 +127,9 @@ html, body {
         button{
             margin-right: 30px;
         }
+    }
+    .column-title{
+        text-align: center;
+
     }
 }

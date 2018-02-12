@@ -11,7 +11,6 @@ export const createAjaxAction = (api, startAction, endAction) => (data, cb) => (
         endAction && dispatch(endAction({ req: data, res: response }));
     }).then(() => {
         //如果在despatch(xx({xx:xx}), ()=> {}); 有cb的时候，会在这边执行这个cb
-        console.info(cb, 22)
         cb && cb(respon)
     }).catch(err => {
         console.info(err);

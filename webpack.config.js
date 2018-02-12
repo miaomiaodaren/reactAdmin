@@ -1,6 +1,12 @@
+var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var utils = require('./utils.js');
+
+//生成JS的目录地址(默认:)
+const jsDir = 'dist/js/';
+//生成css的目录地址(默认:)
+const cssDir = 'dist/css/';
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir);
@@ -10,6 +16,7 @@ module.exports = {
     //入口文件
     entry: {
         app: [path.resolve(__dirname, 'src/index')],
+        vendor: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'react-router-dom']
     },
     //出口文件
     output: {
@@ -40,6 +47,33 @@ module.exports = {
             // query: {
             //     presets: ['react', 'es2015']
             // }
+            //loader的详细写法可以使用use
+            // use: [
+            //         {
+            //             loader: "style-loader" //用来处理最基础的css样式
+            //         }, {
+            //             loader: "css-loader",
+            //             options: {
+            //                 modules: true, //是否支持css-modules
+            //                 camelCase: true,//是否支持 -(中缸线)写法的class,id名称
+            //                 localIdentName: "[name]_[local]_[hash:base64:3]",//css-modules的生成格式
+            //                 importLoaders: 1, // 是否支持css import方法
+            //                 sourceMap: true //是否生成css的sourceMap, 主要用来方便调试
+            //             }
+            //         }, {
+            //             loader: "postcss-loader", //postCSS加载模块,可以使用postCSS的插件模块
+            //             options: {
+            //                 sourceMap: true,
+            //                 plugins: () => [
+            //                     precss(), //支持Sass的一些特性
+            //                     autoprefixer({
+            //                         browsers: ['last 3 version', 'ie >= 10']
+            //                     }),//CSS3 自动化兼容方案
+            //                     postcsseasysprites({imagePath: '../img', spritePath: './assets/dist/img'}) //支持css精灵功能
+            //                 ]
+            //             }
+            //         }
+            //     ]
         }, {
             test: /\.css$/,
             loader: 'style-loader!css-loader',
@@ -83,6 +117,25 @@ module.exports = {
             template: __dirname + '/src/index.html',
             favicon: __dirname + '/src/favicon.ico',
             inject: true,
-        })
+            // 压缩HTML
+            minify: {
+                // 移除空白
+                collapseWhitespace: true,
+                // 移除注释
+                removeComments: true,
+                // 移除属性中的双引号
+                removeAttributeQuotes: true
+            },
+            chunks: ['manifest', 'vendor', 'app'],
+        }),
+        // 这里为什么多了个manifest? 这个是个啥东西, 说简单点, 就是webpack2 用来存储一些关系啦, 链接啦之类的东西, 
+        // 如果不提取这个模块, 每次打包之后vendor 都会有变化, 就失去了我们替换资源时不替换vendor包的意义了
+        // 所以每次项目更新下,只需要替换index.js和mainifest.js就可以了
+        new webpack.optimize.CommonsChunkPlugin({
+            names: [
+                'vendor', 'manifest'
+            ],
+            filename: jsDir + '[name].js'
+        }),
     ]
 }

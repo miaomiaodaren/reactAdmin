@@ -7,8 +7,8 @@ export const saveBlogList = handleActions({
         return { ...state, loading: true }
     },
     'receive blog list'(state, action) {
-        const { res } = action.payload
-        return { data: res, loading: false }
+        const { res } = action.payload;
+        return { data: res.information, loading: false }
     },
     'receive blog del'(state, action) {
         return { loading: false }

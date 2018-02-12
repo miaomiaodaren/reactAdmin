@@ -18,7 +18,7 @@ const webpackConfigDev = {
     ],
     devtool: 'source-map',
     devServer: {
-        historyApiFallback: false,       //暂时不明其意
+        historyApiFallback: true,       //暂时不明其意
         hot: true,
         inline: true,
         host: process.env.HOST || config.dev.host,
@@ -33,6 +33,9 @@ const webpackConfigDev = {
         // quiet: true, // necessary for FriendlyErrorsPlugin
         watchOptions: {
             poll: config.dev.poll,
+        },
+        stats: {
+            colors: true // 用颜色标识
         }
     }
 }

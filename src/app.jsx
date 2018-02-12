@@ -9,6 +9,8 @@ import TopCompont from './components/home/top.jsx'
 import User from './components/users/index.jsx'
 import Blog from './components/blog/index.jsx'
 import BlogEdit from './components/blog/blogedit.jsx'
+import JavaList from './components/javalist/index.jsx'
+import Books from './components/books/book.jsx'
 
 class App extends React.Component {
     constructor(props) {
@@ -24,8 +26,10 @@ class App extends React.Component {
                         <Route path="/news" exact component={news} />
                         <Route path="/user" component={User} />
                         <Route path="/blog" component={Blog} />
+                        <Route path="/books" component={Books} />
                         <Route path="/blogedit" exact component={BlogEdit} />
                         <Route path="/blogedit/:id" component={BlogEdit} />
+                        <Route path="/JavaList" component={JavaList} />
                         <Route path="/" exact component={home} />
                          {/*<Route path="/:type" component={news} /> */}
                     </Switch>

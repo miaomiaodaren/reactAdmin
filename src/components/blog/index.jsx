@@ -11,6 +11,8 @@ import { Switch, Route, Link, withRouter } from 'react-router-dom'
 import moment from '../../util/monent.js'
 import history from "../../util/history";   //在4.0的react-router没有暴露browserHistory的时候可以用。 history.push("/user"); 进行跳转
 
+var styles = require("../../style.less");
+
 @connect(
     (state) => ({
         BlogList: state.saveBlogList,
@@ -64,6 +66,9 @@ class Blog extends React.Component {
                 })
             })(this.props.dispatch)   
         }
+        this.setState((prostate, props) => {
+            total: prostate.total + 1
+        });
     }
 
     tableHeader = () => {
@@ -71,7 +76,8 @@ class Blog extends React.Component {
             dataIndex: 'title',
             title: '标题',
             key: 'title',
-            render: text => <a href="#">{text}</a>,
+            className: 'column-title',
+            render: (text, record, index) => <Link to={`/blogedit/${record._id}`}>{text}</Link>,
         }, {
             dataIndex: 'addtime',
             title: '用户名',
@@ -168,7 +174,7 @@ class Blog extends React.Component {
             v.addtime = moment(v.addtime).formart('yyyy-MM-dd');
         });
         return (
-            <div id="warp">
+            <div id="warp" className={ styles.name }>
                 <div className="serach users">
                     <SearchBar fields={ this.searchFields() } onOk={ this.seach } />
                     <Button onClick={ this.addblog } className="search" icon="user-add" >添加</Button>
@@ -191,5 +197,15 @@ class Blog extends React.Component {
         )
     }
 }
+
+//props类型定义
+// Blog.propTypes = {
+//     BlogList: PropTypes.string,
+//     saveType: PropTypes.element.isRequired
+// };
+//props默认值
+// Greeting.defaultProps = {
+//   name: 'Stranger'
+// };
 
 export default withRouter(Blog)

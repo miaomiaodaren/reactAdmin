@@ -53,7 +53,7 @@ class blogEdit extends React.Component {
         const {params} = this.props.match;
         if(params.id) {
             GetBlogList({_id: params.id}).then(res => {
-                const {title = '', type = '', content = ''} = res[0],
+                const {title = '', type = '', content = ''} = res.information[0],
                     contentBlock = htmlToDraft(content);
                 if (contentBlock) {
                     const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks),
