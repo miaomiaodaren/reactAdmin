@@ -16,7 +16,7 @@ export default class Sidebar extends Component {
         super(props);
         this.state = {
             // collapsed: false,
-            selectkey: 'index'
+            selectkey: window.location.hash.split('/')[1] || 'index'
         }
     }
     render() {
@@ -48,7 +48,7 @@ export default class Sidebar extends Component {
                     <Menu.Item key="5">
                         <Link to="/"><span><Icon type="shake" /><span>音乐模块</span></span></Link>
                     </Menu.Item>
-                    <Menu.Item key="6">
+                    <Menu.Item key="javalist">
                         <Link to="/javalist"><span><Icon type="smile" /><span>前端天堂</span></span></Link>
                     </Menu.Item>
                 </Menu>

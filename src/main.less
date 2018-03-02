@@ -55,16 +55,6 @@ html, body {
     }
 }
 
-@keyframes rotate{
-    0% {transform: rotate(0);}
-    100% {transform: rotate(360deg);}
-}
-
-@-webkit-keyframes rotate{
-    0% {transform: rotate(0);}
-    100% {transform: rotate(360deg);}
-}
-
 //头部模块
 #admin_top{
     position: absolute;
@@ -81,7 +71,7 @@ html, body {
 //右侧主要信息
 #main_right {
     position: absolute;
-    top: 70px;
+    top: 60px;
     left: 190px;
     right: 0;
     bottom: 0;
@@ -130,6 +120,54 @@ html, body {
     }
     .column-title{
         text-align: center;
-
     }
+
+    //首页
+    .index_head{
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        font-size: 14px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+        position: relative;
+        span{
+            position: absolute;
+            opacity: 0;
+            height: 30px;
+            overflow: hidden;
+            animation: textgd 30s linear infinite;   
+            display: inline-block;
+        }
+        .go_left{
+            left: 100%;
+        }
+    }
+
+    //前端天堂
+    .javaList{
+        margin: 20px;
+        .tabs_Panes{
+        }
+    }
+}
+
+@keyframes rotate{
+    0% {transform: rotate(0);}
+    100% {transform: rotate(360deg);}
+}
+
+@-webkit-keyframes rotate{
+    0% {transform: rotate(0);}
+    100% {transform: rotate(360deg);}
+}
+
+@keyframes textgd{
+    0% {left: 0; opacity: 1;} 
+    100% {left: 100%;; opacity: 1;}
+}
+
+@-webkit-keyframes textgd{
+   0% {left: 0; opacity: 1;} 
+    100% {left: 100%;; opacity: 1;}
 }
