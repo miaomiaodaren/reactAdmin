@@ -11,6 +11,7 @@ import Blog from './components/blog/index.jsx'
 import BlogEdit from './components/blog/blogedit.jsx'
 import JavaList from './components/javalist/index.jsx'
 import Books from './components/books/book.jsx'
+import Lineage from './components/javalist/lineage.jsx'
 
 class App extends React.Component {
     constructor(props) {
@@ -30,6 +31,7 @@ class App extends React.Component {
                         <Route path="/blogedit" exact component={BlogEdit} />
                         <Route path="/blogedit/:id" component={BlogEdit} />
                         <Route path="/JavaList" component={JavaList} />
+                        <Route path="/lineage/:name" component={Lineage} />
                         <Route path="/" exact component={home} />
                          {/*<Route path="/:type" component={news} /> */}
                     </Switch>
