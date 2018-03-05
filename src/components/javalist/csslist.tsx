@@ -1,18 +1,20 @@
 import React from 'react';
 import cssJson from './css.json';
 import { Button } from 'antd';
-import { isArrayLislk, each, gettype } from '../../util/util.js';
-import { csstt } from '../../model/actions/jstt.js';
+import { isArrayLislk, each, gettype } from '../../util/util';
+import { csstt } from '../../model/actions/jstt';
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
 @withRouter
-// @connect(state => {
-//         csstt: state.csstt
-//     }, dispatch => bindActionCreators({csstt}, dispatch)
-// )
+@connect(state => ({
+        csstt: state.csstt
+    }), dispatch => ({
+        actions: bindActionCreators(csstt, dispatch)
+    })
+)
 export default class csslist extends React.Component {
     constructor(props) {
         super(props)

@@ -3,14 +3,14 @@ import { handleActions } from 'redux-actions';   //用户模块state的管理
 const blogList = {}
 
 export const saveBlogList = handleActions({
-    'request blog list'(state, action) {
+    'request blog list'(state: any, action: any) {
         return { ...state, loading: true }
     },
-    'receive blog list'(state, action) {
+    'receive blog list'(state: any, action: any) {
         const { res } = action.payload;
         return { data: res.information, loading: false }
     },
-    'receive blog del'(state, action) {
+    'receive blog del'(state: any, action: any) {
         return { loading: false }
     }
 }, blogList)
@@ -18,7 +18,7 @@ export const saveBlogList = handleActions({
 const typeList = {};
 
 export const saveType = handleActions({
-    'SAVETYPELIST'(state, active) {
+    'SAVETYPELIST'(state: any, active: any) {
         const { res } = active.payload;
         return { ...res }
     }

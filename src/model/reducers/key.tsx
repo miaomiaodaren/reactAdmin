@@ -6,7 +6,7 @@ const menustate = {
 }
 
 export const changeMenu = handleActions({
-    'change state'(state, action) {
+    'change state'(state: any, action: any) {
         console.info(state, 99, action);
         return { ...state, ...action.payload }
     }

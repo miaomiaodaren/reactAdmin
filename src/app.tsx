@@ -1,20 +1,20 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom'
 
-import home from './components/home/index.js'
-import news from './components/news/index.js'
+import home from './components/home/index'
+import news from './components/news/index'
 
-import Sidebar from './components/home/left.jsx'
-import TopCompont from './components/home/top.jsx'
-import User from './components/users/index.jsx'
-import Blog from './components/blog/index.jsx'
-import BlogEdit from './components/blog/blogedit.jsx'
-import JavaList from './components/javalist/index.jsx'
-import Books from './components/books/book.jsx'
-import Lineage from './components/javalist/lineage.jsx'
+import Sidebar from './components/home/left'
+import TopCompont from './components/home/top'
+import User from './components/users/index'
+import Blog from './components/blog/index'
+import BlogEdit from './components/blog/blogedit'
+import JavaList from './components/javalist/index'
+import Books from './components/books/book'
+import Lineage from './components/javalist/lineage'
 
 class App extends React.Component {
-    constructor(props) {
+    constructor(props: any) {
         super(props);
     }
     render() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { isArrayLislk, each, gettype } from '../../util/util.js'
-import { typelistedit } from '../../model/actions/blog.js';
+import { typelistedit } from '../../model/actions/blog';
 import { Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
 import CssList from './csslist.jsx';
@@ -40,7 +40,7 @@ export default class JavaList extends React.Component {
     componetWillUpdate() {
         console.info('33');
     }
-    packComponent = (temp) => {
+    packComponent = (temp: any) => {
         //每一个选项卡中都内嵌了一个组件，这边是把组件返回的的对象生成到对象中
         if(!isArrayLislk(temp)) return [];
         each(temp, (v, i) => {
@@ -49,7 +49,7 @@ export default class JavaList extends React.Component {
         return temp
     }
     //那传过来的name跟带有组件的obj进行对比，生成符合条件的真实DOM。
-    setPackDom = (temp) => {
+    setPackDom = (temp: any) => {
         const tempList = {
             'css': CssList
         };
@@ -59,7 +59,7 @@ export default class JavaList extends React.Component {
         }
         return (<Istemp></Istemp>)
     }
-    setTypeDom = (typelist) => {
+    setTypeDom = (typelist: any) => {
         //动态生成分类的列表数据
         let components = [], list = typelist.list, len = typelist.count, comHtml= null;
         if(!isArrayLislk(list)) return components;
@@ -68,7 +68,7 @@ export default class JavaList extends React.Component {
         });
         return components
     }
-    tabOnChange = (activeKey) => {
+    tabOnChange = (activeKey: any) => {
         this.setState({activeKey})
     }
     render() {

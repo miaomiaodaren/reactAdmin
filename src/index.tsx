@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from './model/reducers/index.js'
+import rootReducer from './model/reducers/index'
 import {
     Route,
     Router,
     HashRouter,
     Link,
-    hashHistory,
+    // hashHistory,
     Switch,
     BrowserRouter
 } from 'react-router-dom'
@@ -21,9 +21,9 @@ const store = createStore(rootReducer);
 import './main.less'
 import 'antd/dist/antd.less'
 
-import Home from 'components/home/index'
-import Login from 'components/login/index.jsx'
-import App from './app.jsx'
+import Home from './components/home/index'
+import Login from './components/login/index'
+import App from './app'
 
 ReactDOM.render(
     <Provider store={store}>

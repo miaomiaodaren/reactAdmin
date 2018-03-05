@@ -15,7 +15,7 @@ function resolve(dir) {
 module.exports = {
     //入口文件
     entry: {
-        app: [path.resolve(__dirname, 'src/index')],
+        app: [path.resolve(__dirname, 'src/index.tsx')],
         vendor: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'react-router-dom']
     },
     //出口文件
@@ -31,7 +31,7 @@ module.exports = {
             path.resolve(__dirname, 'node_modules'),
         ],
         //默认拓展值，可以在import的时候不用加入后辍名
-        extensions: ['.js', '.jsx', '.json'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
         alias: {
             '@': resolve('src'),
             '@api': resolve('src/api'),
@@ -41,6 +41,14 @@ module.exports = {
     //2017.12.13,此处貌似可以做按需加载，可以大大减少数万行生成后的代码  http://www.jianshu.com/p/c0bec50ec385
     module: {
         rules: [{
+            test: /\.ts[x]?$/,
+            use: [
+                {loader: 'react-hot-loader/webpack'},
+                {loader: 'babel-loader'},
+                {loader: 'awesome-typescript-loader'}
+            ],
+            exclude: /node_modules/,
+        },{
             test: /\.js[x]?$/,
             loader: 'babel-loader',
             exclude: /node_modules/,

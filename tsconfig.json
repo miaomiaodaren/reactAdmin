@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",        //输出目录
+    "sourceMap": true,          //：把 ts 文件编译成 js 文件的时候，同时生成对应的sourceMap文件
+    "noImplicitAny": true,      //noImplicitAny：如果为true的话，TypeScript 编译器无法推断出类型时，它仍然会生成 JavaScript 文件，但是它也会报告一个错误。为了找到错误还是设置为true比较好。
+    "module": "es6",       //代码规范，也可以选amd。
+    "target": "es5",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+      "node_modules",
+  ]
+}

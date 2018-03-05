@@ -34,4 +34,9 @@ export const AddBlog = (params = {}) => newFetch(`${HOST}/news/addNews`, params,
 export const GetBooksList = (params = {}) => newFetch(`${HOST}/books/showbook`, params, 'GET');
 
 //删除小说
-export const RemoveBook = (params = {}) => newFetch(`${HOST}/books/showbook`, params, 'POST')
+export const RemoveBook = (params = {}) => newFetch(`${HOST}/books/showbook`, params, 'POST');
+
+
+//增加/更新前端天堂数据
+export const addLineAge = (params = {}) => newFetch(`${HOST}/lineage/addlineage`, params, 'POST');
+export const getLineAge = (params = {}) => newFetch(`${HOST}/lineage/getlineage`, params, 'GET');
