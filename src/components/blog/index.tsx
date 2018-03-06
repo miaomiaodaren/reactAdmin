@@ -1,10 +1,10 @@
 import React from 'react';
 import { Table, message, Modal, Button } from 'antd';
-import SearchBar, { FormModel } from '../searchbar.jsx';
-import TableCom from '../tablecom.jsx';
+import SearchBar, { FormModel } from '../searchbar';
+import TableCom from '../tablecom';
 import { connect } from 'react-redux';
-import { GetBlogList, GetBlogTypeList, AddBlogType } from '../../api/api.js';
-import { fetchBlogList, delfetchBlog, typelistedit } from '../../model/actions/blog.js';
+import { GetBlogList, GetBlogTypeList, AddBlogType } from '@/api/api';
+import { fetchBlogList, delfetchBlog, typelistedit } from '../../model/actions/blog';
 import { Switch, Route, Link, withRouter } from 'react-router-dom'
 
 

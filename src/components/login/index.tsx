@@ -7,7 +7,7 @@ const FormItem = Form.Item;
 
 import './index.less'
 
-import { Loging } from '../../api/api'
+import { Loging } from '@/api/api'
 
 @connect(
     (state) => ({

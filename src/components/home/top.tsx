@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { reqMenuChange } from '../../model/actions/key.js'
+import { reqMenuChange } from '../../model/actions/key'
 
 @connect(
     (state) => ({

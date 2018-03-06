@@ -1,4 +1,5 @@
-import React from 'react';
+/// <reference path="../../../declare_modules.d.ts" />
+import * as React from 'react';
 import { Row, Col, Card, Button, Input, Select, message } from 'antd';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -6,19 +7,21 @@ import draftToHtml from 'draftjs-to-html';
 import draftToMarkdown from 'draftjs-to-markdown';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import htmlToDraft from 'html-to-draftjs';   //用来把html的数据还原成富文本框的格式
-import { typelistedit } from '../../model/actions/blog.js';
+import { typelistedit } from '../../model/actions/blog';
 import { connect } from 'react-redux';
-import { AddBlog, GetBlogList } from '../../api/api.js';
+import { AddBlog, GetBlogList } from '../../api/api';
 import { withRouter } from 'react-router-dom'
 
+export interface Props {
+    saveType: any
+}
+
 @connect(
-    (state) => ({
-        saveType: state.saveType,
-    })
+    (state) => ({ saveType: state.saveType })
 )
 
-class blogEdit extends React.Component {
-    constructor(props) {
+class blogEdit extends React.Component<any, any> {
+    constructor(props: Props) {
         super(props);
         this.state = {
             editorState: '',
@@ -29,14 +32,13 @@ class blogEdit extends React.Component {
         }
     }
 
-    onEditorChange = (editorContent) => {
-        console.info(editorContent, 99);
+    onEditorChange = (editorContent: any): void  => {
         this.setState({
             editorContent
         })
     }
 
-    onEditorStateChange = (editorState) => {
+    onEditorStateChange = (editorState: string): void => {
         this.setState({
             editorState,
         });

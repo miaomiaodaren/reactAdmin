@@ -1,10 +1,10 @@
 import React from 'react';
 import { Table, message, Modal, Button } from 'antd';
-import SearchBar, { FormModel } from '../searchbar.jsx';
-import TableCom from '../tablecom.jsx';
+import SearchBar, { FormModel } from '../searchbar';
+import TableCom from '../tablecom';
 import { connect } from 'react-redux';
-import { fetchUserList, AddTodo, fetchUserAdd } from '../../model/actions/user.js'
-import { RemoveU } from '../../api/api.js';   //接口地址
+import { fetchUserList, AddTodo, fetchUserAdd } from '../../model/actions/user'
+import { RemoveU } from '../../api/api';   //接口地址
 
 @connect(
     (state) => ({

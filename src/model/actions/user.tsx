@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
 import { createAjaxAction } from '../../util/index.js';
 
-import { GetUser, AddUser } from '../../api/api.js';
+import { GetUser, AddUser } from '../../api/api';
 
 export const AddTodo = createAction('ADD_TODO');
 export const requestUserList = createAction('request user list');

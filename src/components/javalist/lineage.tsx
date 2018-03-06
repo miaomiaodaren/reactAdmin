@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { Icon, Input  } from 'antd';
-import { addLineAge, getLineAge } from '../../api/api.js';
+import { addLineAge, getLineAge } from '../../api/api';
 const { TextArea } = Input;
 
 export default class lineage extends React.Component {

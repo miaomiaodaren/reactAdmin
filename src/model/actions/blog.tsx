@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
 import { createAjaxAction } from '../../util/index.js';
 
-import { GetBlogList, DelBlogById, GetBlogTypeList, AddBlog } from '../../api/api.js';
+import { GetBlogList, DelBlogById, GetBlogTypeList, AddBlog } from '../../api/api';
 
 //blog列表数据
 export const requestBlogList = createAction('request blog list');

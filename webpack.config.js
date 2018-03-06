@@ -9,8 +9,11 @@ const jsDir = 'dist/js/';
 const cssDir = 'dist/css/';
 
 function resolve(dir) {
-    return path.join(__dirname, '..', dir);
+    //2018-3-6修复
+    return path.join(__dirname, '.', dir);
 }
+// 测试地址问题
+// console.info(resolve('src'), 222222222222222222222222);
 
 module.exports = {
     //入口文件
@@ -44,7 +47,7 @@ module.exports = {
             test: /\.ts[x]?$/,
             use: [
                 {loader: 'react-hot-loader/webpack'},
-                {loader: 'babel-loader'},
+                // {loader: 'babel-loader'},
                 {loader: 'awesome-typescript-loader'}
             ],
             exclude: /node_modules/,

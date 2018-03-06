@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table, message, Modal, Button } from 'antd';
-import TableCom from '../tablecom.jsx';
-import { GetBooksList } from '../../api/api.js';
+import TableCom from '../tablecom';
+import { GetBooksList } from '@/api/api';
 import { Link } from 'react-router-dom';
 
 class books extends React.Component {

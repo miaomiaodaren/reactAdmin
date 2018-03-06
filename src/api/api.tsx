@@ -1,5 +1,5 @@
 import newFetch from './fetch';
-// const HOST = process.env.NODE_ENV === '"development"' ? '/api' : '';
+const HOST = process.env.NODE_ENV === '"development"' ? '/api' : '';
 //用户登入接口测试
 export const Loging = (params = {}) => newFetch(`${HOST}/users/reginer`, params);
 
@@ -11,9 +11,6 @@ export const AddUser = (params ={}) => newFetch(`${HOST}/users/UserReginer`, par
 
 //删除用户
 export const RemoveU = (params = {}) => newFetch(`${HOST}/users/RemoveUser`, params, 'POST');
-
-
-
 
 //获取博客列表
 export const GetBlogList = (params = {}) => newFetch(`${HOST}/news/newslist`, params, 'POST');
@@ -35,7 +32,6 @@ export const GetBooksList = (params = {}) => newFetch(`${HOST}/books/showbook`, 
 
 //删除小说
 export const RemoveBook = (params = {}) => newFetch(`${HOST}/books/showbook`, params, 'POST');
-
 
 //增加/更新前端天堂数据
 export const addLineAge = (params = {}) => newFetch(`${HOST}/lineage/addlineage`, params, 'POST');

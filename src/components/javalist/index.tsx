@@ -4,7 +4,7 @@ import { isArrayLislk, each, gettype } from '../../util/util.js'
 import { typelistedit } from '../../model/actions/blog';
 import { Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
-import CssList from './csslist.jsx';
+import CssList from './csslist';
 
 @connect(
     (state) => ({
