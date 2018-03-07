@@ -43,18 +43,24 @@ module.exports = {
     //这部分会帮助我们去处理不同类型的文件，其中 test 就是文件的后缀，loaders 是“转译器”，include 是指定文件的目录，exclude 是排除某个目录。  
     //2017.12.13,此处貌似可以做按需加载，可以大大减少数万行生成后的代码  http://www.jianshu.com/p/c0bec50ec385
     module: {
-        rules: [{
-            test: /\.ts[x]?$/,
-            use: [
-                {loader: 'react-hot-loader/webpack'},
-                // {loader: 'babel-loader'},
-                {loader: 'awesome-typescript-loader'}
-            ],
-            exclude: /node_modules/,
-        },{
-            test: /\.js[x]?$/,
-            loader: 'babel-loader',
-            exclude: /node_modules/,
+        rules: [
+            {
+                test: /\.ts[x]?$/,
+                use: [
+                    {loader: 'react-hot-loader/webpack'},
+                    {loader: 'awesome-typescript-loader'}
+                ],
+                exclude: /node_modules/,
+            },
+            // {
+            //     test: /\.ts[x]?$/,
+            //     loaders: ["babel-loader", "awesome-typescript-loader?tsconfig=tsconfig.json&useCache=true"],
+            //     exclude: /node_modules/,
+            // },
+            {
+                test: /\.js[x]?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
             // query: {
             //     presets: ['react', 'es2015']
             // }
@@ -148,5 +154,6 @@ module.exports = {
             ],
             filename: jsDir + '[name].js'
         }),
+        // new webpack.HotModuleReplacementPlugin(),
     ]
 }

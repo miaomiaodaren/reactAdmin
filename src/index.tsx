@@ -17,7 +17,6 @@ import createHistory from 'history/createHashHistory'; // createBrowserHistory
 const history = createHistory();
 const store = createStore(rootReducer);
 
-
 import './main.less'
 import 'antd/dist/antd.less'
 

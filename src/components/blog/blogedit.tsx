@@ -1,4 +1,4 @@
-/// <reference path="../../../declare_modules.d.ts" />
+/// <reference path="../../../typings/react-redux.d.ts" />
 import * as React from 'react';
 import { Row, Col, Card, Button, Input, Select, message } from 'antd';
 import { Editor } from 'react-draft-wysiwyg';
@@ -10,18 +10,19 @@ import htmlToDraft from 'html-to-draftjs';   //用来把html的数据还原成�
 import { typelistedit } from '../../model/actions/blog';
 import { connect } from 'react-redux';
 import { AddBlog, GetBlogList } from '../../api/api';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import { Dispatch } from 'redux';
 
-export interface Props {
-    saveType: any
+interface IContentPageProps {
+    saveType?: any
 }
 
-@connect(
-    (state) => ({ saveType: state.saveType })
-)
-
+// @connect(
+//     (state) => ({ saveType: state.saveType })
+// )
+@connect(mapStateToProps)
 class blogEdit extends React.Component<any, any> {
-    constructor(props: Props) {
+    constructor(props: IContentPageProps) {
         super(props);
         this.state = {
             editorState: '',
@@ -174,5 +175,13 @@ class blogEdit extends React.Component<any, any> {
         )
     }
 }
+
+
+function mapStateToProps(state: any): IContentPageProps {
+    return {
+        saveType: state.saveType
+    };
+}
+
 
 export default withRouter(blogEdit)
