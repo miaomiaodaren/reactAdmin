@@ -1,21 +1,25 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Button, Icon } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reqMenuChange } from '../../model/actions/key'
 
-@connect(
-    (state) => ({
-        changeMenu: state.changeMenu,
-    })
-)
+// @connect(
+//     (state) => ({
+//         changeMenu: state.changeMenu,
+//     })
+// )
 
-export default class TopCompont extends Component {
-    constructor(props) {
+interface ssb {
+    changeMenu?: any
+}
+
+export default class TopCompont extends React.Component<ssb, {}> {
+    constructor(props: any) {
         super(props)
     }
     toggleCollapsed = () => {
-        this.props.dispatch(reqMenuChange({collapsed: !this.props.changeMenu.collapsed}));
+        // this.props.dispatch(reqMenuChange({collapsed: !this.props.changeMenu.collapsed}));
     }
 
     render() {

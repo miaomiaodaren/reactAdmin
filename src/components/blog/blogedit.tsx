@@ -7,7 +7,7 @@ import draftToHtml from 'draftjs-to-html';
 import draftToMarkdown from 'draftjs-to-markdown';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import htmlToDraft from 'html-to-draftjs';   //用来把html的数据还原成富文本框的格式
-import { typelistedit } from '../../model/actions/blog';
+// import { typelistedit } from '../../model/actions/blog';
 import { connect } from 'react-redux';
 import { AddBlog, GetBlogList } from '../../api/api';
 import { withRouter } from 'react-router-dom';
@@ -76,13 +76,13 @@ class blogEdit extends React.Component<any, any> {
             })
         }
         //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
-        if(!Object.keys(this.props.saveType).length) {
-            typelistedit({}, (data: any) => {
-                this.setState({
-                    typeList: data.list
-                })
-            })(this.props.dispatch)   
-        }
+        // if(!Object.keys(this.props.saveType).length) {
+        //     typelistedit({}, (data: any) => {
+        //         this.setState({
+        //             typeList: data.list
+        //         })
+        //     })(this.props.dispatch)   
+        // }
     }
 
     //分类改变

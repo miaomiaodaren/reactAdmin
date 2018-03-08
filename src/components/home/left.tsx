@@ -1,23 +1,26 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Route, Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;   //导航的子集菜单
-import Login from '../../static/ff.jpg';  
+// import Login from '../../static/ff.jpg';  
 
-@connect(
-    (state) => ({
-        changeMenu: state.changeMenu,
-    })
-)
-export default class Sidebar extends Component {
-    constructor(props) {
+// @connect(
+//     (state) => ({
+//         changeMenu: state.changeMenu,
+//     })
+// )
+interface ssb {
+    changeMenu?: any
+}
+class Sidebar extends React.Component<ssb, {}> {
+    constructor(props: any) {
         super(props);
-        this.state = {
-            // collapsed: false,
-            selectkey: window.location.hash.split('/')[1] || 'index'
-        }
+    }
+    state = {
+        // collapsed: false,
+        selectkey: window.location.hash.split('/')[1] || 'index'
     }
     render() {
         const hasurl = window.location.hash.split('/')[1] || '';
@@ -25,7 +28,7 @@ export default class Sidebar extends Component {
         return (
             <div id="leftMenu" style={changeMenu.collapsed ? { maxWidth: 80, minWidth: 80, overflow: 'hidden' } : {}}>
                 <div className="userInfo">
-                    <img src={Login} className="userLogin"/>
+                    {/* <img src={Login} className="userLogin"/> */}
                     <h3>喵喵大人</h3>
                 </div>
                 <Menu defaultSelectedKeys={[this.state.selectkey]} defaultOpenKeys={[hasurl]} mode="inline" theme="dark" inlineCollapsed={this.props.changeMenu.collapsed}>
@@ -56,3 +59,6 @@ export default class Sidebar extends Component {
         )
     }
 }
+
+export default connect((state: any) => ({
+    changeMenu: state.changeMenu }))(Sidebar);

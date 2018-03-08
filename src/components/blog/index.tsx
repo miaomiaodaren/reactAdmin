@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import { Table, message, Modal, Button } from 'antd';
-import SearchBar, { FormModel } from '../searchbar';
-import TableCom from '../tablecom';
+// import SearchBar, { FormModel } from '../searchbar';
+// import TableCom from '../tablecom';
 import { connect } from 'react-redux';
 import { GetBlogList, GetBlogTypeList, AddBlogType } from '../../api/api';
-import { fetchBlogList, delfetchBlog, typelistedit } from '../../model/actions/blog';
+// import { fetchBlogList, delfetchBlog, typelistedit } from '../../model/actions/blog';
 import { Switch, Route, Link, withRouter } from 'react-router-dom'
 
 
@@ -70,18 +70,18 @@ class Blog extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        fetchBlogList()(this.props.dispatch)
-        //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
-        if(!Object.keys(this.props.saveType).length) {
-            typelistedit({}, (data: any) => {
-                this.setState({
-                    typeList: data.list
-                })
-            })(this.props.dispatch)   
-        }
-        this.setState((prostate: any, props: any) => {
-            total: prostate.total + 1
-        });
+        // fetchBlogList()(this.props.dispatch)
+        // //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
+        // if(!Object.keys(this.props.saveType).length) {
+        //     typelistedit({}, (data: any) => {
+        //         this.setState({
+        //             typeList: data.list
+        //         })
+        //     })(this.props.dispatch)   
+        // }
+        // this.setState((prostate: any, props: any) => {
+        //     total: prostate.total + 1
+        // });
     }
 
     tableHeader = () => {
@@ -107,15 +107,15 @@ class Blog extends React.Component<any, any> {
             const {_id} = row;
             this.props.history.push(`/blogedit/${_id}`);
         } else {
-            delfetchBlog({_id: row._id}, () => {
-                message.success('博客删除成功');
-                fetchBlogList()(this.props.dispatch);
-            })(this.props.dispatch)
+            // delfetchBlog({_id: row._id}, () => {
+            //     message.success('博客删除成功');
+            //     fetchBlogList()(this.props.dispatch);
+            // })(this.props.dispatch)
         }
     }
 
     seach = (params: any) => {
-        fetchBlogList({...params})(this.props.dispatch)
+        // fetchBlogList({...params})(this.props.dispatch)
     }
 
     //跳转到添加用户页面
@@ -155,12 +155,12 @@ class Blog extends React.Component<any, any> {
         let d = await AddBlogType({...data});
         if(d.code == 1) {
             message.success('分类添加成功');
-            typelistedit({}, (data: any) => {
-                this.setState({
-                    typeList: data.list,
-                    typeDialog: false
-                })
-            })(this.props.dispatch)
+            // typelistedit({}, (data: any) => {
+            //     this.setState({
+            //         typeList: data.list,
+            //         typeDialog: false
+            //     })
+            // })(this.props.dispatch)
         }
         
     }
@@ -183,29 +183,29 @@ class Blog extends React.Component<any, any> {
 
     render() {
         let { BlogList } = this.props;
-        (BlogList.data || []).forEach(v => {
-            v.addtime = moment(v.addtime).formart('yyyy-MM-dd');
-        });
+        // (BlogList.data || []).forEach(v => {
+        //     v.addtime = moment(v.addtime).formart('yyyy-MM-dd');
+        // });
         return (
             <div id="warp" className={ styles.name }>
                 <div className="serach users">
-                    <SearchBar fields={ this.searchFields() } onOk={ this.seach } />
+                    {/* <SearchBar fields={ this.searchFields() } onOk={ this.seach } /> */}
                     <Button onClick={ this.addblog } className="search" icon="user-add" >添加</Button>
                     <Button onClick={ this.addtype } className="search" icon="user-add" style={{marginLeft: 20}}>添加</Button>
                 </div>
                 <div className="tableBox">
                     <div style={{ padding: 20 }}>
-                        <TableCom header={ this.tableHeader()} ref="istable" data={ BlogList && BlogList.data } 
+                        {/* <TableCom header={ this.tableHeader()} ref="istable" data={ BlogList && BlogList.data } 
                             rowClass="tableclass"
                             action={ this.state.actionList }
                             pagination={ true } pageSize={ 10 }
                             total={ this.state.total }
                             onCtrlClick= {this.tableAction}
                             loading = { BlogList.loading || false }
-                        />
+                        /> */}
                     </div>
                 </div>
-                <FormModel modalKey="add" title="分类添加" visible={this.state.typeDialog}  onColse={this.onColse} fields={this.typefiles()} editBtn={this.editBtn()} submitClick={this.submits}></FormModel>
+                {/* <FormModel modalKey="add" title="分类添加" visible={this.state.typeDialog}  onColse={this.onColse} fields={this.typefiles()} editBtn={this.editBtn()} submitClick={this.submits}></FormModel> */}
             </div>
         )
     }

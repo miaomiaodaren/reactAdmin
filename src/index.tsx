@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './model/reducers/index'
@@ -21,14 +21,14 @@ import './main.less'
 import 'antd/dist/antd.less'
 
 import Home from './components/home/index'
-import Login from './components/login/index'
+// import Login from './components/login/index'
 import App from './app'
 
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <Switch>
-                <Route path="/login" component={Login} />
+                {/* <Route path="/login" component={Login} /> */}
                 <Route exact path="/" component={App} />
                 <Route path="/:type" component={App} />
             </Switch>

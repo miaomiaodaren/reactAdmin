@@ -1,14 +1,14 @@
-import React from 'react';
-import { addClass } from '../../util/util.js'
+import * as React from 'react';
+// import { addClass } from '../../util/util.js'
 export default class Home extends React.Component {
-    constructor(props) {
+    constructor(props: any) {
         super(props)
     }
     componentDidMount() {
         console.info(this);
         const headeDOM = this.refs.index_head_span,
-            indeDOM = this.refs.index_head,
-            wid = headeDOM.getBoundingClientRect().width;
+            indeDOM = this.refs.index_head;
+            // wid = headeDOM.getBoundingClientRect().width;
             // indexwid = indeDom.getBoundingClientRect().width;
             
     }
