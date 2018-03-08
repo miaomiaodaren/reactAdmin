@@ -4,8 +4,15 @@ const Regx = {
     trreg: /^(\d{4})[\.|\:|\-|\/]{1}(\d{1,2})[\.|\:|\-|\/]{1}(\d{1,2})\s{1}(\d{2})[\.|\:|\-|\/]{1}(\d{2})[\.|\:|\-|\/]{1}(\d{2})$/, //匹配1992-07-14 11:25:36
 }
 
+
 class Monent {
-    constructor(timer) {
+    private NowTime: any;
+    private defftime: number;
+    private regData: any;
+    private timeformt: {
+        [index: string]: any
+    }
+    constructor(timer: any) {
         const self = this;
         this.NowTime = timer || new Date;
         this.defftime = 0;
@@ -48,7 +55,7 @@ class Monent {
     
     //根据传入的type,返回时间的各值
     //FullYear(年),Month(月),Date(天),Hours(时),Minutes(分),Seconds(秒),Milliseconds(毫秒),Day(星期)
-    getoftype(type, timer) {
+    getoftype(type: any, timer: any) {
         if(!type) return ''
         const t = timer ? timer : this;
         return new Date(t)['get' + type]()

@@ -3,25 +3,38 @@ import { Table, message, Modal, Button } from 'antd';
 import SearchBar, { FormModel } from '../searchbar';
 import TableCom from '../tablecom';
 import { connect } from 'react-redux';
-import { GetBlogList, GetBlogTypeList, AddBlogType } from '@/api/api';
+import { GetBlogList, GetBlogTypeList, AddBlogType } from '../../api/api';
 import { fetchBlogList, delfetchBlog, typelistedit } from '../../model/actions/blog';
 import { Switch, Route, Link, withRouter } from 'react-router-dom'
 
 
-import moment from '../../util/monent.js'
-import history from "../../util/history";   //在4.0的react-router没有暴露browserHistory的时候可以用。 history.push("/user"); 进行跳转
+// import moment from '../../util/monent.js'
+// import history from "../../util/history";   //在4.0的react-router没有暴露browserHistory的时候可以用。 history.push("/user"); 进行跳转
 
 var styles = require("../../style.less");
 
-@connect(
-    (state) => ({
-        BlogList: state.saveBlogList,
-        saveType: state.saveType,
-    })
-)
+// @connect(
+//     (state) => ({
+//         BlogList: state.saveBlogList,
+//         saveType: state.saveType,
+//     })
+// )
 
-class Blog extends React.Component {
-    constructor(props) {
+interface BlogInterface {
+    saveBlogList?: any,
+    saveType?: any
+}
+
+interface StateInterface {
+    typeList?: any[],
+    actionList: any[],
+    total?: number,
+    typeDialog?: boolean
+}
+
+
+class Blog extends React.Component<any, any> {
+    constructor(props: BlogInterface) {
         super(props);
         this.state = {
             typeList: [],
@@ -46,11 +59,11 @@ class Blog extends React.Component {
             key: 'type',
             type: 'select',
             defaultValue: '全部',
-            items: () => this.state.typeList.map(ele => ({
-                value: ele.name,
-                mean: ele.name
-            })),
-            onChange: (v) => {
+            // items: () => this.state.typeList.map(ele => ({
+            //     value: ele.name,
+            //     mean: ele.name
+            // })),
+            onChange: (v: any) => {
                 // let ref = v === '0' ? {} : v === '1' ? {isAdmin: true} : {isAdmin: false};
             }
         }]
@@ -60,13 +73,13 @@ class Blog extends React.Component {
         fetchBlogList()(this.props.dispatch)
         //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
         if(!Object.keys(this.props.saveType).length) {
-            typelistedit({}, (data) => {
+            typelistedit({}, (data: any) => {
                 this.setState({
                     typeList: data.list
                 })
             })(this.props.dispatch)   
         }
-        this.setState((prostate, props) => {
+        this.setState((prostate: any, props: any) => {
             total: prostate.total + 1
         });
     }
@@ -77,7 +90,7 @@ class Blog extends React.Component {
             title: '标题',
             key: 'title',
             className: 'column-title',
-            render: (text, record, index) => <Link to={`/blogedit/${record._id}`}>{text}</Link>,
+            render: (text: any, record: any, index: any) => <Link to={`/blogedit/${record._id}`}>{text}</Link>,
         }, {
             dataIndex: 'addtime',
             title: '用户名',
@@ -89,7 +102,7 @@ class Blog extends React.Component {
         }]
     }
 
-    tableAction = (key, row) => {
+    tableAction = (key: any, row: any) => {
         if(key === 'edit') {
             const {_id} = row;
             this.props.history.push(`/blogedit/${_id}`);
@@ -101,7 +114,7 @@ class Blog extends React.Component {
         }
     }
 
-    seach = (params) => {
+    seach = (params: any) => {
         fetchBlogList({...params})(this.props.dispatch)
     }
 
@@ -124,7 +137,7 @@ class Blog extends React.Component {
         })
     }
 
-    editBtn = (type) => {
+    editBtn = (type: any) => {
         return [{
             name: '取消',
             onClick: () => {
@@ -138,11 +151,11 @@ class Blog extends React.Component {
         }]
     }
 
-    submits = async (data) => {
+    submits = async (data: any) => {
         let d = await AddBlogType({...data});
         if(d.code == 1) {
             message.success('分类添加成功');
-            typelistedit({}, (data) => {
+            typelistedit({}, (data: any) => {
                 this.setState({
                     typeList: data.list,
                     typeDialog: false
@@ -208,4 +221,9 @@ class Blog extends React.Component {
 //   name: 'Stranger'
 // };
 
-export default withRouter(Blog)
+export default connect((state: BlogInterface) => ({
+    BlogList: state.saveBlogList,
+    saveType: state.saveType,
+}))(Blog)
+
+// export default withRouter(Blog)

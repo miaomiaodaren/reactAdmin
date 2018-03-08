@@ -12,8 +12,9 @@ function resolve(dir) {
     //2018-3-6修复
     return path.join(__dirname, '.', dir);
 }
+
 // 测试地址问题
-// console.info(resolve('src'), 222222222222222222222222);
+console.info(path.resolve(__dirname, 'src'), 222222222222222222222222);
 
 module.exports = {
     //入口文件

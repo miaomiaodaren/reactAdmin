@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/react-redux.d.ts" />
+/// <reference path="../../../declare_modules.d.ts" />
 import * as React from 'react';
 import { Row, Col, Card, Button, Input, Select, message } from 'antd';
 import { Editor } from 'react-draft-wysiwyg';
@@ -17,10 +17,16 @@ interface IContentPageProps {
     saveType?: any
 }
 
+interface isf {
+    title?: string,
+    type?: string,
+    [index: string]: any
+}
+
 // @connect(
 //     (state) => ({ saveType: state.saveType })
 // )
-@connect(mapStateToProps)
+// @connect(mapStateToProps)
 class blogEdit extends React.Component<any, any> {
     constructor(props: IContentPageProps) {
         super(props);
@@ -71,7 +77,7 @@ class blogEdit extends React.Component<any, any> {
         }
         //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
         if(!Object.keys(this.props.saveType).length) {
-            typelistedit({}, (data) => {
+            typelistedit({}, (data: any) => {
                 this.setState({
                     typeList: data.list
                 })
@@ -96,8 +102,8 @@ class blogEdit extends React.Component<any, any> {
         })
     }
 
-    setField(field, value) {
-        let f = {}; 
+    setField(field: any, value: any) {
+        let f: isf = {}; 
         f[field] = value;
         this.setState(f);    //在修改完成之后,还是需要使用setState;
         // console.info(this.state, 77);
@@ -106,7 +112,7 @@ class blogEdit extends React.Component<any, any> {
     setfiles = () => {
         const {list} = this.props.saveType || [];
         const bb = this.props.saveType.list;
-        let sb = (list||[]).map((n, v) => <Select.Option value={n.name} >{n.name}</Select.Option>);
+        let sb = (list||[]).map((n: any, v: number) => <Select.Option value={n.name} >{n.name}</Select.Option>);
         let components = [];
         components.push(sb);
         return components
@@ -121,7 +127,7 @@ class blogEdit extends React.Component<any, any> {
                         <Input placeholder="标题" style={{marginBottom: 20}}  value={title} onChange={e => this.setField('title', e.target.value)} />
                     </Col>
                     <Col span={12}>
-                    <Select defaultValue="全部" style={{ width: 120 }} onChange={this.typeChange} value={type == void 0 ? '全部': type}  onChange={(value) => this.setField('type', value)}>
+                    <Select defaultValue="全部" style={{ width: 120 }} value={type == void 0 ? '全部': type}  onChange={(value) => this.setField('type', value)}>
                         {this.setfiles()}
                     </Select>
                     </Col>
@@ -176,12 +182,7 @@ class blogEdit extends React.Component<any, any> {
     }
 }
 
+export default connect((state: IContentPageProps) => ({
+    saveType: state.saveType }))(blogEdit);
 
-function mapStateToProps(state: any): IContentPageProps {
-    return {
-        saveType: state.saveType
-    };
-}
-
-
-export default withRouter(blogEdit)
+// export default withRouter(blogEdit)
