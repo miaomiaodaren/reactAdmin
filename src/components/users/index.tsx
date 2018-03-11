@@ -1,6 +1,6 @@
-// import React from 'react';
-// import { Table, message, Modal, Button } from 'antd';
-// import SearchBar, { FormModel } from '../searchbar';
+import * as React from 'react';
+import { Table, message, Modal, Button } from 'antd';
+import SearchBar, { FormModel } from '../searchbar';
 // import TableCom from '../tablecom';
 // import { connect } from 'react-redux';
 // import { fetchUserList, AddTodo, fetchUserAdd } from '../../model/actions/user'

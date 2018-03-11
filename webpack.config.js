@@ -2,6 +2,8 @@ var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var utils = require('./utils.js');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const { CheckerPlugin } = require('awesome-typescript-loader');
 
 //生成JS的目录地址(默认:)
 const jsDir = 'dist/js/';
@@ -19,6 +21,7 @@ console.info(path.resolve(__dirname, 'src'), 222222222222222222222222);
 module.exports = {
     //入口文件
     entry: {
+        // 'babel-polyfill', 
         app: [path.resolve(__dirname, 'src/index.tsx')],
         vendor: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'react-router-dom']
     },
@@ -39,29 +42,27 @@ module.exports = {
         alias: {
             '@': resolve('src'),
             '@api': resolve('src/api'),
-        }
+        },
+        // plugins: [
+        //     new TsconfigPathsPlugin({
+        //         configFile: path.resolve(__dirname, 'tsconfig.json')
+        //     })
+        // ],
     },
+    devtool: 'source-map',
     //这部分会帮助我们去处理不同类型的文件，其中 test 就是文件的后缀，loaders 是“转译器”，include 是指定文件的目录，exclude 是排除某个目录。  
     //2017.12.13,此处貌似可以做按需加载，可以大大减少数万行生成后的代码  http://www.jianshu.com/p/c0bec50ec385
     module: {
         rules: [
-            {
-                test: /\.ts[x]?$/,
-                use: [
-                    {loader: 'react-hot-loader/webpack'},
-                    {loader: 'awesome-typescript-loader'}
-                ],
+           {
+                test: /\.(t|j)sx?$/,
                 exclude: /node_modules/,
+                use: ['babel-loader', 'awesome-typescript-loader']
             },
             // {
-            //     test: /\.ts[x]?$/,
-            //     loaders: ["babel-loader", "awesome-typescript-loader?tsconfig=tsconfig.json&useCache=true"],
+            //     test: /\.js[x]?$/,
+            //     loader: 'babel-loader',
             //     exclude: /node_modules/,
-            // },
-            {
-                test: /\.js[x]?$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
             // query: {
             //     presets: ['react', 'es2015']
             // }
@@ -92,7 +93,8 @@ module.exports = {
             //             }
             //         }
             //     ]
-        }, {
+        // },
+        {
             test: /\.css$/,
             loader: 'style-loader!css-loader',
             // include: /components/,
@@ -155,6 +157,7 @@ module.exports = {
             ],
             filename: jsDir + '[name].js'
         }),
+        new CheckerPlugin(),
         // new webpack.HotModuleReplacementPlugin(),
     ]
 }

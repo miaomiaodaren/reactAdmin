@@ -1,10 +1,11 @@
+/// <reference path="../../../typings/global.d.ts" />
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Route, Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;   //导航的子集菜单
-// import Login from '../../static/ff.jpg';  
+import * as Login from '../../static/ff.jpg';  
 
 // @connect(
 //     (state) => ({
@@ -28,7 +29,7 @@ class Sidebar extends React.Component<ssb, {}> {
         return (
             <div id="leftMenu" style={changeMenu.collapsed ? { maxWidth: 80, minWidth: 80, overflow: 'hidden' } : {}}>
                 <div className="userInfo">
-                    {/* <img src={Login} className="userLogin"/> */}
+                    <img src={Login} className="userLogin"/>
                     <h3>喵喵大人</h3>
                 </div>
                 <Menu defaultSelectedKeys={[this.state.selectkey]} defaultOpenKeys={[hasurl]} mode="inline" theme="dark" inlineCollapsed={this.props.changeMenu.collapsed}>

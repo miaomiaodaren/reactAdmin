@@ -1,6 +1,11 @@
 import * as React from 'react';
 // import { addClass } from '../../util/util.js'
-export default class Home extends React.Component {
+import '../../style.less'
+
+export interface Props extends React.Props<Home> {}
+export interface State {}
+
+export default class Home extends React.Component<Props, State> {
     constructor(props: any) {
         super(props)
     }
@@ -15,10 +20,10 @@ export default class Home extends React.Component {
     render() {
         return (
             <div className="aa" ref="index_head">
-                <div className="index_head" style={{fontSize: 14}}>
+                <div className="index_head name_title" style={{fontSize: 14}}>
                     <span ref="index_head_span">热烈庆祝喵喵大人后台开业</span>
                 </div>
-                dajiahoa1
+                dajia11
             </div>
         )
     }
