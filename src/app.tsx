@@ -44,9 +44,11 @@ class App extends React.Component {
                         <Sidebar />
                         <TopCompont />
                         <div id="main_right">
-                            {routes.map(route => (
-                                <Route path={route.path} key={route.path} component={route.body} />
-                            ))}
+                            <Switch>
+                                {routes.map(route => (
+                                    <Route path={route.path} key={route.path} component={route.body} />
+                                ))}
+                            </Switch>
                         </div>
                     </div>
                 </Router>

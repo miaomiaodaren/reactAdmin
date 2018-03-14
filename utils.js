@@ -1,5 +1,6 @@
 const path = require('path');
 const pkg = require('./package.json');
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 //主要处理一些静态图片的目录设置
 exports.assetsPath = function(_path) {
@@ -15,7 +16,8 @@ exports.cssLoaders = function(options) {
         loader: 'css-loader',
         options: {
             minimize: process.env.NODE_ENV === 'production',
-            sourceMap: options.sourceMap
+            sourceMap: options.sourceMap,
+            modules:  true
         }
     }
 
@@ -36,6 +38,14 @@ exports.cssLoaders = function(options) {
                     sourceMap: options.sourceMap
                 })
             })
+        }
+        if (options.extract) {
+            return ExtractTextPlugin.extract({
+                use: loaders,
+                fallback: 'react-style-loader'
+            })
+        } else {
+            return ['react-style-loader'].concat(loaders)
         }
     }
 

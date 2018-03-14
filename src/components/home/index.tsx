@@ -1,9 +1,11 @@
 import * as React from 'react';
 // import { addClass } from '../../util/util.js'
-import '../../style.less'
+// import '../../style.less'
 
 export interface Props extends React.Props<Home> {}
 export interface State {}
+
+import '../../style.css';
 
 export default class Home extends React.Component<Props, State> {
     constructor(props: any) {
@@ -23,7 +25,7 @@ export default class Home extends React.Component<Props, State> {
                 <div className="index_head name_title" style={{fontSize: 14}}>
                     <span ref="index_head_span">热烈庆祝喵喵大人后台开业</span>
                 </div>
-                dajia11
+                daji大家
             </div>
         )
     }

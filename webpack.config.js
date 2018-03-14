@@ -6,9 +6,9 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { CheckerPlugin } = require('awesome-typescript-loader');
 
 //生成JS的目录地址(默认:)
-const jsDir = 'dist/js/';
+const jsDir = 'js/';
 //生成css的目录地址(默认:)
-const cssDir = 'dist/css/';
+const cssDir = 'css/';
 
 function resolve(dir) {
     //2018-3-6修复
@@ -21,14 +21,14 @@ console.info(path.resolve(__dirname, 'src'), 222222222222222222222222);
 module.exports = {
     //入口文件
     entry: {
-        // 'babel-polyfill', 
-        app: [path.resolve(__dirname, 'src/index.tsx')],
+        app: ['babel-polyfill', path.resolve(__dirname, 'src/index.tsx')],
         vendor: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'react-router-dom']
     },
     //出口文件
     output: {
-        path: path.resolve(__dirname, '_dist'),
+        path: path.resolve(__dirname, 'dist'),
         filename: '[name]_[hash:8].js',
+        publicPath: "/"
     },
     //配置模块如何解析
     resolve: {
@@ -158,6 +158,7 @@ module.exports = {
             filename: jsDir + '[name].js'
         }),
         new CheckerPlugin(),
+        new webpack.HashedModuleIdsPlugin(),    
         // new webpack.HotModuleReplacementPlugin(),
     ]
 }

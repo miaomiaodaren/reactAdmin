@@ -1,14 +1,22 @@
 var webpack = require('webpack');
 var merge = require('webpack-merge');
 const utils = require('./utils');
-const config = require('./config/index')
+const config = require('./config/index');
+var path = require('path');
 
 var webpackConfig = require('./webpack.config');
 var portfinder = require('portfinder'); //用于获取port
-var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 
 const webpackConfigDev = {
+    entry: {
+        app: ['babel-polyfill', 'react-hot-loader/patch', path.resolve(__dirname, 'src/index.tsx')],
+    },
+    output: {
+        /*这里本来应该是[chunkhash]的，但是由于[chunkhash]和react-hot-loader不兼容。只能妥协*/
+        filename: '[name].[hash].js'
+    },
     plugins: [
         new webpack.DefinePlugin({
             'process.env': config.dev.env,
@@ -40,7 +48,17 @@ const webpackConfigDev = {
     }
 }
 
-module.exports = merge(webpackConfig, webpackConfigDev)
+module.exports = merge({
+    customizeArray(a, b, key) {
+        /*entry.app不合并，全替换*/
+        if (key === 'entry.app') {
+            return b;
+        }
+        return undefined;
+    }
+})(webpackConfig, webpackConfigDev);
+
+// module.exports = merge(webpackConfig, webpackConfigDev)
 
 
 // const devWebpackConfig = merge(webpackConfig, {

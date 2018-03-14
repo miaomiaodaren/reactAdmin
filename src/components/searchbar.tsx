@@ -1,4 +1,4 @@
-
+/// <reference path="../../declare_modules.d.ts" />
 import * as React from 'react';
 import ReactDom from 'react-dom';
 import { Input, Button, Select, DatePicker, Cascader, Modal, Form } from 'antd';
@@ -99,7 +99,7 @@ interface formInterface {
     form?: any,
     submitClick?: any,
     onColse?: any,
-    fields?: any
+    fields?: any[]
 }
 export class Isform extends React.Component<formInterface, any> {
     constructor(props: any) {
@@ -113,7 +113,7 @@ export class Isform extends React.Component<formInterface, any> {
         }
         return compon;
     }
-    FormInputs = (fields: any): any[] => {
+    FormInputs = (fields: any[]): any[] => {
         let components: any[] = [];
         let i = 0;
         for(const field of fields) {
@@ -171,7 +171,7 @@ export class Isform extends React.Component<formInterface, any> {
         onColse && onColse();
         this.props.form.resetFields();
     }
-    handleSubmit = (e) => {
+    handleSubmit = (e: any) => {
         e && e.preventDefault();
         this.props.form.validateFieldsAndScroll((err: any, values: any) : void => {
             if (!err) {
@@ -201,7 +201,6 @@ export const SearchForm = Form.create()(Isform);
 
 
 
-
 //views 要生成的列表配置
 //showCancel 是否要显示取消按钮
 //noBtn 不显示确定按钮
@@ -217,14 +216,17 @@ interface filedsInterface {
     key?: string,
     type?: string,
     defaultValue?: any,
-    items: any,
-    onChange: any
+    items?: any,
+    onChange?: any,
+    options?: any,
+    disabled?: boolean,
+    ishide?: boolean
 }
 
 interface modeInterface {
     title?: string,
     onColse?: any,
-    fields?: filedsInterface,
+    fields?: any[];
     editBtn?: any,
     visible?: any,
     submitClick?: any,
@@ -235,9 +237,10 @@ interface modeInterface {
 export class FormModel extends React.Component<modeInterface, any> {
     render() {
         const { title, onColse, fields, editBtn, visible, submitClick, defaultData, modalKey } = this.props
+        console.info(fields, 2222);
         return (
             <Modal footer={null} title={title} onCancel={onColse} visible={visible} key={modalKey}>
-                <SearchForm fields={fields} editBtn={editBtn} submitClick={submitClick} />
+                {/*<SearchForm fields={ fields } editBtn={editBtn} submitClick={submitClick} />*/}
             </Modal>
         )
     }
@@ -245,11 +248,11 @@ export class FormModel extends React.Component<modeInterface, any> {
 
 
 
-Isform.propTypes = {
-  title: PropTypes.string,
-  fields: PropTypes.arrayOf(Object),
-//   onOk: PropTypes.func.isRequired,
-  onCancel: PropTypes.func,
-  okText: PropTypes.string,
-}
+// Isform.propTypes = {
+//   title: PropTypes.string,
+//   fields: PropTypes.arrayOf(Object),
+// //   onOk: PropTypes.func.isRequired,
+//   onCancel: PropTypes.func,
+//   okText: PropTypes.string,
+// }
 
