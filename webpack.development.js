@@ -17,6 +17,32 @@ const webpackConfigDev = {
         /*这里本来应该是[chunkhash]的，但是由于[chunkhash]和react-hot-loader不兼容。只能妥协*/
         filename: '[name].[hash].js'
     },
+    module: {
+        rules: [
+            {
+                test: /\.less$/, 
+                use: [
+                    'style-loader?sourceMap',
+                    {
+                        loader: 'typings-for-css-modules-loader',
+                        options: {
+                            modules: true,
+                            namedExport: true,
+                        } 
+                    },
+                    'less-loader',
+                ],
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                    // 'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+                ],
+            }
+        ]
+    },
     plugins: [
         new webpack.DefinePlugin({
             'process.env': config.dev.env,
@@ -47,6 +73,8 @@ const webpackConfigDev = {
         }
     }
 }
+
+console.info(JSON.stringify(merge(webpackConfig, webpackConfigDev).module.rules));
 
 module.exports = merge({
     customizeArray(a, b, key) {

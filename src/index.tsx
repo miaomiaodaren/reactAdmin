@@ -17,6 +17,7 @@ const history = createHistory();
 const store = createStore(rootReducer);
 
 // import './main.less'
+// import './main.less'
 require('./main.less');
 import 'antd/dist/antd.less'
 

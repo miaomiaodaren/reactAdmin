@@ -14,9 +14,36 @@ const productionConfig = {
     devtool: 'cheap-module-source-map',
     module: {
         loaders: [
-            { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")},
+            // { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")},
             // { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader", {publicPath:'../'}) },
-            { test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader') },
+            { 
+                test: /\.less$/, 
+                loader: ExtractTextPlugin.extract({
+                    fallback: {
+                        loader: 'style-loader',
+                        options: {
+                            insertAt: 'top'
+                        }
+                    },
+                    use: [
+                        {
+                            loader: 'typings-for-css-modules-loader',
+                            options: {
+                                modules: true,
+                                namedExport: true,
+                            }
+                        },
+                        {
+                            loader: 'less-loader',
+                            options: {
+                                outputStyle: 'expanded',
+                                sourceMap: true
+                            }
+                        },
+                        // 'css-loader'
+                    ]
+                }) 
+            },
         ],
     },
     plugins: [
@@ -41,7 +68,7 @@ const productionConfig = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
         }),
-        new ExtractTextPlugin('css/[name].[contenthash].css', {allChunks: true}), // 单独打包CSS
+        new ExtractTextPlugin('css/[name].[contenthash].css', { allChunks: true }), // 单独打包CSS
     ]
 }
 

@@ -94,11 +94,12 @@ module.exports = {
             //         }
             //     ]
         // },
+        // {
+        //     test: /\.css$/,
+        //     loader: 'style-loader!css-loader',
+        //     // include: /components/,
+        // }, 
         {
-            test: /\.css$/,
-            loader: 'style-loader!css-loader',
-            // include: /components/,
-        }, {
             test: /\.(jpe?g|png|gif|svg|ico)/i,
             loader: 'url-loader',
             options: {
@@ -114,9 +115,6 @@ module.exports = {
         }, {
             test: /\.(swf|xap)/,
             loader: 'file',
-        }, {
-            test: /\.less$/, 
-            loader: 'style-loader!css-loader!less-loader',
         }],
     },
     plugins: [

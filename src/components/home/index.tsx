@@ -5,7 +5,9 @@ import * as React from 'react';
 export interface Props extends React.Props<Home> {}
 export interface State {}
 
-import '../../style.css';
+// import '../../style.css';
+import * as ffs from '../../style.less';
+// var styles = require("../../style.css");
 
 export default class Home extends React.Component<Props, State> {
     constructor(props: any) {
@@ -20,12 +22,14 @@ export default class Home extends React.Component<Props, State> {
             
     }
     render() {
+        console.info(ffs.name_title, 222);
         return (
             <div className="aa" ref="index_head">
-                <div className="index_head name_title" style={{fontSize: 14}}>
+                <div className="index_head" style={{fontSize: 14}}>
                     <span ref="index_head_span">热烈庆祝喵喵大人后台开业</span>
                 </div>
                 daji大家
+                <span className={ffs.name_title}>12312</span>
             </div>
         )
     }
