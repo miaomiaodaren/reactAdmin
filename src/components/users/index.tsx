@@ -48,7 +48,6 @@ class Users extends React.Component<Uprops, any> {
         }
     }
     
-
     searchFields = (): any[] => {
         return [{
             title: '用户名',
@@ -247,7 +246,6 @@ class Users extends React.Component<Uprops, any> {
     render() {
         const { todoList }: any = this.props;
             // userL = todoList.data;
-        
         return (
             <div id="warp"> 
                 <div className="users">
@@ -256,7 +254,6 @@ class Users extends React.Component<Uprops, any> {
                 </div>
                 <div className="tableBox">
                     <div style={{ padding: 20 }}>
-                        3123123123
                         <TableCom header={ this.tableHeader()} ref="istable" data={ todoList.data } 
                             rowClass="tableclass"
                             action={ this.state.actionList }

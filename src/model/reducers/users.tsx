@@ -14,7 +14,7 @@ export const todoList = handleActions({
     },
     'receive user list'(state: any, action: any) {
         const { res } = action.payload
-        return { data: res, loading: false }
+        return { data: res.data, loading: false }
     }
 }, sb)
 
