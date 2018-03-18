@@ -1,7 +1,7 @@
 import newFetch from './fetch';
-const HOST = process.env.NODE_ENV === '"development"' ? '/api' : '';
+const HOST = process.env.NODE_ENV === "development" ? '/api' : '';
 
-console.info(process.env.NODE_ENV === '"development"', 223);
+console.info(process.env.NODE_ENV === '"development"', 223, HOST, process.env.NODE_ENV);
 //用户登入接口测试
 export const Loging = (params = {}) => newFetch(`${HOST}/users/reginer`, params);
 

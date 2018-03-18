@@ -21,9 +21,6 @@ const productionConfig = {
                 loader: ExtractTextPlugin.extract({
                     fallback: {
                         loader: 'style-loader',
-                        options: {
-                            insertAt: 'top'
-                        }
                     },
                     use: [
                         {

@@ -6,7 +6,7 @@ export interface Props extends React.Props<Home> {}
 export interface State {}
 
 // import '../../style.css';
-import * as ffs from '../../style.less';
+import * as ffs from './home.less';
 // var styles = require("../../style.css");
 
 export default class Home extends React.Component<Props, State> {

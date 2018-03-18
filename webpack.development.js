@@ -32,6 +32,16 @@ const webpackConfigDev = {
                     },
                     'less-loader',
                 ],
+                include: /components/,
+            },
+            {
+                test: /\.less$/, 
+                use: [
+                    'style-loader?sourceMap',
+                    'css-loader',
+                    'less-loader',
+                ],
+                exclude: /components/,
             },
             {
                 test: /\.css$/,
@@ -46,7 +56,7 @@ const webpackConfigDev = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': config.dev.env,
-            'HOST': config.dev.env.NODE_ENV === '"development"' ? JSON.stringify('/api') : JSON.stringify('')
+            'HOST': config.dev.env.NODE_ENV === "development" ? JSON.stringify('/api') : JSON.stringify('')
         }),
         new webpack.HotModuleReplacementPlugin()
     ],
