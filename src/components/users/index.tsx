@@ -15,7 +15,8 @@ import { RemoveU } from '../../api/api';   //接口地址
 
 interface Uprops {
     todoList?: any,
-    dispatch: any
+    dispatch: any,
+    userList: any
 }
 
 interface Ele {
@@ -161,13 +162,16 @@ class Users extends React.Component<Uprops, any> {
     }
 
     componentDidMount() {
+        console.info(this.props, 'isprops');
         // this.props.dispatch(fetchUserList({
         //     id: 222,
         //     text: '333',
         // }));
         // this.GetUserList();
         //此处只能把dispatch做为最后一个参数再传进去,才没有问题
-        fetchUserList()(this.props.dispatch)
+        // fetchUserList()(this.props.dispatch)
+        //在此使用了redux的connect的第二个参数，可以直接封装一个方法，然后直接在页面实现action的方法
+        this.props.userList();
     }
 
     tableAction = async (key: any, row: any) => {
@@ -244,6 +248,7 @@ class Users extends React.Component<Uprops, any> {
     }  
 
     render() {
+        console.info(this, 668);
         const { todoList }: any = this.props;
             // userL = todoList.data;
         return (
@@ -271,7 +276,23 @@ class Users extends React.Component<Uprops, any> {
     }
 }
 
-export default connect((state: any) => ({
+const mapStateToProps  = (state: any) => ({
     todoList: state.todoList,
     adduser: state.AddUser,
-}))(Users)
+})
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        userList: () => {
+            fetchUserList()(dispatch)
+        }
+    }
+}
+
+//connect()(Users) 是用来把dispatch注册到props，但是当第二个参数传入了方法，则dispatch不会再注册到props中
+export default connect(mapStateToProps, mapDispatchToProps)(Users)
+
+// export default connect((state: any) => ({
+//     todoList: state.todoList,
+//     adduser: state.AddUser,
+// }))(Users)

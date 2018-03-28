@@ -7,22 +7,16 @@ import {
     Router,
     HashRouter,
     Link,
-    // hashHistory,
     Switch,
     BrowserRouter
 } from 'react-router-dom'
 
-import createHistory from 'history/createHashHistory'; // createBrowserHistory
-const history = createHistory();
 const store = createStore(rootReducer);
 
-// import './main.less'
 import './main.less'
-// require('./main.less');
 import 'antd/dist/antd.less'
 
 import Home from './components/home/index'
-// import Login from './components/login/index'
 import App from './app'
 import {AppContainer} from 'react-hot-loader';
 

@@ -8,5 +8,24 @@
         // 二者的关系是 var state = store.getState();
     //action 是一个包含type属性的普通函数
 
-import { createStore } form 'redux';
+import {createStore} from 'redux';
+import combineReducers from './reducers';
+let store = createStore(combineReducers);
+export default store;
 
+// // 打印初始状态
+// console.log(store.getState());
+
+// // 每次 state 更新时，打印日志
+// // 注意 subscribe() 返回一个函数用来注销监听器
+// let unsubscribe = store.subscribe(() =>
+//     console.log(store.getState())
+// );
+
+// // 发起一系列 action
+// store.dispatch(increment());
+// store.dispatch(decrement());
+// store.dispatch(reset());
+
+// // 停止监听 state 更新
+// unsubscribe();

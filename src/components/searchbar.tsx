@@ -2,7 +2,8 @@
 import * as React from 'react';
 import ReactDom from 'react-dom';
 import { Input, Button, Select, DatePicker, Cascader, Modal, Form } from 'antd';
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
+import { FormComponentProps } from 'antd/lib/form';
 
 interface searchInterface {
     fields?: any,
@@ -94,14 +95,13 @@ export default class SearchBar extends React.Component<any, searchInterface> {
 const FormItem = Form.Item;
 //表单提交插件
 
-interface formInterface {
+interface formInterface extends React.Props<any>  {
     editBtn?: any,
-    form?: any,
     submitClick?: any,
     onColse?: any,
     fields?: any[]
 }
-export class Isform extends React.Component<formInterface, any> {
+export class Isform extends React.Component<formInterface&FormComponentProps, any> {
     constructor(props: any) {
         super(props)
     }
@@ -197,7 +197,7 @@ export class Isform extends React.Component<formInterface, any> {
     }
 }
 
-export const SearchForm = Form.create()(Isform);
+export const SearchForm = Form.create<formInterface>()(Isform);
 
 
 
@@ -237,10 +237,9 @@ interface modeInterface {
 export class FormModel extends React.Component<modeInterface, any> {
     render() {
         const { title, onColse, fields, editBtn, visible, submitClick, defaultData, modalKey } = this.props
-        console.info(fields, 2222);
         return (
             <Modal footer={null} title={title} onCancel={onColse} visible={visible} key={modalKey}>
-                {/*<SearchForm fields={ fields } editBtn={editBtn} submitClick={submitClick} />*/}
+                <SearchForm fields={ fields } editBtn={editBtn} submitClick={submitClick} />
             </Modal>
         )
     }

@@ -6,13 +6,7 @@ const Regx = {
 
 
 class Monent {
-    private NowTime: any;
-    private defftime: number;
-    private regData: any;
-    private timeformt: {
-        [index: string]: any
-    }
-    constructor(timer: any) {
+    constructor(timer) {
         const self = this;
         this.NowTime = timer || new Date;
         this.defftime = 0;
@@ -55,7 +49,7 @@ class Monent {
     
     //根据传入的type,返回时间的各值
     //FullYear(年),Month(月),Date(天),Hours(时),Minutes(分),Seconds(秒),Milliseconds(毫秒),Day(星期)
-    getoftype(type: any, timer: any) {
+    getoftype(type, timer) {
         if(!type) return ''
         const t = timer ? timer : this;
         return new Date(t)['get' + type]()

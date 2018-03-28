@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Table, Menu, Dropdown, Icon, Tooltip } from 'antd';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 interface Props {
     header?: any,

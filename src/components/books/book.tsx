@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Table, message, Modal, Button } from 'antd';
-// import TableCom from '../tablecom';
+import TableCom from '../tablecom';
 import { GetBooksList } from '../../api/api';
 import { Link } from 'react-router-dom';
 
@@ -70,14 +70,14 @@ class books extends React.Component<{}, {}> {
         return (
             <div className="books">
                 <div className="tableBox">
-                    {/* <TableCom header={ this.tableHeader()} ref="istable" data={ dataInfo } 
+                    <TableCom header={ this.tableHeader()} ref="istable" data={ dataInfo } 
                         rowClass="tableclass"
                         action={ this.state.actionList }
                         pagination={ true } pageSize={ 10 }
                         total={ total }
                         onCtrlClick= {this.tableAction}
                         loading = { loading || false }
-                    /> */}
+                    />
                 </div>
             </div>
         )

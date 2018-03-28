@@ -55,6 +55,9 @@ class Sidebar extends React.Component<ssb, {}> {
                     <Menu.Item key="javalist">
                         <Link to="/javalist"><span><Icon type="smile" /><span>前端天堂</span></span></Link>
                     </Menu.Item>
+                    <Menu.Item key="workRecord">
+                        <Link to="/workrecord"><span><Icon type="exception" /><span>工作记录</span></span></Link>
+                    </Menu.Item>
                 </Menu>
             </div>
         )

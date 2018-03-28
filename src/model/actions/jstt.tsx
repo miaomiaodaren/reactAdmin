@@ -1,6 +1,10 @@
-// export function csstt(name) {
-//     return dispatch => {
-//         alert('22');
-//         dispatch({ type: 'CSSTT', payload: {name: 'fufeng' }})
-//     }
-// }
+import { createAction } from 'redux-actions';
+
+
+export function csstt() {
+    return {type: 'CSSLIST'}
+}
+
+export function cssAttrAction(payload: string) {
+    return { type: 'CSSATTR', payload };
+}
