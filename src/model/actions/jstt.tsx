@@ -8,3 +8,14 @@ export function csstt() {
 export function cssAttrAction(payload: string) {
     return { type: 'CSSATTR', payload };
 }
+
+export function testAction() {
+    return {type: 'TEXTACTION'}
+}
+
+//异步active
+// function asyncActionTest() {
+//     return (dispatch: any) => {
+//         return 1
+//     }
+// }

@@ -13,12 +13,6 @@ import { createAjaxAction } from '../../util/index'
 import { getLineAge } from '../../api/api'
 
 // @withRouter
-// @connect(state => ({
-//         csstt: state.csstt
-//     }), dispatch => ({
-//         actions: bindActionCreators(csstt, dispatch)
-//     })
-// )
 
 interface PROPS {
     csstts?: any,

@@ -16,3 +16,4 @@ export const savetypelist = createAction('SAVETYPELIST');
 
 //操作博客分类的方法
 export const typelistedit = createAjaxAction(GetBlogTypeList, '', savetypelist)
+

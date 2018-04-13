@@ -30,6 +30,7 @@ const webpackConfigDev = {
                             namedExport: true,
                         } 
                     },
+                    // 'css-loader',
                     'less-loader',
                 ],
                 include: /components/,

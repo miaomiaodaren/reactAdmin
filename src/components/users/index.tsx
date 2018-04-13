@@ -5,6 +5,7 @@ import TableCom from '../tablecom';
 import { connect } from 'react-redux';
 import { fetchUserList, AddTodo, fetchUserAdd } from '../../model/actions/user'
 import { RemoveU } from '../../api/api';   //接口地址
+import { withRouter } from 'react-router-dom';
 
 // @connect(
 //     (state) => ({
@@ -160,8 +161,11 @@ class Users extends React.Component<Uprops, any> {
     gUserList = (obj: any) => {
         fetchUserList({ ...obj })(this.props.dispatch)
     }
-
+    componentWillMount() {
+        //WillMount是在完成首次渲染之前调用，此时可以修改组件的state
+    }
     componentDidMount() {
+        // 真实的DOM被渲染出来后调用，可以在此方法中通过 this.getDOMNode()访问真实的DOM元素。此时可以使用其它类库操作DOM
         console.info(this.props, 'isprops');
         // this.props.dispatch(fetchUserList({
         //     id: 222,
@@ -290,7 +294,7 @@ const mapDispatchToProps = (dispatch: any) => {
 }
 
 //connect()(Users) 是用来把dispatch注册到props，但是当第二个参数传入了方法，则dispatch不会再注册到props中
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+export default withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(Users))
 
 // export default connect((state: any) => ({
 //     todoList: state.todoList,

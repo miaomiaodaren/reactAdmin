@@ -5,6 +5,7 @@ import { typelistedit } from '../../model/actions/blog';
 import { Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
 import CssList from './csslist';
+import JsList from './jslist';
 
 interface JAVAPROPS {
     BlogList?: any,
@@ -51,7 +52,8 @@ class JavaList extends React.Component<JAVAPROPS, any> {
     //那传过来的name跟带有组件的obj进行对比，生成符合条件的真实DOM。
     setPackDom = (temp: any) => {
         const tempList: any = {
-            'css': CssList
+            'css': CssList,
+            'javascript': JsList
         };
         const Istemp = tempList[temp];
         if(!Istemp) {
@@ -84,12 +86,6 @@ class JavaList extends React.Component<JAVAPROPS, any> {
     }
 }
 
-// @connect(
-//     (state) => ({
-//         BlogList: state.saveBlogList,
-//         saveType: state.saveType,
-//     })
-// )
 const mapStateToProps = (state: any) => ({
     BlogList: state.saveBlogList,
     saveType: state.saveType,

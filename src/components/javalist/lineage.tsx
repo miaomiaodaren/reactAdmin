@@ -116,7 +116,7 @@ class lineage extends React.Component<any, any> {
 
     showhtml = (data: any) => {
         var html = {__html: data};
-        return <div dangerouslySetInnerHTML={html} /> ;
+        return <div className={styles.editorBg} dangerouslySetInnerHTML={html} /> ;
     }
 
     filesHtml = () => {

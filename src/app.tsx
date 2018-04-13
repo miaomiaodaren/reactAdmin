@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { Switch, Route, Link, Router, } from 'react-router-dom'
-
-
+import { Switch, Route, Link, Router, Redirect } from 'react-router-dom'
 import news from './components/news/index'
 
 import Sidebar from './components/home/left'
@@ -17,7 +15,7 @@ import bhistory from './util/history';
 
 import { hot } from 'react-hot-loader';
 
-console.info(store, 'isstore');
+import Home from './components/home/index'
 
 class App extends React.Component {
     constructor(props: any) {
