@@ -1,9 +1,8 @@
 import * as React from 'react'
 import { findDOMNode } from 'react-dom'
-// const ClipboardJS = require('clipboard') //复制文本到剪贴板功
 import * as ClipboardJS from 'clipboard';
 
-export class Copy extends React.Component<any, any>{
+class Copy extends React.Component<any, any>{
     constructor(props: any) {
         super(props)
     }
@@ -28,3 +27,5 @@ export class Copy extends React.Component<any, any>{
         )
     }
 }
+
+export default Copy

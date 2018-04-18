@@ -24,18 +24,26 @@ const productionConfig = {
                         use: [
                             'css-loader',
                             'less-loader?modules',
-                            // {
-                            //     loader: 'typings-for-css-modules-loader',
-                            //     options: {
-                            //         modules: true,
-                            //         namedExport: true,
-                            //         camelcase: true,
-                            //     }
-                            // }
                         ],
                     }
-                )
-            }
+                ),
+                exclude: /components/,
+            },
+            {
+                test: /\.less$/, 
+                use: [
+                    'style-loader?sourceMap',
+                    {
+                        loader: 'typings-for-css-modules-loader',
+                        options: {
+                            modules: true,
+                            namedExport: true,
+                        } 
+                    },
+                    'less-loader',
+                ],
+                include: /components/,
+            },
         ],
     },
     plugins: [

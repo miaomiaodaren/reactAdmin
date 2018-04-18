@@ -67,7 +67,7 @@ class Users extends React.Component<Uprops, any> {
             })),
             onChange: (v: any): void => {
                 let ref = v === '0' ? {} : v === '1' ? {isAdmin: true} : {isAdmin: false};
-                this.gUserList(ref)
+                this.props.userList(ref);
             }
         }]
     }
@@ -287,8 +287,8 @@ const mapStateToProps  = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        userList: () => {
-            fetchUserList()(dispatch)
+        userList: (params={}) => {
+            fetchUserList(params)(dispatch)
         }
     }
 }

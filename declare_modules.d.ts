@@ -5,3 +5,5 @@ declare module 'draft-js';
 declare module 'html-to-draftjs';
 
 declare module 'util.js'
+
+declare module 'popper'

@@ -30,7 +30,6 @@ const webpackConfigDev = {
                             namedExport: true,
                         } 
                     },
-                    // 'css-loader',
                     'less-loader',
                 ],
                 include: /components/,
@@ -49,7 +48,6 @@ const webpackConfigDev = {
                 use: [
                     'style-loader',
                     'css-loader'
-                    // 'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
                 ],
             }
         ]
