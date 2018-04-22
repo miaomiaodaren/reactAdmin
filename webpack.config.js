@@ -94,11 +94,6 @@ module.exports = {
             //         }
             //     ]
         // },
-        // {
-        //     test: /\.css$/,
-        //     loader: 'style-loader!css-loader',
-        //     // include: /components/,
-        // }, 
         {
             test: /\.(jpe?g|png|gif|svg|ico)/i,
             loader: 'url-loader',
@@ -132,6 +127,7 @@ module.exports = {
         //excludeChunks 弄懂了 chunks 之后，excludeChunks 选项也就好理解了，跟 chunks 是相反的，排除掉某些 js 文件。 excludeChunks: ['index1.js']
         //chunksSortMode 选项决定了 script 标签的引用顺序。默认有四个选项，'none', 'auto', 'dependency', '{function}'。
         new HtmlWebpackPlugin({
+            filename: 'index.html',
             template: __dirname + '/src/index.html',
             favicon: __dirname + '/src/favicon.ico',
             inject: true,

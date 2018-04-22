@@ -5,6 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 var webpackConfig = require('./webpack.config');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+
 var path = require('path');
 process.env.NODE_ENV = 'production';
 
@@ -13,33 +14,35 @@ var utils = require('./utils');
 const productionConfig = {
     devtool: 'cheap-module-source-map',
     module: {
-        loaders: [
-            // { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader")},
-            // { test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader", {publicPath:'../'}) },
-            { 
-                test: /\.less$/, 
+        rules: [
+            {
+                test: /\.(css|less)$/,
                 loader: ExtractTextPlugin.extract({
-                    fallback: {
-                        loader: 'style-loader',
+                        fallback: {
+                            loader: 'style-loader',
+                        },
+                        use: [
+                            'css-loader',
+                            'less-loader?modules',
+                        ],
+                    }
+                ),
+                exclude: /components/,
+            },
+            {
+                test: /\.less$/, 
+                use: [
+                    'style-loader?sourceMap',
+                    {
+                        loader: 'typings-for-css-modules-loader',
+                        options: {
+                            modules: true,
+                            namedExport: true,
+                        } 
                     },
-                    use: [
-                        {
-                            loader: 'typings-for-css-modules-loader',
-                            options: {
-                                modules: true,
-                                namedExport: true,
-                            }
-                        },
-                        {
-                            loader: 'less-loader',
-                            options: {
-                                outputStyle: 'expanded',
-                                sourceMap: true
-                            }
-                        },
-                        // 'css-loader'
-                    ]
-                }) 
+                    'less-loader',
+                ],
+                include: /components/,
             },
         ],
     },
@@ -65,7 +68,10 @@ const productionConfig = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
         }),
-        new ExtractTextPlugin('css/[name].[contenthash].css', { allChunks: true }), // 单独打包CSS
+        new ExtractTextPlugin({
+            filename: 'css/[name].[contenthash].css',
+            allChunks: true
+        }), // 单独打包CSS
     ]
 }
 

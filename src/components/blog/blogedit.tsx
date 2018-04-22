@@ -13,6 +13,7 @@ import { AddBlog, GetBlogList } from '../../api/api';
 import { withRouter } from 'react-router-dom';
 import { Dispatch } from 'redux';
 
+
 interface IContentPageProps {
     saveType?: any
 }
@@ -59,7 +60,7 @@ class blogEdit extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        const {params} = this.props.match;
+        const {params} = this.props.match; 
         if(params.id) {
             GetBlogList({_id: params.id}).then(res => {
                 const {title = '', type = '', content = ''} = res.information[0],
