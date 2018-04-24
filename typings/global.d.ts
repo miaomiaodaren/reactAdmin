@@ -25,3 +25,7 @@ declare module "*.scss" {
     export = classNames;
 }
 
+declare module 'rc-cascader';
+
+declare module 'classnames';
+

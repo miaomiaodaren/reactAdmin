@@ -1,11 +1,13 @@
 import * as React from 'react'
-import Cascader from './cascader'
+// import Cascader from './cascader'
+import 'rc-cascader/assets/index.css';
+import RcCascader from 'rc-cascader';
 
 class Cas extends React.Component<any, any> {
     constructor(props: any) {
         super(props)
         this.state = {
-            options: [{
+            option: [{
                 value: 'zhejiang',
                 label: 'Zhejiang',
                 children: [{
@@ -25,17 +27,31 @@ class Cas extends React.Component<any, any> {
                     children: [{
                         value: 'zhonghuamen',
                         label: 'Zhong Hua Men',
+                        children: [{
+                            value: 'taipingmen',
+                            label: 'Tai Ping Men'
+                        }]
                     }],
                 }],
-            }]
+            }],
+            defvalue: []
         }
+    }
+    componentDidMount() {
+        console.info(RcCascader, 2222)
+    }
+    changes = (v: any) => {
+        console.info(v);
+        this.setState({
+            defvalue: v
+        })
     }
     
     render() {
-        const {options} = this.state;
+        const {option, defvalue} = this.state;
         return (
            <div>
-               <Cascader option={options} />
+               <RcCascader options={option} onChange={(val: any)=> this.changes(val)}  value={defvalue}><input value={defvalue} readOnly/></RcCascader>
            </div>
         )
     }

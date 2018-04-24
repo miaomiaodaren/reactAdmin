@@ -10,6 +10,7 @@ class Plugin extends React.Component<any, any>{
                 {name: '复制文本到剪贴板功', url: 'copy'},
                 {name: '图片上传', url: 'upload'},
                 {name: '联级选择框', url: 'cascader'},
+                {name: '文本输入框', url: 'input'},
             ]
         }
         this.liEach = this.liEach.bind(this);

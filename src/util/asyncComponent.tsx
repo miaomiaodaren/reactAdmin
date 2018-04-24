@@ -10,7 +10,6 @@ export default function asyncComponent(importComponent: any) {
         }
 
         async componentDidMount() {
-            console.info(importComponent, 56);
             const { default: com } = await importComponent();
             this.setState({com})
         }

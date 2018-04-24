@@ -6,27 +6,33 @@ import { connect } from 'react-redux';
 import { fetchUserList, AddTodo, fetchUserAdd } from '../../model/actions/user'
 import { RemoveU } from '../../api/api';   //接口地址
 import { withRouter } from 'react-router-dom';
+import * as PropTypes from 'prop-types';
 
-// @connect(
-//     (state) => ({
-//         todoList: state.todoList,
-//         adduser: state.AddUser,
-//     })
-// )
-
-interface Uprops {
-    todoList?: any,
-    dispatch: any,
-    userList: any
+export interface UserProps {
+    todoList?: any;
+    dispatch?: any;
+    userList?: any;
+    myName?: string;
 }
 
-interface Ele {
-    value?: any,
-    mean?: any
+export interface Ele {
+    value?: any;
+    mean?: any;
 }
 
-class Users extends React.Component<Uprops, any> {
-    constructor(props: any) {
+class Users extends React.Component<UserProps, any> {
+    static defaultProps = {
+        myName: 'fufeng',
+    }
+
+    static propTypes = {
+        myName: PropTypes.string,
+        todoList: PropTypes.node,
+        dispatch: PropTypes.node,
+        userList: PropTypes.node,
+    }
+
+    constructor(props: UserProps) {
         super(props)
         this.state = {
             typeList: [{
@@ -254,12 +260,11 @@ class Users extends React.Component<Uprops, any> {
     render() {
         console.info(this, 668);
         const { todoList }: any = this.props;
-            // userL = todoList.data;
         return (
             <div id="warp"> 
                 <div className="users">
                     <SearchBar fields={ this.searchFields() } onOk={this.searcher} /> 
-                    <Button onClick={ this.add } className="search" icon="user-add" >添加</Button>
+                    <Button onClick={ this.add } className="search" icon="user-add" >添加{this.props.myName}</Button>
                 </div>
                 <div className="tableBox">
                     <div style={{ padding: 20 }}>
