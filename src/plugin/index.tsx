@@ -11,6 +11,7 @@ class Plugin extends React.Component<any, any>{
                 {name: '图片上传', url: 'upload'},
                 {name: '联级选择框', url: 'cascader'},
                 {name: '文本输入框', url: 'input'},
+                {name: '图片轮播', url: 'swipt'},
             ]
         }
         this.liEach = this.liEach.bind(this);
