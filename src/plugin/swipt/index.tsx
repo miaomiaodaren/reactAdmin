@@ -1,6 +1,8 @@
 import * as React from 'react'
 import * as ProtType from 'prop-types'
 import Swiper from './swiper'
+import Carousel from './carousel'
+import CarouselItem from './carouselItem'
 
 export default class SwiperDemo extends React.Component {
     constructor(props: any) {
@@ -9,16 +11,13 @@ export default class SwiperDemo extends React.Component {
     render() {
         return (
             <div>
-                <Swiper>
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
-                    <div>5</div>
-                    <div>6</div>
-                    <div>7<span>8888</span></div>
-                    <div>hellowordfdsa</div>
-                </Swiper>
+                <Carousel>
+                    <CarouselItem>1fufeng</CarouselItem>
+                    <CarouselItem>2fufeng</CarouselItem>
+                    <CarouselItem>3fufeng</CarouselItem>
+                    <CarouselItem>4fufeng</CarouselItem>
+                    <CarouselItem>5fufeng</CarouselItem>
+                </Carousel>
             </div>
         )
     }
