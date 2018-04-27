@@ -7,3 +7,8 @@ export const swiper_li: string;
 export const swiper_pro: string;
 export const swiper_next: string;
 export const rate: string;
+export const is_active: string;
+export const allowHalf: string;
+export const allowHalf_left: string;
+export const allowHalf_right: string;
+export const rightHalf: string;

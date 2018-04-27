@@ -1,36 +1,30 @@
 import * as React from 'react'
-import { Icon } from 'antd'
 import * as ProtType from 'prop-types'
-import * as CssList from '../input/input.less'
+import Rate from './rate'
+
 
 export interface RateProps {
     count?: number
 }
 
-export default class Rate extends React.Component<any, any> {
-    static propTypes = {
-        count: ProtType.number
-    }
-    static defaultProps = {
-        count: 5
-    }
+export interface RateState {
+    counts?: number
+}
+
+export default class RateDemo extends React.Component<any, any> {
     constructor(props: any) {
         super(props)
-    }
-    mouseMove() {
         
     }
+    
+    handleChange = (value: number): void => {
+        console.info(value, 2222);
+    }
+
     render() {
-        const {count} = this.props;
-        let rateArr = [];
-        for(let i = 0; i < count; i ++) {
-            rateArr.push(<li className="rate" onMouseMove={this.mouseMove.bind(this)}><Icon type="star-o" /></li>)
-        }
         return (
             <div>
-                <ul className={CssList.rate}>
-                    {rateArr}
-                </ul>
+                <Rate value={3} onChange={this.handleChange} allowHalf />
             </div>
         )
     }

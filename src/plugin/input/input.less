@@ -57,11 +57,37 @@
 }
 
 .rate {
-    width: 150px;
+    width: 250px;
     li{
-        color: #000;
+        color: #e8e8e8;
+        transition: color .5s;
         &:hover{
             color: yellow;
+        }
+        &.is_active{
+            color: yellow;
+        }
+        i{
+            font-size: 30px;
+        }
+        .allowHalf{
+            width: 100%;
+            // display: inline-block;
+            position: relative;
+            .allowHalf_left{
+                position: absolute;
+                width: 50%;
+                top: 0;
+                left: 0;
+                overflow: hidden;
+            }
+            .allowHalf_right {
+                opacity: 1;
+                width: 100%;
+            }
+        }
+        .rightHalf {
+            color: #e8e8e8;
         }
     }
 }

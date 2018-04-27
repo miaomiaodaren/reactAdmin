@@ -53,6 +53,7 @@
     "history": "^4.7.2",
     "html-to-draftjs": "^1.1.2",
     "html-webpack-plugin": "^2.30.1",
+    "immutable": "^3.8.2",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "node-notifier": "^5.1.2",
