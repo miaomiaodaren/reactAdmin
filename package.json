@@ -60,6 +60,7 @@
     "portfinder": "^1.0.13",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
+    "react-click-outside": "^3.0.1",
     "react-css-modules": "^4.7.1",
     "react-dom": "^16.2.0",
     "react-draft-wysiwyg": "^1.10.0",
