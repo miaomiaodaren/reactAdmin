@@ -189,6 +189,18 @@ export const clears = (obj: any) => {
     return obj
 }
 
+//fields是一个数组,删除obj中拥有fields的属性
+export const omit = (obj: {}, fields: string[]) => {
+    const shallowCopy: any = {
+      ...obj,
+    };
+    for (let i = 0; i < fields.length; i++) {
+      const key = fields[i];
+      delete shallowCopy[key];
+    }
+    return shallowCopy;
+}
+
 //把obj数据中的数据调换， key = val; val = key
 export function invert(obj: any) {
     if(!obj) return
@@ -467,6 +479,13 @@ export const delay = (fn: any, wait: any, args: any) => {
 //HTML Dom 模块
 
 
+
+export const closest = (ele: Element, query: string) => {
+    
+}
+
+
+
 //判断是否拥有该样式
 //20181-22 在阅读element源码的时候，了解了hasClass addClass removeClass更完善的写法，后期可以参考element/utils/dom.js
 //2018/2/1 dom.currentStyle ? dom.currentStyle : window.getComputedStyle(dom, null);  style, currentStyle, getComputedStyle 三者都可以获取样式，只有style可以写入 
@@ -732,48 +751,48 @@ export const stringfyQs = (obj: any) => {
 
 //2018-1-18新增debounce函数去抖动，throttle函数节流    undesoced 跟 lodash都有封装这种函数
 //此方法是借用了vue element 的一个插件实现的一个比较简单的
-// export const debounce = (fn: any, delay: any, immediate: any) => {
-//     return throttle(fn, delay, immediate, true);
-// }
+export const debounce = (fn: any, delay: any, immediate: any) => {
+    return throttle(fn, delay, immediate, true);
+}
 
 //debounce 参数的话说明是调用的debounce
 //debounce 将延迟函数的执行(真正的执行)在函数最后一次调用时刻的 wait 毫秒之后   也就是二次事件的触发间隔一定要大于一个值，不然如果一直触发，则只会触发一次
 //throttle 当重复调用函数的时候，最多每隔 wait毫秒调用一次该函数       如果事件一直在触发，则会每隔几秒触发一次，与debounce相比会触发多次，但是有时间间隔
 //immediate 如果是trun 则会把延迟执行，会以最后一个的参数为准，false的话，会先执行，再判断
-// export const throttle = function(fn: any, delay: any, immediate: any, debounce: any) {
-//     let currtime = +new Date(),         //当前时间
-//         last_call = 0,
-//         last_exec = 0,          //最后一次执行时间
-//         that,               //赋值当前的this
-//         args,               //方法所带参数
-//         diff,               //二者时间差
-//         timer = null,       //定时执行的方法
-//         exec = function() {
-//             last_exec = currtime        //执行的时候把当前时间赋值给最后一次执行时间
-//             fn.apply(that, args);   //执行方法
-//         }
-//     return function () {
-//         currtime = +new Date();
-//         that = this;
-//         args = arguments;
-//         diff = currtime - (debounce ? last_call : last_exec) - delay;
-//         clearTimeout(timer);
-//         if(debounce) {
-//             if(immediate) {
-//                 timer = setTimeout(exec, delay);
-//             } else if (diff >= 0) {
-//                 exec();
-//             }
-//         } else {
-//             if(diff >= 0) {
-//                 exec();
-//             } else if(immediate) {
-//                 timer = setTimeout(exec, -diff);
-//             }
-//         }
-//         last_call = currtime;
-//     }
-// }
+export const throttle = function(fn: any, delay: any, immediate?: any, debounce?: any) {
+    let currtime = +new Date(),         //当前时间
+        last_call = 0,
+        last_exec = 0,          //最后一次执行时间
+        that: any,               //赋值当前的this
+        args: any,               //方法所带参数
+        diff,               //二者时间差
+        timer: any = null,       //定时执行的方法
+        exec = function() {
+            last_exec = currtime        //执行的时候把当前时间赋值给最后一次执行时间
+            fn.apply(that, args);   //执行方法
+        }
+    return function () {
+        currtime = +new Date();
+        that = this;
+        args = arguments;
+        diff = currtime - (debounce ? last_call : last_exec) - delay;
+        clearTimeout(timer);
+        if(debounce) {
+            if(immediate) {
+                timer = setTimeout(exec, delay);
+            } else if (diff >= 0) {
+                exec();
+            }
+        } else {
+            if(diff >= 0) {
+                exec();
+            } else if(immediate) {
+                timer = setTimeout(exec, -diff);
+            }
+        }
+        last_call = currtime;
+    }
+}
 
 
 //实现加减乘除运算，保证不丢失精度

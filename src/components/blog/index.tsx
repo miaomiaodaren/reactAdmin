@@ -4,24 +4,19 @@ import SearchBar, { FormModel } from '../searchbar';
 import TableCom from '../tablecom';
 import { connect } from 'react-redux';
 import { GetBlogList, GetBlogTypeList, AddBlogType } from '../../api/api';
-import { fetchBlogList, delfetchBlog, typelistedit } from '../../model/actions/blog';
+import { fetchBlogList, delfetchBlog, typelistedit, savetypelist, getAsynTypeList } from '../../model/actions/blog';
 import { Switch, Route, Link, withRouter } from 'react-router-dom'
+import { isEmptyObject } from '../../util/util'
 
 
 // import moment from '../../util/monent'
 import history from "../../util/history";   //在4.0的react-router没有暴露browserHistory的时候可以用。 history.push("/user"); 进行跳转
 // var styles = require("../../style.less");
 
-// @connect(
-//     (state) => ({
-//         BlogList: state.saveBlogList,
-//         saveType: state.saveType,
-//     })
-// )
-
 interface BlogInterface {
     saveBlogList?: any,
-    saveType?: any
+    saveType?: any,
+    getAllType?: any
 }
 
 interface StateInterface {
@@ -70,19 +65,12 @@ class Blog extends React.Component<any, any> {
     }
 
     componentDidMount() {
-        console.info(this, 223);
-        fetchBlogList()(this.props.dispatch)
+        const {BolgList, alltypeList, GetAllTypes} = this.props;
+        BolgList();
         // //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
-        if(!Object.keys(this.props.saveType).length) {
-            typelistedit({}, (data: any) => {
-                this.setState({
-                    typeList: data.list
-                })
-            })(this.props.dispatch)   
+        if(isEmptyObject(alltypeList)) {
+            GetAllTypes({});
         }
-        // this.setState((prostate: any, props: any) => {
-        //     total: prostate.total + 1
-        // });
     }
 
     tableHeader = () => {
@@ -116,7 +104,7 @@ class Blog extends React.Component<any, any> {
     }
 
     seach = (params: any) => {
-        fetchBlogList({...params})(this.props.dispatch)
+        this.props.BolgList({...params});
     }
 
     //跳转到添加用户页面
@@ -223,9 +211,23 @@ class Blog extends React.Component<any, any> {
 //   name: 'Stranger'
 // };
 
-export default connect((state: BlogInterface) => ({
+const mapStateToProps = (state: BlogInterface) => ({
     BlogList: state.saveBlogList,
     saveType: state.saveType,
-}))(Blog)
+    alltypeList: state.getAllType,
+})
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        BolgList: (params: any = {}) => {
+            fetchBlogList(params)(dispatch)
+        },
+        GetAllTypes: (data: any = {}, callback?: any) => {
+            getAsynTypeList(data, callback)(dispatch)
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Blog)
 
 // export default withRouter(Blog)

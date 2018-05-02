@@ -1,6 +1,8 @@
 import * as React from 'react'
 import CascaderMenu from './menu'
-import { Manager, Target, Popper, Arrow  } from 'react-popper';
+import PopperJS from 'popper.js'
+import { findDOMNode } from 'react-dom'
+const ClickOutside = require('react-click-outside');
 
 interface State {
     menu?: any,
@@ -9,59 +11,74 @@ interface State {
 }
 
 class Cas extends React.Component<any, State> {
+    public popperJS: any
     constructor(props: any) {
         super(props)
         this.state = {
             menuVisible: false,             //判断弹出框是否显示的状态
             inputValue: '',                 //输入框的当前值
         }
+        this.handleClickOutside = this.handleClickOutside.bind(this);
     }
     handleClick = () => {
         const { menuVisible } = this.state
-        this.setState({
-            menuVisible: !menuVisible,
-        })
+        if(!menuVisible) {
+            this.setState({
+                menuVisible: true,
+            })
+        }
+    }
+
+    componentDidMount() {
+        console.info(this.context, 'sss')
     }
 
     componentDidUpdate(props: Object, state: State) {
         const { menuVisible } = this.state
+        const {inputs, menu} = this.refs;
+        if(state.menuVisible != menuVisible) {
+            if(menuVisible) {
+                if(!this.popperJS) {
+                    this.popperJS = new PopperJS(findDOMNode(inputs), findDOMNode(menu), {
+                        modifiers: {
+                            applyStyle: {
+                                gpuAcceleration: false,
+                            }
+                        },
+                        placement: 'top',
+                    })
+                } else {
+                    this.popperJS.update();
+                }
+            } else {
+                if(this.popperJS) {
+                    this.popperJS.destroy();
+                    delete this.popperJS
+                }
+            }
+        }
     }
     showMenu = () => {
         
     }
+
+    handleClickOutside() {
+        if (this.state.menuVisible) {
+          this.setState({ menuVisible: false });
+        }
+    }
+
     render() {
-        const {inputValue} = this.state
+        const {inputValue, menuVisible} = this.state
         return (
-            <label onClick={this.handleClick} >
-                {/* <input ref="input" defaultValue={inputValue} /> */}
-                {/* <CascaderMenu ref="menu" /> */}
-                <Manager>
-                    <Target>
-                        <span>312312312312312</span>
-                    </Target>
-                    <Popper placement="bottom">
-                        fffffffffffffffffffffffffffff
-                        <Arrow className="popper__arrow" />
-                    </Popper>
-                </Manager>
+            <label onClick={this.handleClick}>
+                <span ref="inputs">
+                    <input defaultValue={inputValue} />
+                </span>
+                {menuVisible ? <CascaderMenu ref="menu" options={this.props.option} /> : ''}
             </label>
         )
     }
 }
 
-export default Cas
-
-{/* <Manager>
-          <Target
-            style={{ width: 120, height: 120, background: '#b4da55' }}
-            onClick={this.handleClick}
-          >
-            Click {this.state.isOpen ? 'to hide' : 'to show'} popper
-          </Target>
-          {this.state.isOpen && (
-            <Popper className="popper">
-              Popper Content for Toggleable Example
-              <Arrow className="popper__arrow" />
-            </Popper>
-          )}
-        </Manager> */}
+export default ClickOutside(Cas)

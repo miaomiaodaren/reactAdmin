@@ -1,0 +1,93 @@
+.large{
+    input {
+        width:  500px;
+        height: 50px;
+        line-height: 50px;
+    }
+}
+.defaults{
+    input {
+        width:  300px;
+        height: 40px;
+        line-height: 40px;
+    }
+}
+
+.small{
+    input {
+        width:  150px;
+        height: 30px;
+        line-height: 30px;
+    }
+}
+
+.swiper_main{
+    width: 300px;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    .swiper_list{
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        display: block;
+        transition: transform .5s ease;
+        .swiper_li{
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+    }
+}
+
+.swiper_pro{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    line-height: 40px;
+    z-index: 10;
+}
+
+.swiper_next{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    line-height: 40px;
+    z-index: 10;
+}
+
+.rate {
+    width: 250px;
+    li{
+        color: #e8e8e8;
+        transition: color .5s;
+        &:hover{
+            color: yellow;
+        }
+        &.is_active{
+            color: yellow;
+        }
+        i{
+            font-size: 30px;
+        }
+        .allowHalf{
+            width: 100%;
+            // display: inline-block;
+            position: relative;
+            .allowHalf_left{
+                position: absolute;
+                width: 50%;
+                top: 0;
+                left: 0;
+                overflow: hidden;
+            }
+            .allowHalf_right {
+                opacity: 1;
+                width: 100%;
+            }
+        }
+        .rightHalf {
+            color: #e8e8e8;
+        }
+    }
+}

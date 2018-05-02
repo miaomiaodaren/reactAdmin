@@ -32,7 +32,7 @@ const webpackConfigDev = {
                     },
                     'less-loader',
                 ],
-                include: /components/,
+                include: [/components/, /plugin/],
             },
             {
                 test: /\.less$/, 
@@ -41,7 +41,7 @@ const webpackConfigDev = {
                     'css-loader',
                     'less-loader',
                 ],
-                exclude: /components/,
+                exclude: [/components/, /plugin/],
             },
             {
                 test: /\.css$/,
