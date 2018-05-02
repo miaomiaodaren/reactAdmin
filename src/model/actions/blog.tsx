@@ -17,3 +17,18 @@ export const savetypelist = createAction('SAVETYPELIST');
 //操作博客分类的方法
 export const typelistedit = createAjaxAction(GetBlogTypeList, '', savetypelist)
 
+
+export const getAsynTypeList = (data: any = {}, callback?: () => void) => {
+    return async (dispatch: any) => {
+        try{
+            let result = await GetBlogTypeList(data);
+            dispatch({
+                type: 'GETALLTYPELIST',
+                list: result.list || [],
+                count: result.count || 0
+            })
+        } catch(err) {
+            console.error(err);
+        }
+    }
+}

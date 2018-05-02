@@ -8,9 +8,10 @@
         // 二者的关系是 var state = store.getState();
     //action 是一个包含type属性的普通函数
 
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import combineReducers from './reducers';
-let store = createStore(combineReducers);
+import thunk from 'redux-thunk';
+let store = createStore(combineReducers, applyMiddleware(thunk));
 export default store;
 
 // // 打印初始状态

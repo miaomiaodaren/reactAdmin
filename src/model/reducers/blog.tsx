@@ -23,3 +23,14 @@ export const saveType = handleActions({
         return { ...res }
     }
 }, typeList) 
+
+
+
+export const getAllType = (state: any = typeList, action: any) => {
+    switch(action.type) {
+        case 'GETALLTYPELIST':
+            return {...state, ...action}
+        default: 
+            return state;
+    }
+}

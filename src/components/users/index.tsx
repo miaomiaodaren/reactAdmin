@@ -27,9 +27,9 @@ class Users extends React.Component<UserProps, any> {
 
     static propTypes = {
         myName: PropTypes.string,
-        todoList: PropTypes.node,
+        todoList: PropTypes.any,
         dispatch: PropTypes.node,
-        userList: PropTypes.node,
+        userList: PropTypes.any,
     }
 
     constructor(props: UserProps) {
@@ -300,8 +300,3 @@ const mapDispatchToProps = (dispatch: any) => {
 
 //connect()(Users) 是用来把dispatch注册到props，但是当第二个参数传入了方法，则dispatch不会再注册到props中
 export default withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(Users))
-
-// export default connect((state: any) => ({
-//     todoList: state.todoList,
-//     adduser: state.AddUser,
-// }))(Users)
