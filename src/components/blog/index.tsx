@@ -69,7 +69,15 @@ class Blog extends React.Component<any, any> {
         BolgList();
         // //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
         if(isEmptyObject(alltypeList)) {
-            GetAllTypes({});
+            GetAllTypes({}, (data: any[]) => {
+                this.setState({
+                    typeList: data || []
+                })
+            });
+        } else {
+            this.setState({
+                typeList: alltypeList.list || []
+            })
         }
     }
 
@@ -181,7 +189,7 @@ class Blog extends React.Component<any, any> {
                 <div className="serach users">
                     <SearchBar fields={ this.searchFields() } onOk={ this.seach } />
                     <Button onClick={ this.addblog } className="search" icon="user-add" >添加</Button>
-                    <Button onClick={ this.addtype } className="search" icon="user-add" style={{marginLeft: 20}}>添加</Button>
+                    <Button onClick={ this.addtype } className="search" icon="user-add" style={{marginLeft: 20}}>添加分类</Button>
                 </div>
                 <div className="tableBox">
                     <div style={{ padding: 20 }}>
@@ -200,16 +208,6 @@ class Blog extends React.Component<any, any> {
         )
     }
 }
-
-//props类型定义
-// Blog.propTypes = {
-//     BlogList: PropTypes.string,
-//     saveType: PropTypes.element.isRequired
-// };
-//props默认值
-// Greeting.defaultProps = {
-//   name: 'Stranger'
-// };
 
 const mapStateToProps = (state: BlogInterface) => ({
     BlogList: state.saveBlogList,

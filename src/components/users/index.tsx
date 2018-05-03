@@ -5,8 +5,9 @@ import TableCom from '../tablecom';
 import { connect } from 'react-redux';
 import { fetchUserList, AddTodo, fetchUserAdd } from '../../model/actions/user'
 import { RemoveU } from '../../api/api';   //接口地址
-import { withRouter } from 'react-router-dom';
+import { withRouter, Prompt  } from 'react-router-dom';
 import * as PropTypes from 'prop-types';
+import {is, fromJS} from 'immutable'
 
 export interface UserProps {
     todoList?: any;
@@ -171,17 +172,12 @@ class Users extends React.Component<UserProps, any> {
         //WillMount是在完成首次渲染之前调用，此时可以修改组件的state
     }
     componentDidMount() {
-        // 真实的DOM被渲染出来后调用，可以在此方法中通过 this.getDOMNode()访问真实的DOM元素。此时可以使用其它类库操作DOM
-        console.info(this.props, 'isprops');
-        // this.props.dispatch(fetchUserList({
-        //     id: 222,
-        //     text: '333',
-        // }));
-        // this.GetUserList();
-        //此处只能把dispatch做为最后一个参数再传进去,才没有问题
-        // fetchUserList()(this.props.dispatch)
         //在此使用了redux的connect的第二个参数，可以直接封装一个方法，然后直接在页面实现action的方法
         this.props.userList();
+    }
+
+    shouldComponentUpdate(nextProps:UserProps, nextState: any) {
+        return !is(fromJS(nextProps), fromJS(this.props)) || !is(fromJS(nextState), fromJS(this.state))
     }
 
     tableAction = async (key: any, row: any) => {
@@ -258,7 +254,6 @@ class Users extends React.Component<UserProps, any> {
     }  
 
     render() {
-        console.info(this, 668);
         const { todoList }: any = this.props;
         return (
             <div id="warp"> 

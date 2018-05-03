@@ -10,12 +10,9 @@ import rootReducer from './model/reducers/index'
 import { createStore } from 'redux';
 const store = createStore(rootReducer);
 import routes from './routes';
-
 import bhistory from './util/history';
-
 import { hot } from 'react-hot-loader';
-
-import Home from './components/home/index'
+import Errors from './components/404'
 
 class App extends React.Component {
     constructor(props: any) {
@@ -31,8 +28,9 @@ class App extends React.Component {
                         <div id="main_right">
                             <Switch>
                                 {routes.map(route => (
-                                    <Route path={route.path} key={route.path} component={route.body()} />
+                                    <Route exact path={route.path} key={route.path} component={route.body()} />
                                 ))}
+                                <Route component= {Errors}/>
                             </Switch>
                         </div>
                     </div>

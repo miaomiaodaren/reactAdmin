@@ -10,7 +10,7 @@
 
 import {createStore, applyMiddleware} from 'redux';
 import combineReducers from './reducers';
-import thunk from 'redux-thunk';
+import thunk from 'redux-thunk';        //可以使用异步action
 let store = createStore(combineReducers, applyMiddleware(thunk));
 export default store;
 
