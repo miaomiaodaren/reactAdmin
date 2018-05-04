@@ -30,17 +30,3 @@ function renderWithHotReload(RootElement: any) {
         document.getElementById('app')
     )
 }
-
-// ReactDOM.render(
-//     <Provider store={store}>
-//         <Router history={history}>
-//             <Switch>
-//                 {/* <Route path="/login" component={Login} /> */}
-//                 <Route exact path="/" component={App} />
-//                 <Route path="/:type" component={App} />
-//             </Switch>
-//         </Router>
-//     </Provider>,
-//     document.getElementById('app')
-// );
-// ReactDOM.render(<App />, document.getElementById('app'));

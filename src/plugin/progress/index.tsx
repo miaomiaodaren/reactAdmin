@@ -9,8 +9,9 @@ export default class showInput extends React.Component {
     render() {
         return (
             <div>
-                <Progress />
+                <Progress percent={80} />
                 <br />
+                <Progress type="circle" percent={80} />
             </div>
         )
     }

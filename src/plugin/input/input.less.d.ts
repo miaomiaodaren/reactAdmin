@@ -12,3 +12,5 @@ export const allowHalf: string;
 export const allowHalf_left: string;
 export const allowHalf_right: string;
 export const rightHalf: string;
+export const progress_line: string;
+export const progress_realline: string;

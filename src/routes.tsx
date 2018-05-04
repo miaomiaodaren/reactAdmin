@@ -6,9 +6,7 @@ import BlogEdit from './components/blog/blogedit';
 import Books from './components/books/book';
 import JavaList from './components/javalist/index';
 import Lineage from './components/javalist/lineage';
-
-//插件路由
-import Plugin from './plugin/index'
+import Plugin from './plugin/index';        //插件路由
 
 const routes = [
     {
@@ -37,6 +35,10 @@ const routes = [
     },
     {
         path: '/plugin',
+        body: () => Plugin
+    },
+    {
+        path: '/plugin/:type',
         body: () => Plugin
     },
     {
