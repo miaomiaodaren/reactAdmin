@@ -93,6 +93,7 @@
     "classnames": "^2.2.5",
     "popper.js": "^1.14.3",
     "rc-cascader": "^0.12.2",
-    "react-click-outside": "^3.0.1"
+    "react-click-outside": "^3.0.1",
+    "redux-thunk": "^2.2.0"
   }
 }
