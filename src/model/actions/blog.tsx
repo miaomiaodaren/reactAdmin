@@ -17,7 +17,7 @@ export const savetypelist = createAction('SAVETYPELIST');
 //操作博客分类的方法
 export const typelistedit = createAjaxAction(GetBlogTypeList, '', savetypelist)
 
-//使用异步的ACTION，可以在得到数据之后保存在内存中
+//使用异步的ACTION，可以在得到数据之后保存在内存中,需要安装redux-chunk插件
 export const getAsynTypeList = (data: any = {}, callback?: (data: any[]) => void) => {
     return async (dispatch: any) => {
         try{

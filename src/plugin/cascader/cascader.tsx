@@ -1,5 +1,8 @@
 import * as React from 'react'
 import CascaderMenu from './menu'
+import * as PropTypes from 'prop-types'
+
+
 import PopperJS from 'popper.js'
 import { findDOMNode } from 'react-dom'
 const ClickOutside = require('react-click-outside');
@@ -13,7 +16,13 @@ interface State {
 class Cas extends React.Component<any, State> {
     public popperJS: any
     constructor(props: any) {
-        super(props)
+        super(props);
+        let initialValue = [];
+        if ('value' in props) {
+            initialValue = props.value || [];
+        } else if ('defaultValue' in props) {
+            initialValue = props.defaultValue || [];
+        }
         this.state = {
             menuVisible: false,             //判断弹出框是否显示的状态
             inputValue: '',                 //输入框的当前值

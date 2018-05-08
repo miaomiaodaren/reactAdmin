@@ -3,7 +3,8 @@ import { Table, message, Modal, Button } from 'antd';
 import SearchBar, { FormModel } from '../searchbar';
 import TableCom from '../tablecom';
 import { connect } from 'react-redux';
-import { fetchUserList, AddTodo, fetchUserAdd } from '../../model/actions/user'
+import { bindActionCreators } from 'redux';
+import { asyncAddTodo, fetchUserAdd } from '../../model/actions/user'
 import { RemoveU } from '../../api/api';   //接口地址
 import { withRouter, Prompt  } from 'react-router-dom';
 import * as PropTypes from 'prop-types';
@@ -33,8 +34,12 @@ class Users extends React.Component<UserProps, any> {
         userList: PropTypes.any,
     }
 
-    constructor(props: UserProps) {
-        super(props)
+    static contextTypes = {
+        store: PropTypes.object
+    }
+
+    constructor(props: UserProps, context: any) {
+        super(props, context)
         this.state = {
             typeList: [{
                 value: 0,
@@ -166,7 +171,7 @@ class Users extends React.Component<UserProps, any> {
     }
 
     gUserList = (obj: any) => {
-        fetchUserList({ ...obj })(this.props.dispatch)
+        this.props.userList({ ...obj });
     }
     componentWillMount() {
         //WillMount是在完成首次渲染之前调用，此时可以修改组件的state
@@ -181,7 +186,6 @@ class Users extends React.Component<UserProps, any> {
     }
 
     tableAction = async (key: any, row: any) => {
-        console.info(row);
         if(key === 'edit') {
             //TODO 执行编译
             this.setState({
@@ -194,7 +198,7 @@ class Users extends React.Component<UserProps, any> {
                 const d = await RemoveU({id: row._id});
                 if(d.code === 1) {
                     message.success('用户删除成功');
-                    fetchUserList()(this.props.dispatch);
+                    this.props.userList();
                 }
             } catch(err) {
                 console.error(err);
@@ -207,7 +211,7 @@ class Users extends React.Component<UserProps, any> {
         fetchUserAdd({ ...params }, () => {
             message.success('用户添加成功');
             this.setState({addDialog: false});
-            fetchUserList()(this.props.dispatch)
+            this.props.userList();
         })(this.props.dispatch)
     } 
     //用户编辑提交事件
@@ -216,13 +220,12 @@ class Users extends React.Component<UserProps, any> {
         fetchUserAdd({ ...params, method: 'update' }, () => {
             message.success('用户编辑成功');
             this.setState({editDialog: false});
-            fetchUserList()(this.props.dispatch)
+            this.props.userList();
         })(this.props.dispatch)
     }
 
     searcher = (params: any) => {
-        console.info(params, 777);
-        fetchUserList({ ...params })(this.props.dispatch)
+        this.props.userList({ ...params });
     }
   
     add = () => {
@@ -256,7 +259,7 @@ class Users extends React.Component<UserProps, any> {
     render() {
         const { todoList }: any = this.props;
         return (
-            <div id="warp"> 
+            <div id="warp">
                 <div className="users">
                     <SearchBar fields={ this.searchFields() } onOk={this.searcher} /> 
                     <Button onClick={ this.add } className="search" icon="user-add" >添加{this.props.myName}</Button>
@@ -281,14 +284,14 @@ class Users extends React.Component<UserProps, any> {
 }
 
 const mapStateToProps  = (state: any) => ({
-    todoList: state.todoList,
+    todoList: state.Users,
     adduser: state.AddUser,
 })
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
         userList: (params={}) => {
-            fetchUserList(params)(dispatch)
+            asyncAddTodo(params)(dispatch)
         }
     }
 }

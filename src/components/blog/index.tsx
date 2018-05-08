@@ -11,7 +11,6 @@ import { isEmptyObject } from '../../util/util'
 
 // import moment from '../../util/monent'
 import history from "../../util/history";   //在4.0的react-router没有暴露browserHistory的时候可以用。 history.push("/user"); 进行跳转
-// var styles = require("../../style.less");
 
 interface BlogInterface {
     saveBlogList?: any,
@@ -227,5 +226,3 @@ const mapDispatchToProps = (dispatch: any) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Blog)
-
-// export default withRouter(Blog)

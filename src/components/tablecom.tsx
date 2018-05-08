@@ -81,6 +81,3 @@ export default class TableCom extends React.Component<Props, any> {
     }
 }
 
-// TableCom.propTypes = {
-//     pageSize: PropTypes.number,
-// }

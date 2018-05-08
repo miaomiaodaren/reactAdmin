@@ -24,10 +24,6 @@ interface isf {
     [index: string]: any
 }
 
-// @connect(
-//     (state) => ({ saveType: state.saveType })
-// )
-// @connect(mapStateToProps)
 class blogEdit extends React.Component<any, any> {
     constructor(props: IContentPageProps) {
         super(props);

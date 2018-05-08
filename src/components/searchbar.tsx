@@ -247,11 +247,3 @@ export class FormModel extends React.Component<modeInterface, any> {
 
 
 
-// Isform.propTypes = {
-//   title: PropTypes.string,
-//   fields: PropTypes.arrayOf(Object),
-// //   onOk: PropTypes.func.isRequired,
-//   onCancel: PropTypes.func,
-//   okText: PropTypes.string,
-// }
-
