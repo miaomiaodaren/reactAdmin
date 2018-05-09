@@ -12,7 +12,7 @@ const store = createStore(rootReducer);
 import routes from './routes';
 import bhistory from './util/history';
 import { hot } from 'react-hot-loader';
-import Errors from './components/404'
+import Errors from './components/404';
 
 class App extends React.Component {
     constructor(props: any) {

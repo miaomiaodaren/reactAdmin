@@ -7,7 +7,7 @@
         // subscribe(listener) 可以理解成dom中的addEventListener
         // 二者的关系是 var state = store.getState();
     //action 是一个包含type属性的普通函数
-
+    // https://www.jianshu.com/p/a2d4c1856560    devTools
 import {createStore, applyMiddleware} from 'redux';
 import combineReducers from './reducers';
 import thunk from 'redux-thunk';        //可以使用异步action

@@ -29,3 +29,7 @@ declare module 'rc-cascader';
 
 declare module 'classnames';
 
+declare module 'redux-devtools'
+declare module 'redux-devtools-log-monitor'
+declare module 'redux-devtools-dock-monitor'
+

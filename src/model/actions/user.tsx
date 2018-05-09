@@ -26,10 +26,10 @@ export const AddTodoEnd = ():ActionType => ({
 export const asyncAddTodo = (param?: any) => {
     return async(dispatch: any) => {
         try{
-            await dispatch(AddTodoStart());
+            dispatch(AddTodoStart());
             let result = await GetUser(param);
-            await dispatch(AddTodo(result));
-            await dispatch(AddTodoEnd());
+            dispatch(AddTodo(result));
+            dispatch(AddTodoEnd());
         } catch(err) {
             console.error(err);
         }
