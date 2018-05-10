@@ -59,9 +59,9 @@ export default class TableCom extends React.Component<Props, any> {
             })
         }
     }
-    onPageChangeHandler = (e: any) => {
+    onPageChangeHandler = (page: number, pageSize: number) => {
         //会传入要去的页数
-        this.setState({ currentPage: e })
+        this.setState({ currentPage: page })
     }
     render() {
         return (

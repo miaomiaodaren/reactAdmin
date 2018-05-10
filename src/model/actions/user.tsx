@@ -29,10 +29,10 @@ export const asyncAddTodo = (param?: any) => {
             dispatch(AddTodoStart());
             let result = await GetUser(param);
             dispatch(AddTodo(result));
-            dispatch(AddTodoEnd());
         } catch(err) {
             console.error(err);
         }
+        dispatch(AddTodoEnd());
     }
 }
 

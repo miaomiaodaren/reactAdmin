@@ -262,11 +262,11 @@ class Users extends React.Component<UserProps, any> {
             <div id="warp">
                 <div className="users">
                     <SearchBar fields={ this.searchFields() } onOk={this.searcher} /> 
-                    <Button onClick={ this.add } className="search" icon="user-add" >添加{this.props.myName}</Button>
+                    <Button onClick={ this.add } className="search" icon="user-add" >添加用户</Button>
                 </div>
                 <div className="tableBox">
                     <div style={{ padding: 20 }}>
-                        <TableCom header={ this.tableHeader()} ref="istable" data={ todoList.data } 
+                        <TableCom header={ this.tableHeader()} ref="istable" data={ todoList.list } 
                             rowClass="tableclass"
                             action={ this.state.actionList }
                             pagination={ true } pageSize={ 10 }

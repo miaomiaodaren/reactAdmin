@@ -13,21 +13,6 @@ export const Users = (state = userStyle, action: any) => {
             return state
     }
 }
-// export const todoList = handleActions({
-//     'ADD_TODO'(state: any, action: any) {
-//         return { ...state, loading: true, ...action.payload }
-//     },
-//     'request user list'(state: any, action: any) {
-//         return { ...state, loading: true }
-//     },
-//     'receive user list'(state: any, action: any) {
-//         const { res } = action.payload
-//         return { data: res.data, loading: false }
-//     }
-// }, sb)
-
-
-
 
 const addparams = {}
 
