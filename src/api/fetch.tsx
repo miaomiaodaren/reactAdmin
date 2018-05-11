@@ -1,4 +1,7 @@
 import axios from 'axios';
+import {stringify, parse} from 'qs';
+
+
 
 declare global {
     interface Window { decodeURIComponent: any; }
@@ -30,7 +33,7 @@ const getUrlPrmt = (url: string)=> {
 
 const pardata = (data: any, type: string) => {
     let d = type === 'GET' ? { method: type, headers: { "Content-type": 'application/json' }} :
-        { method: type, body: JSON.stringify(data), headers: { "Content-type": 'application/json' }}
+        { method: type, data: data, headers: { "Content-type": 'application/json' }}
     return d;
 }
 
@@ -57,6 +60,7 @@ const fetchAjax = (url: string, method: string, params?: any) => {
     } else {
         url += !par ? '' :`?${par}`
     }
+    console.info(url, pardata(params, method), 3333333333333);
     return instance(url, pardata(params, method)).then(res => res.data)
 }
 

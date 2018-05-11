@@ -4,7 +4,7 @@ import SearchBar, { FormModel } from '../searchbar';
 import TableCom from '../tablecom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { asyncAddTodo, fetchUserAdd } from '../../model/actions/user'
+import { asyncAddTodo, asyncAddUser, USERS } from '../../model/actions/user'
 import { RemoveU } from '../../api/api';   //接口地址
 import { withRouter, Prompt  } from 'react-router-dom';
 import * as PropTypes from 'prop-types';
@@ -15,6 +15,7 @@ export interface UserProps {
     dispatch?: any;
     userList?: any;
     myName?: string;
+    userAdd?: any;
 }
 
 export interface Ele {
@@ -208,20 +209,24 @@ class Users extends React.Component<UserProps, any> {
 
     //点击提交的时候触发的事件
     submits = (params : any) => {
-        fetchUserAdd({ ...params }, () => {
-            message.success('用户添加成功');
-            this.setState({addDialog: false});
-            this.props.userList();
-        })(this.props.dispatch)
+        this.props.userAdd({ ...params }, (res: any) => {
+            if(res.statue === 'success') {
+                message.success('用户添加成功');
+                this.setState({addDialog: false});
+                this.props.userList();
+            }  else {
+                message.success(res.message);
+            }
+        })
     } 
     //用户编辑提交事件
     Editsubmits = (params: any) => {
         console.info(params);
-        fetchUserAdd({ ...params, method: 'update' }, () => {
-            message.success('用户编辑成功');
-            this.setState({editDialog: false});
-            this.props.userList();
-        })(this.props.dispatch)
+        // fetchUserAdd({ ...params, method: 'update' }, () => {
+        //     message.success('用户编辑成功');
+        //     this.setState({editDialog: false});
+        //     this.props.userList();
+        // })(this.props.dispatch)
     }
 
     searcher = (params: any) => {
@@ -258,6 +263,7 @@ class Users extends React.Component<UserProps, any> {
 
     render() {
         const { todoList }: any = this.props;
+
         return (
             <div id="warp">
                 <div className="users">
@@ -292,6 +298,9 @@ const mapDispatchToProps = (dispatch: any) => {
     return {
         userList: (params={}) => {
             asyncAddTodo(params)(dispatch)
+        },
+        userAdd: (params: USERS, callback?: () => void) => {
+            asyncAddUser(params, callback)(dispatch)
         }
     }
 }

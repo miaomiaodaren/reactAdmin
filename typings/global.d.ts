@@ -33,3 +33,4 @@ declare module 'redux-devtools'
 declare module 'redux-devtools-log-monitor'
 declare module 'redux-devtools-dock-monitor'
 
+declare module 'qs';

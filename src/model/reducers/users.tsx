@@ -16,12 +16,25 @@ export const Users = (state = userStyle, action: any) => {
 
 const addparams = {}
 
-export const AddUser = handleActions({
-    'request add user'(state: any, action: any) {
-        return { loading: true }
-    },
-    'receive add user'(state: any, action: any) {
-        const { res, req } = action.payload;
-        return { data: req, loading: false }
-    },
-}, addparams)
+export const AddUser = (state = userStyle, action: any) => {
+    switch(action.type) {
+        case 'Add_User_Stare':
+            return {...state, loading: true}
+        case 'Add_User_End':
+            return {...state, loading: false}
+        case 'Add_Usering':
+            return { ...state, ...action.payload, loading: true }
+        default:
+            return state
+    }
+}
+
+// export const AddUser = handleActions({
+//     'request add user'(state: any, action: any) {
+//         return { loading: true }
+//     },
+//     'receive add user'(state: any, action: any) {
+//         const { res, req } = action.payload;
+//         return { data: req, loading: false }
+//     },
+// }, addparams)

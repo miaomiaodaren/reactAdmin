@@ -11,6 +11,12 @@ export const AddUser = (params ={}) => fetchAjax(`/user/addUser`, 'POST', params
 
 
 
+
+
+
+
+
+
 //删除用户
 export const RemoveU = (params = {}) => fetchAjax(`/users/RemoveUser`, 'POST', params);
 

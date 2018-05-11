@@ -37,6 +37,39 @@ export const asyncAddTodo = (param?: any) => {
 }
 
 
+export interface USERS {
+    name: any,
+    isAdmin: boolean,
+    psw: any
+}
+const addUserStare = ():ActionType => ({
+    type: 'Add_User_Stare'
+});
+
+const addUsering = (resInfo: any):ActionType => ({
+    type: 'Add_Usering',
+    payload: resInfo,
+});
+
+const addUserEnd = ():ActionType => ({
+    type: 'Add_User_End'
+});
+
+export const asyncAddUser = (params: USERS, callback?: (res: any) => void) => {
+    return async(dispatch: any) => {
+        try {
+            dispatch(addUserStare());
+            let result = await AddUser(params);
+            dispatch(addUsering(result));
+            callback && callback(result);
+        } catch(err) {
+            console.error(err)
+        }
+        dispatch(addUserEnd());
+    }
+}
+
+
 
 //用户添加
 export const requestUserAdd = createAction('request user list');
