@@ -9,16 +9,16 @@ export const GetUser = (params = {}) => fetchAjax(`/user/userList`, 'GET', param
 //添加用户
 export const AddUser = (params ={}) => fetchAjax(`/user/addUser`, 'POST', params);
 
-
-
-
-
-
-
-
-
 //删除用户
-export const RemoveU = (params = {}) => fetchAjax(`/users/RemoveUser`, 'POST', params);
+export const RemoveU = (params = {}) => fetchAjax(`/user/RemoveUser`, 'POST', params);
+
+
+
+
+
+
+
+
 
 //获取博客列表
 export const GetBlogList = (params = {}) => fetchAjax(`/news/newslist`, 'POST', params);

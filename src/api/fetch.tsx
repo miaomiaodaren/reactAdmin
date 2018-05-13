@@ -60,8 +60,7 @@ const fetchAjax = (url: string, method: string, params?: any) => {
     } else {
         url += !par ? '' :`?${par}`
     }
-    console.info(url, pardata(params, method), 3333333333333);
-    return instance(url, pardata(params, method)).then(res => res.data)
+    return instance(url, pardata(params, method)).then((res: any) => res.data)
 }
 
 export default fetchAjax

@@ -1,14 +1,14 @@
 import * as React from 'react';
-// import { addClass } from '../../util/util.js'
-// import '../../style.less'
+import { connect } from 'react-redux'
 
 export interface Props extends React.Props<Home> {}
 export interface State {}
 
-// import '../../style.css';
-// import * as ffs from './home.less';
-// var styles = require("../../style.css");
+// function dectest(target: any) {
+//     target.prototype.name = 'isfufeng'
+// }
 
+// @dectest
 export default class Home extends React.Component<Props, State> {
     constructor(props: any) {
         super(props)
@@ -28,7 +28,6 @@ export default class Home extends React.Component<Props, State> {
                     <span ref="index_head_span">热烈庆祝喵喵大人后台开业</span>
                 </div>
                 daji大家
-                {/* <span className={ffs.name_title}>12312</span> */}
             </div>
         )
     }

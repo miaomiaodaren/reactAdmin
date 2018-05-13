@@ -3,12 +3,30 @@ import * as classnames from 'classnames'
 import * as ProtType from 'prop-types'
 
 import * as cssList from '../input/input.less'
+import arrayTreeFilter from 'array-tree-filter';
 
 export interface PROPS {
     type?: 'line' | 'circle';
     percent?: number
 }
 
+const data = [{
+    value: 'a',
+    children: [{
+      value: 'b',
+      children: [{
+        value: 'c'
+      }, {
+        value: 'd',
+      }]
+    }],
+  }];
+  const values = ['a', 'b', 'c'];
+  const result = arrayTreeFilter(
+    data, (item, level) => item.value === values[level]
+  );
+  
+console.log(result, 6666);
 
 export default class progress extends React.Component<PROPS, any> {
     static propTypes = {

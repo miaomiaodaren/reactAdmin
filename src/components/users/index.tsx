@@ -127,15 +127,9 @@ class Users extends React.Component<UserProps, any> {
             title: '用户名',
             key: 'name',
             type: 'input',
+            disabled: true,
             options: {
                 initialValue: editData.name,
-            }
-        }, {
-            title: '密码',
-            key: 'psw',
-            type: 'password',
-            options: {
-                initialValue: editData.psw,
             }
         }, {
             title: '是否管理员',
@@ -188,6 +182,7 @@ class Users extends React.Component<UserProps, any> {
 
     tableAction = async (key: any, row: any) => {
         if(key === 'edit') {
+            console.info(key, row, 3333);
             //TODO 执行编译
             this.setState({
                 editDialog: true,
@@ -197,9 +192,12 @@ class Users extends React.Component<UserProps, any> {
             //TODO 执行删除   (后续添加删除确认,需要确认才能删除)
             try {
                 const d = await RemoveU({id: row._id});
-                if(d.code === 1) {
+
+                if(d.statue === 'success') {
                     message.success('用户删除成功');
                     this.props.userList();
+                } else {
+                    message.error(d.message);
                 }
             } catch(err) {
                 console.error(err);
@@ -221,12 +219,16 @@ class Users extends React.Component<UserProps, any> {
     } 
     //用户编辑提交事件
     Editsubmits = (params: any) => {
-        console.info(params);
-        // fetchUserAdd({ ...params, method: 'update' }, () => {
-        //     message.success('用户编辑成功');
-        //     this.setState({editDialog: false});
-        //     this.props.userList();
-        // })(this.props.dispatch)
+        this.props.userAdd({...params}, (res: any) => {
+            console.info(res, 4444);
+            if(res.statue === 'success') {
+                message.success('用户编辑成功');
+                this.setState({editDialog: false});
+                this.props.userList();
+            }  else {
+                message.success(res.message);
+            }
+        })
     }
 
     searcher = (params: any) => {
@@ -262,6 +264,7 @@ class Users extends React.Component<UserProps, any> {
     }  
 
     render() {
+        console.info(this, 3333);
         const { todoList }: any = this.props;
 
         return (
