@@ -11,11 +11,12 @@ import * as PropTypes from 'prop-types';
 import {is, fromJS} from 'immutable'
 
 export interface UserProps {
-    todoList?: any;
     dispatch?: any;
-    userList?: any;
     myName?: string;
-    userAdd?: any;
+    userList?: any,
+    userAdd?: any,
+    todoList?: any[],
+    adduser?: any[],
 }
 
 export interface Ele {
@@ -23,6 +24,23 @@ export interface Ele {
     mean?: any;
 }
 
+const mapStateToProps  = (state: any) => ({
+    todoList: state.Users,
+    adduser: state.AddUser,
+})
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        userList: (params={}) => {
+            asyncAddTodo(params)(dispatch)
+        },
+        userAdd: (params: USERS, callback?: () => void) => {
+            asyncAddUser(params, callback)(dispatch)
+        }
+    }
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
 class Users extends React.Component<UserProps, any> {
     static defaultProps = {
         myName: 'fufeng',
@@ -33,6 +51,8 @@ class Users extends React.Component<UserProps, any> {
         todoList: PropTypes.any,
         dispatch: PropTypes.node,
         userList: PropTypes.any,
+        userAdd: PropTypes.any,
+        adduser: PropTypes.any,
     }
 
     static contextTypes = {
@@ -264,7 +284,6 @@ class Users extends React.Component<UserProps, any> {
     }  
 
     render() {
-        console.info(this, 3333);
         const { todoList }: any = this.props;
 
         return (
@@ -292,21 +311,6 @@ class Users extends React.Component<UserProps, any> {
     }
 }
 
-const mapStateToProps  = (state: any) => ({
-    todoList: state.Users,
-    adduser: state.AddUser,
-})
-
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        userList: (params={}) => {
-            asyncAddTodo(params)(dispatch)
-        },
-        userAdd: (params: USERS, callback?: () => void) => {
-            asyncAddUser(params, callback)(dispatch)
-        }
-    }
-}
 
 //connect()(Users) 是用来把dispatch注册到props，但是当第二个参数传入了方法，则dispatch不会再注册到props中
-export default withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(Users))
+export default withRouter<any>(Users)
