@@ -39,6 +39,13 @@ export default class showInput extends React.Component<any, any> implements Test
     }
 
     testMethod: any
+
+    componentDidMount() {
+        fetch('http://127.0.0.1:3003/user/userList').then(res => res.json()).then(res => {
+            console.info(res, 2222222222222);
+        })
+    }
+    
     render() {
         console.info(this.testMethod, 3333, this);
         return (

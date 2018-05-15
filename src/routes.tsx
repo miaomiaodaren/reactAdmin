@@ -6,6 +6,7 @@ import BlogEdit from './components/blog/blogedit';
 import Books from './components/books/book';
 import JavaList from './components/javalist/index';
 import Lineage from './components/javalist/lineage';
+import Music from './components/music/login';
 import Plugin from './plugin/index';        //插件路由
 
 const routes = [
@@ -40,6 +41,10 @@ const routes = [
     {
         path: '/plugin/:type',
         body: () => Plugin
+    },
+    {
+        path: '/music',
+        body: () => Music
     },
     {
         path: '/',
