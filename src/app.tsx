@@ -13,12 +13,41 @@ import routes from './routes';
 import bhistory from './util/history';
 import { hot } from 'react-hot-loader';
 import Errors from './components/404';
+import Home from './components/home/index'
+import Login from './components/login'
+
+
+const isLogin = () => {
+    const token = sessionStorage.getItem('token');
+    return !!token
+}
+
+const PrivateRoute = ({commponent: Component, ...rest}: any) => {
+    return (
+        <Route render={ props =>
+            isLogin() ? (
+                <Component {...props} />
+            ) : (
+                <Redirect
+                    to={{
+                    pathname: "/login",
+                    state: { from: props.location }
+                    }}
+                />
+            )
+        }/>
+    )
+} 
+
+
 
 class App extends React.Component {
     constructor(props: any) {
         super(props);
     }
+
     render() {
+        sessionStorage.setItem('token', '222');
         return (
             <Provider store={store}>
                 <Router history={bhistory}>
@@ -28,8 +57,9 @@ class App extends React.Component {
                         <div id="main_right">
                             <Switch>
                                 {routes.map(route => (
-                                    <Route exact path={route.path} key={route.path} component={route.body()} />
+                                    <PrivateRoute exact path={route.path} key={route.path} component={route.body()} />
                                 ))}
+                                <Route path='/login' key='/login' component={Login} />
                                 <Route component= {Errors}/>
                             </Switch>
                         </div>
