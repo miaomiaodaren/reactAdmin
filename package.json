@@ -55,6 +55,7 @@
     "immutable": "^3.8.2",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
+    "moment": "^2.22.1",
     "node-notifier": "^5.1.2",
     "portfinder": "^1.0.13",
     "prop-types": "^15.6.1",

@@ -12,19 +12,13 @@ export const AddUser = (params ={}) => fetchAjax(`/user/addUser`, 'POST', params
 //删除用户
 export const RemoveU = (params = {}) => fetchAjax(`/user/RemoveUser`, 'POST', params);
 
-
-
-
-
-
-
-
-
 //获取博客列表
-export const GetBlogList = (params = {}) => fetchAjax(`/news/newslist`, 'POST', params);
+export const GetBlogList = (params = {}) => fetchAjax(`/blog/blogList`, 'GET', params);
 
 //获取博客分类列表
-export const GetBlogTypeList = (params = {}) => fetchAjax(`/types/GetTypes`, 'GET', params);
+export const GetBlogTypeList = (params = {}) => fetchAjax(`/type/Gettype`, 'GET', params);
+
+
 
 //删除博客
 export const DelBlogById = (params = {}) => fetchAjax(`/news/delNews`, 'POST', params);

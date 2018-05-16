@@ -21,14 +21,13 @@ export const typelistedit = createAjaxAction(GetBlogTypeList, '', savetypelist)
 export const getAsynTypeList = (data: any = {}, callback?: (data: any[]) => void) => {
     return async (dispatch: any) => {
         try{
-            let result = await GetBlogTypeList(data);
+            let { result } = await GetBlogTypeList(data);
             await dispatch({
                 type: 'GETALLTYPELIST',
-                list: result.list || [],
+                list: result.res || [],
                 count: result.count || 0
             });
-            callback && callback(result.list);
-            
+            return Promise.resolve(result.res)
         } catch(err) {
             console.error(err);
         }

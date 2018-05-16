@@ -7,9 +7,8 @@ import { GetBlogList, GetBlogTypeList, AddBlogType } from '../../api/api';
 import { fetchBlogList, delfetchBlog, typelistedit, savetypelist, getAsynTypeList } from '../../model/actions/blog';
 import { Switch, Route, Link, withRouter } from 'react-router-dom'
 import { isEmptyObject } from '../../util/util'
+import * as moment from 'moment';
 
-
-// import moment from '../../util/monent'
 import history from "../../util/history";   //在4.0的react-router没有暴露browserHistory的时候可以用。 history.push("/user"); 进行跳转
 
 interface BlogInterface {
@@ -58,6 +57,7 @@ class Blog extends React.Component<any, any> {
                 mean: ele.name
             })),
             onChange: (v: any) => {
+                console.info(v, 33);
                 let ref = v === '0' ? {} : v === '1' ? {isAdmin: true} : {isAdmin: false};
             }
         }]
@@ -68,9 +68,9 @@ class Blog extends React.Component<any, any> {
         BolgList();
         // //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
         if(isEmptyObject(alltypeList)) {
-            GetAllTypes({}, (data: any[]) => {
+            GetAllTypes().then((res: any[]) => {
                 this.setState({
-                    typeList: data || []
+                    typeList: res || []
                 })
             });
         } else {
@@ -180,9 +180,9 @@ class Blog extends React.Component<any, any> {
 
     render() {
         let { BlogList } = this.props;
-        // (BlogList.data || []).forEach((v: any) => {
-        //     v.addtime = moment(v.addtime).formart('yyyy-MM-dd');
-        // });
+        (BlogList.data || []).forEach((item: any) => {
+            item.addtime = moment(item.addtime).format('YYYY-MM-DD');
+        });
         return (
             <div id="warp">
                 <div className="serach users">
@@ -219,8 +219,8 @@ const mapDispatchToProps = (dispatch: any) => {
         BolgList: (params: any = {}) => {
             fetchBlogList(params)(dispatch)
         },
-        GetAllTypes: (data: any = {}, callback?: any) => {
-            getAsynTypeList(data, callback)(dispatch)
+        GetAllTypes: async(data: any = {}, callback?: any) => {
+            return await getAsynTypeList(data, callback)(dispatch)
         }
     }
 }

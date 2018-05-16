@@ -202,8 +202,6 @@ class Users extends React.Component<UserProps, any> {
 
     tableAction = async (key: any, row: any) => {
         if(key === 'edit') {
-            console.info(key, row, 3333);
-            //TODO 执行编译
             this.setState({
                 editDialog: true,
                 editData: row
@@ -212,8 +210,7 @@ class Users extends React.Component<UserProps, any> {
             //TODO 执行删除   (后续添加删除确认,需要确认才能删除)
             try {
                 const d = await RemoveU({id: row._id});
-
-                if(d.statue === 'success') {
+                if(d.status === 'success') {
                     message.success('用户删除成功');
                     this.props.userList();
                 } else {
@@ -228,7 +225,7 @@ class Users extends React.Component<UserProps, any> {
     //点击提交的时候触发的事件
     submits = (params : any) => {
         this.props.userAdd({ ...params }, (res: any) => {
-            if(res.statue === 'success') {
+            if(res.status === 'success') {
                 message.success('用户添加成功');
                 this.setState({addDialog: false});
                 this.props.userList();
@@ -240,8 +237,7 @@ class Users extends React.Component<UserProps, any> {
     //用户编辑提交事件
     Editsubmits = (params: any) => {
         this.props.userAdd({...params}, (res: any) => {
-            console.info(res, 4444);
-            if(res.statue === 'success') {
+            if(res.status === 'success') {
                 message.success('用户编辑成功');
                 this.setState({editDialog: false});
                 this.props.userList();
@@ -272,7 +268,6 @@ class Users extends React.Component<UserProps, any> {
         return [{
             name: '取消',
             onClick: () => {
-               // this.setState({addDialog: false});
                type === "add" ? this.setState({addDialog: false}) : this.setState({editDialog: false})
             },
             htmlType: 'button'
@@ -285,7 +280,6 @@ class Users extends React.Component<UserProps, any> {
 
     render() {
         const { todoList }: any = this.props;
-
         return (
             <div id="warp">
                 <div className="users">
