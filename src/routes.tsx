@@ -12,46 +12,17 @@ import Plugin from './plugin/index';        //插件路由
 
 const routes = [
     // { path: '/login', body: () => Login },
-    {
-        path: '/user',
-        body: () => User
-    },
-    {
-        path: '/blog',
-        body: () => Blog
-    },
-    {
-        path: '/blogedit/:id',
-        body: () => BlogEdit
-    },
-    {
-        path: '/books',
-        body: () => Books
-    },
-    {
-        path: '/javalist',
-        body: () => JavaList
-    },
-    {
-        path: '/lineage/:name',
-        body: () => Lineage
-    },
-    {
-        path: '/plugin',
-        body: () => Plugin
-    },
-    {
-        path: '/plugin/:type',
-        body: () => Plugin
-    },
-    {
-        path: '/music',
-        body: () => Music
-    },
-    {
-        path: '/',
-        body: () => Home
-    }
+    { path: '/user', body: () => User },
+    { path: '/blog', body: () => Blog },
+    { path: '/blogedit/:id', body: () => BlogEdit },
+    { path: '/blogedit',body: () => BlogEdit },
+    { path: '/books', body: () => Books },
+    { path: '/javalist', body: () => JavaList },
+    { path: '/lineage/:name', body: () => Lineage },
+    { path: '/plugin', body: () => Plugin },
+    { path: '/plugin/:type', body: () => Plugin },
+    { path: '/music', body: () => Music },
+    { path: '/', body: () => Home }
 ]
 
 export default routes

@@ -22,9 +22,9 @@ const isLogin = () => {
     return !!token
 }
 
-const PrivateRoute = ({commponent: Component, ...rest}: any) => {
+const PrivateRoute = ({component: Component, ...rest}: any) => {
     return (
-        <Route render={ props =>
+        <Route exact {...rest} render={ props =>
             isLogin() ? (
                 <Component {...props} />
             ) : (
@@ -38,8 +38,6 @@ const PrivateRoute = ({commponent: Component, ...rest}: any) => {
         }/>
     )
 } 
-
-
 
 class App extends React.Component {
     constructor(props: any) {
@@ -57,7 +55,7 @@ class App extends React.Component {
                         <div id="main_right">
                             <Switch>
                                 {routes.map(route => (
-                                    <PrivateRoute exact path={route.path} key={route.path} component={route.body()} />
+                                    <PrivateRoute path={route.path} key={route.path} component={route.body()} />
                                 ))}
                                 <Route path='/login' key='/login' component={Login} />
                                 <Route component= {Errors}/>

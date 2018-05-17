@@ -19,15 +19,21 @@ export const GetBlogList = (params = {}) => fetchAjax(`/blog/blogList`, 'GET', p
 export const GetBlogTypeList = (params = {}) => fetchAjax(`/type/Gettype`, 'GET', params);
 
 
+export const AddBlog = (params = {}) => fetchAjax(`/blog/addBlog`, 'POST', params);
 
 //删除博客
-export const DelBlogById = (params = {}) => fetchAjax(`/news/delNews`, 'POST', params);
+export const DelBlogById = (params = {}) => fetchAjax(`/blog/delBlog`, 'POST', params);
+
+
+
+
+
 
 //添加博客分类
 export const AddBlogType = (params = {}) => fetchAjax(`/types/addTypes`, 'POST', params);
 
 //发布博客
-export const AddBlog = (params = {}) => fetchAjax(`/news/addNews`, 'POST', params);
+
 
 //获取小说列表
 export const GetBooksList = (params = {}) => fetchAjax(`/books/showbook`, 'GET', params);

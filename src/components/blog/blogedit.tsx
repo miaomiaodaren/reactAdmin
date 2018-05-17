@@ -7,7 +7,8 @@ import draftToHtml from 'draftjs-to-html';
 import draftToMarkdown from 'draftjs-to-markdown';
 import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import htmlToDraft from 'html-to-draftjs';   //用来把html的数据还原成富文本框的格式
-// import { typelistedit } from '../../model/actions/blog';
+import { getAsynTypeList } from '../../model/actions/blog';
+import { isEmptyObject } from '../../util/util'; 
 import { connect } from 'react-redux';
 import { AddBlog, GetBlogList } from '../../api/api';
 import { withRouter } from 'react-router-dom';
@@ -24,7 +25,20 @@ interface isf {
     [index: string]: any
 }
 
-class blogEdit extends React.Component<any, any> {
+const mapStateToProps = (state: any) => ({
+    alltypeList: state.getAllType,
+})
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        GetAllTypes: async(data: any = {}, callback?: any) => {
+            return await getAsynTypeList(data, callback)(dispatch)
+        }
+    }
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class blogEdit extends React.Component<any, any> {
     constructor(props: IContentPageProps) {
         super(props);
         this.state = {
@@ -56,10 +70,11 @@ class blogEdit extends React.Component<any, any> {
     }
 
     componentDidMount() {
+        const {alltypeList, GetAllTypes} = this.props;
         const {params} = this.props.match; 
         if(params.id) {
             GetBlogList({_id: params.id}).then(res => {
-                const {title = '', type = '', content = ''} = res.information[0],
+                const {title = '', type = '', content = ''} = res.result.data[0],
                     contentBlock = htmlToDraft(content);
                 if (contentBlock) {
                     const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks),
@@ -73,13 +88,17 @@ class blogEdit extends React.Component<any, any> {
             })
         }
         //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
-        // if(!Object.keys(this.props.saveType).length) {
-        //     typelistedit({}, (data: any) => {
-        //         this.setState({
-        //             typeList: data.list
-        //         })
-        //     })(this.props.dispatch)   
-        // }
+        if(isEmptyObject(alltypeList)) {
+            GetAllTypes().then((res: any[]) => {
+                this.setState({
+                    typeList: res || []
+                })
+            });
+        } else {
+            this.setState({
+                typeList: alltypeList.list || []
+            })
+        }
     }
 
     //分类改变
@@ -92,7 +111,7 @@ class blogEdit extends React.Component<any, any> {
             { editorContent, title, type } = this.state,
             data = params.id ? {title, type, content: draftToHtml(editorContent), _id: params.id} : {title, type, content: draftToHtml(editorContent)};
         AddBlog(data).then(res => {
-            if(res.status == 1) {
+            if(res.status == 'success') {
                 message.success('博客添加成功');
                 this.props.history.push('/blog');
             }
@@ -107,8 +126,8 @@ class blogEdit extends React.Component<any, any> {
     }
 
     setfiles = () => {
-        const {list} = this.props.saveType || [];
-        const bb = this.props.saveType.list;
+        const {list} = this.props.alltypeList || [];
+        const bb = this.props.alltypeList.list;
         let sb = (list||[]).map((n: any, v: number) => <Select.Option value={n.name} >{n.name}</Select.Option>);
         let components = [];
         components.push(sb);
@@ -116,6 +135,7 @@ class blogEdit extends React.Component<any, any> {
     }
 
     render() {
+        console.info(this.props);
         const { editorContent, editorState, title, type } = this.state;
         return (
             <div className="warp">
@@ -144,7 +164,7 @@ class blogEdit extends React.Component<any, any> {
                                         // image: { uploadCallback: this.imageUploadCallBack },
                                     }}
                                     onContentStateChange={this.onEditorChange}
-                                    placeholder="大家好,我是傻逼"
+                                    placeholder="write it"
                                     spellCheck
                                     onFocus={() => {console.log('focus')}}
                                     onBlur={() => {console.log('blur')}}
@@ -179,7 +199,4 @@ class blogEdit extends React.Component<any, any> {
     }
 }
 
-export default connect((state: IContentPageProps) => ({
-    saveType: state.saveType }))(blogEdit);
 
-// export default withRouter(blogEdit)

@@ -116,9 +116,8 @@ class Blog extends React.Component<any, any> {
 
     //跳转到添加用户页面
     addblog = () => {
-        console.info(this.context, 99);
-        // history.push("/user");
-        // this.props.history.push('/blogedit');
+        const {history} = this.props;
+        history.push('/blogedit');
     }
 
     //添加type模块
