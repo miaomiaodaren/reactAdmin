@@ -54,10 +54,10 @@ class App extends React.Component {
                         <TopCompont />
                         <div id="main_right">
                             <Switch>
+                                <Route path='/login' key='/login' component={Login} />
                                 {routes.map(route => (
                                     <PrivateRoute path={route.path} key={route.path} component={route.body()} />
                                 ))}
-                                <Route path='/login' key='/login' component={Login} />
                                 <Route component= {Errors}/>
                             </Switch>
                         </div>

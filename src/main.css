@@ -1,1 +1,211 @@
-body,html{margin:0;padding:0}#app .App{background-color:#ececec}:global(.h2){color:#00f}#leftMenu{position:fixed;top:0;left:0;bottom:0;background:#fff;border-right:1px solid #e9e9e9;width:180px;min-width:180px;max-width:180px;transition:min-width .1s,max-width .1s}#leftMenu .ant-menu{height:100%}#leftMenu .userInfo{height:80px;padding-bottom:20px;background-color:#001529;color:#fff;box-sizing:border-box;line-height:80px;overflow:hidden}#leftMenu .userInfo .userLogin{width:50px;height:50px;border-radius:50%;vertical-align:middle;animation:rotate 15s linear infinite;margin-left:10px;display:inline-block}#leftMenu .userInfo h3{display:inline-block;color:#fff;margin-left:10px}#admin_top{position:absolute;top:0;left:190px;background:#fff;border-bottom:1px solid #e9e9e9;height:60px;right:0;bottom:0;box-sizing:border-box}#main_right{position:absolute;top:60px;left:190px;right:0;bottom:0;background-color:#fff;box-sizing:border-box}#main_right .searchbar{width:100%;text-align:right}#main_right .searchbar .field{display:inline-block;padding-right:20px}#main_right .searchbar .field .input .input,#main_right .searchbar .field .input .title{display:inline-block;text-align:right;margin-right:5px}#main_right .searchbar .buttonGroup{display:inline-block}#main_right .searchbar .buttonGroup button{margin-right:20px}#main_right .users{padding:24px;display:flex}#main_right .tableclass{text-align:center}#main_right .ant-table-thead th{text-align:center}#main_right .editbutton{padding:0!important;text-align:center;min-height:60px;line-height:60px}#main_right .editbutton button{margin-right:30px}#main_right .column-title{text-align:center}#main_right .index_head{width:100%;height:30px;line-height:30px;font-size:14px;border-bottom:1px solid #ddd;text-align:left;position:relative}#main_right .index_head span{position:absolute;opacity:0;height:30px;overflow:hidden;animation:textgd 30s linear infinite;display:inline-block}#main_right .index_head .go_left{left:100%}#main_right .javaList{margin:20px}@keyframes rotate{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@-webkit-keyframes rotate{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes textgd{0%{left:0;opacity:1}100%{left:100%;opacity:1}}@-webkit-keyframes textgd{0%{left:0;opacity:1}100%{left:100%;opacity:1}}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  list-style: none;
+}
+#app .App {
+  background-color: #ececec;
+}
+:global(.h2) {
+  color: blue;
+}
+#leftMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  border-right: 1px solid #e9e9e9;
+  width: 180px;
+  min-width: 180px;
+  max-width: 180px;
+  transition: min-width 0.1s, max-width 0.1s;
+}
+#leftMenu .ant-menu {
+  height: 100%;
+}
+#leftMenu .userInfo {
+  height: 80px;
+  padding-bottom: 20px;
+  background-color: #001529;
+  color: #fff;
+  box-sizing: border-box;
+  line-height: 80px;
+  overflow: hidden;
+}
+#leftMenu .userInfo .userLogin {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  vertical-align: middle;
+  animation: rotate 15s linear infinite;
+  margin-left: 10px;
+  display: inline-block;
+}
+#leftMenu .userInfo h3 {
+  display: inline-block;
+  color: #fff;
+  margin-left: 10px;
+}
+#admin_top {
+  position: absolute;
+  top: 0;
+  left: 190px;
+  background: #fff;
+  border-bottom: 1px solid #e9e9e9;
+  height: 60px;
+  right: 0;
+  bottom: 0;
+  box-sizing: border-box;
+}
+#main_right {
+  position: absolute;
+  top: 60px;
+  left: 190px;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+#main_right .searchbar {
+  width: 100%;
+  text-align: right;
+}
+#main_right .searchbar .field {
+  display: inline-block;
+  padding-right: 20px;
+}
+#main_right .searchbar .field .input .title,
+#main_right .searchbar .field .input .input {
+  display: inline-block;
+  text-align: right;
+  margin-right: 5px;
+}
+#main_right .searchbar .buttonGroup {
+  display: inline-block;
+}
+#main_right .searchbar .buttonGroup button {
+  margin-right: 20px;
+}
+#main_right .users {
+  padding: 24px;
+  display: flex;
+}
+#main_right .tableclass {
+  text-align: center;
+}
+#main_right .ant-table-thead th {
+  text-align: center;
+}
+#main_right .editbutton {
+  padding: 0 !important;
+  text-align: center;
+  min-height: 60px;
+  line-height: 60px;
+}
+#main_right .editbutton button {
+  margin-right: 30px;
+}
+#main_right .column-title {
+  text-align: left;
+  padding-left: 100px;
+}
+#main_right .index_head {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+  position: relative;
+}
+#main_right .index_head span {
+  position: absolute;
+  opacity: 0;
+  height: 30px;
+  overflow: hidden;
+  animation: textgd 30s linear infinite;
+  display: inline-block;
+}
+#main_right .index_head .go_left {
+  left: 100%;
+}
+#main_right .javaList {
+  margin: 20px;
+}
+#main_right .javaList #cssbd ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+#main_right .javaList #cssbd ul .css_li_style {
+  list-style: none;
+  width: 180px;
+  text-align: left;
+  line-height: 40px;
+}
+#main_right #lineage .css_main p {
+  background: #F3F3F3;
+  font-size: 14px;
+  line-height: 2;
+  padding: 0 10px;
+  margin-right: 10px;
+}
+#main_right #lineage .css_main p i {
+  text-align: right;
+}
+#main_right #lineage .css_main .isshow {
+  display: inline-block;
+}
+#main_right #lineage .css_main .ishide {
+  display: none;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes textgd {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes textgd {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 1;
+  }
+}
+#plugin_main ul {
+  display: flex;
+}
+#plugin_main ul li {
+  width: 20%;
+  flex: 1;
+  line-height: 40px;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 30px;
+}

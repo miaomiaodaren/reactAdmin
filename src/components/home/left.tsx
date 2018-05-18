@@ -48,9 +48,9 @@ class Sidebar extends React.Component<PROPS, {}> {
                             <Link to="/blog"><span><span>博客列表</span></span></Link>
                         </Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="4">
+                    {/* <Menu.Item key="4">
                         <Link to="/books"><span><Icon type="exception" /><span>小说模块</span></span></Link>
-                    </Menu.Item>
+                    </Menu.Item> */}
                     <Menu.Item key="5">
                         <Link to="/"><span><Icon type="shake" /><span>音乐模块</span></span></Link>
                     </Menu.Item>
