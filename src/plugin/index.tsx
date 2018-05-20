@@ -11,6 +11,7 @@ class Plugin extends React.Component<any, any>{
                 {name: '单选框', url: 'radio'},
                 {name: '评分', url: 'rate'},
                 {name: '进度条', url: 'progress'},
+                {name: '三级联动', url: 'select'},
                 // {name: '联级选择框', url: 'cascader'},
                 // {name: '文本输入框', url: 'input'},
                 // {name: '图片轮播', url: 'swipt'},

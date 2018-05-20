@@ -56,8 +56,8 @@ export default class SearchBar extends React.Component<any, searchInterface> {
             }
             components.push(<div key={i++} className="field">
                 <div className="input">
-                    <div className="title" style={{ width: field.labelWidth || 100 }}>{field.title}:</div>
-                    <div style={{ width: field.width || 130 }} className="input">{component}</div>
+                    <div className="title" style={{ width: field.labelWidth || 50 }}>{field.title}:</div>
+                    <div style={{ width: field.width || 120 }} className="input">{component}</div>
                 </div>
             </div>)
         }

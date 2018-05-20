@@ -221,3 +221,20 @@ ul li {
         }
     }
 }
+
+
+
+
+// 插件三级联动代码
+.sel_model{
+    position: relative;
+    .sel_model_mask{ position: fixed; height: 100%; background-color: rgba(0, 0, 0, 0.4); top: 0; left: 0; right: 0; bottom: 0; z-index: 1000; }
+    .set_model_warp{ position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1000; overflow: hidden; outline: 0px;
+        .set_model_con{ width: 100%; position: fixed; background-color: rgb(255, 255, 255); bottom: 0; left: 0;}
+        .set_model_con_head{display: flex; align-items: center; position: relative;
+            .set_model_con_head1{height: 42px; padding: 9px 15px; color: #108ee9; font-size: 17px; display: flex; justify-content: center;}
+            .set_model_con_head2{height: 42px; padding: 9px 15px; color: #108ee9; font-size: 17px; display: flex; justify-content: center; flex: 1; text-align: center; color: #000;}
+            .set_model_con_head3{height: 42px; padding: 9px 15px; color: #108ee9; font-size: 17px; display: flex; justify-content: center; text-align: right;}
+        }
+    }
+}

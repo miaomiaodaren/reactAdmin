@@ -51,12 +51,14 @@ export default class blogEdit extends React.Component<any, any> {
     }
 
     onEditorChange = (editorContent: any): void  => {
+        console.info(1)
         this.setState({
             editorContent
         })
     }
 
     onEditorStateChange = (editorState: string): void => {
+        console.info(2 )
         this.setState({
             editorState,
         });
@@ -135,7 +137,6 @@ export default class blogEdit extends React.Component<any, any> {
     }
 
     render() {
-        console.info(this.props);
         const { editorContent, editorState, title, type } = this.state;
         return (
             <div className="warp">
@@ -151,7 +152,7 @@ export default class blogEdit extends React.Component<any, any> {
                     <Col span={24}>
                         <div className="cloud-box">
                             <Card title="富文本编辑器" bordered={true} >
-                                <Editor
+                                <Editor ref="editor"
                                     editorState={editorState}
                                     toolbarClassName="home-toolbar"
                                     wrapperClassName="home-wrapper"
@@ -162,6 +163,7 @@ export default class blogEdit extends React.Component<any, any> {
                                         list: { inDropdown: true },
                                         textAlign: { inDropdown: true },
                                         // image: { uploadCallback: this.imageUploadCallBack },
+                                        
                                     }}
                                     onContentStateChange={this.onEditorChange}
                                     placeholder="write it"
