@@ -8,7 +8,7 @@ export default class Select extends React.Component<any, any>{
             selVal: ['浙江', '杭州', '江干区'],
             isactive: false,
             iData: [
-                [{label: '浙江', value: 'zhejiang'}, {label: '上海', value: 'shanghai'}],
+                [{label: '浙江', value: 'zhejiang'}, {label: '上海', value: 'shanghai'}, {label: '南京', value: 'nanjing'}, , {label: '北京', value: 'beijing'}],
                 [{label: '杭州', value: 'hangzhou', pvalue: 'zhejiang'}, {label: '浦东', value: 'pudong', pvalue: 'shanghai'}]
             ]
         }
@@ -21,16 +21,23 @@ export default class Select extends React.Component<any, any>{
 
     setModel = () => {
         const { isactive, iData } = this.state;
-        let componet: any = []; let con: any = [];
-        console.info(iData.lenght, 3333, iData.length, iData)
-        for(let i = 0; i < iData.length; i++) {
-            iData[i].map((v: any, index: number) => {
-                let csses = classList('prolist', `prolist${index}`);
-                con.push(<div className={csses}>{v.label}</div>)
+        let componet: any = [];
+        iData.map((items: any, is: number) => {
+            let con: any[] = [];
+            items.map((item: any, i: number) => {
+                let childHtml = (
+                    <div className='prolist' key={`prolist${item.value}`}>
+                        {item.label}
+                    </div>);
+                con.push(childHtml)
             })
-        }
-        console.info(con, 222); 
-
+            componet.push(
+                <div className="am-picker-col" key={`${items}${is}`}>
+                    <div className="am-picker-col-mask" style={{"backgroundSize": "100% 102px"}}></div>
+                    <div className='lists'>{con}</div>
+                </div>
+            )
+        })
         const setHtml = (
             <div className="sel_model">
                 <div className="sel_model_mask"></div>

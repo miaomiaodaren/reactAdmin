@@ -18,12 +18,23 @@ export const GetBlogList = (params = {}) => fetchAjax(`/blog/blogList`, 'GET', p
 //获取博客分类列表
 export const GetBlogTypeList = (params = {}) => fetchAjax(`/type/Gettype`, 'GET', params);
 
-
+//发布博客
 export const AddBlog = (params = {}) => fetchAjax(`/blog/addBlog`, 'POST', params);
 
 //删除博客
 export const DelBlogById = (params = {}) => fetchAjax(`/blog/delBlog`, 'POST', params);
 
+//用户登录
+export const UserLogin = (params = {}) => fetchAjax(`/user/login`, 'POST', params);
+
+
+interface APIINFO {
+    [index: string]: any;
+}
+const apis:APIINFO = {
+    Loging, AddUser, GetUser, RemoveU, GetBlogList, GetBlogTypeList, AddBlog, DelBlogById, UserLogin
+}
+export default apis
 
 
 
@@ -31,8 +42,6 @@ export const DelBlogById = (params = {}) => fetchAjax(`/blog/delBlog`, 'POST', p
 
 //添加博客分类
 export const AddBlogType = (params = {}) => fetchAjax(`/types/addTypes`, 'POST', params);
-
-//发布博客
 
 
 //获取小说列表

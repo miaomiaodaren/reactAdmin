@@ -173,7 +173,7 @@ export class Isform extends React.Component<formInterface&FormComponentProps, an
     }
     handleSubmit = (e: any) => {
         e && e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err: any, values: any) : void => {
+        this.props.form.validateFieldsAndScroll({first: true}, (err: any, values: any) : void => {  //one parame has options
             if (!err) {
                 const { submitClick } = this.props;
                 if(values.isAdmin) {

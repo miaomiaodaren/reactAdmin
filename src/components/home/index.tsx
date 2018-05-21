@@ -1,14 +1,32 @@
 import * as React from 'react';
 import { connect } from 'react-redux'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import Sidebar from './left'
+import TopCompont from './top'
+import Errors from '../404'
+import routes from '../../routes';
 
 export interface Props extends React.Props<Home> {}
 export interface State {}
 
-// function dectest(target: any) {
-//     target.prototype.name = 'isfufeng'
-// }
+const isLogin = () => {
+    const token = sessionStorage.getItem('token');
+    return !!token
+}
 
-// @dectest
+const PrivateRoute = ({component: Component, ...rest}: any) => {
+    return (
+        <Route exact {...rest} render={ props =>
+            isLogin() ? (
+                <Component {...props} />
+            ) : (
+                <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
+            )
+        }/>
+    )
+} 
+
+
 export default class Home extends React.Component<Props, State> {
     constructor(props: any) {
         super(props)
@@ -18,16 +36,28 @@ export default class Home extends React.Component<Props, State> {
         const headeDOM = this.refs.index_head_span,
             indeDOM = this.refs.index_head;
             // wid = headeDOM.getBoundingClientRect().width;
-            // indexwid = indeDom.getBoundingClientRect().width;
-            
+            // indexwid = indeDom.getBoundingClientRect().width; 
     }
+
+    setRoute = () => {
+        let component: any[] = [];
+        routes.map((route: any) => {
+            component.push(<PrivateRoute path={route.path} key={route.path} component={route.body()} />)
+        })
+        component.push(<Route component= {Errors}/>);
+        return component
+    }
+
     render() {
         return (
-            <div className="aa" ref="index_head">
-                <div className="index_head" style={{fontSize: 14}}>
-                    <span ref="index_head_span">热烈庆祝喵喵大人后台开业</span>
+            <div className="admin_home">
+                <Sidebar />
+                <TopCompont />
+                <div id="main_right">
+                    <Switch>
+                        {this.setRoute()}
+                    </Switch>
                 </div>
-                daji大家
             </div>
         )
     }
