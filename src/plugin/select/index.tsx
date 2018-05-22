@@ -80,11 +80,18 @@ export default class Select extends React.Component<any, any>{
 
     render() {
         let { selVal, isactive } = this.state;
+        let items: any[] = []; 
+        for(let i = 0; i < 10; i++) {
+            items.push({
+                value: String(i),
+                label: `0 ${i}`,
+            })
+        }
         return (
             <div>
                 {/* <input onFocus={this.selFocus} defaultValue={selVal.join(' ')} />
                 { this.setModel() } */}
-                <Pick />
+                <Pick>{items}</Pick>
             </div>
         )
     }
