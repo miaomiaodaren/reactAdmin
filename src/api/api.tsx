@@ -28,13 +28,6 @@ export const DelBlogById = (params = {}) => fetchAjax(`/blog/delBlog`, 'POST', p
 export const UserLogin = (params = {}) => fetchAjax(`/user/login`, 'POST', params);
 
 
-interface APIINFO {
-    [index: string]: any;
-}
-const apis:APIINFO = {
-    Loging, AddUser, GetUser, RemoveU, GetBlogList, GetBlogTypeList, AddBlog, DelBlogById, UserLogin
-}
-export default apis
 
 
 
@@ -54,3 +47,11 @@ export const RemoveBook = (params = {}) => fetchAjax(`/books/showbook`, 'POST', 
 export const addLineAge = (params = {}) => fetchAjax(`/lineage/addlineage`, 'POST', params);
 
 export const getLineAge = (params = {}) => fetchAjax(`/lineage/getlineage`, 'GET', params);
+
+// interface APIINFO {
+//     [index: string]: any;
+// }
+// const apis:APIINFO = {
+//     Loging, AddUser, GetUser, RemoveU, GetBlogList, GetBlogTypeList, AddBlog, DelBlogById, UserLogin
+// }
+// export default apis

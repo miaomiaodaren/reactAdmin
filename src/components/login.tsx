@@ -4,15 +4,9 @@ import { SearchForm } from './searchbar';
 import { message } from 'antd';
 
 
-import apis from '../api/api';
 
-function proAjax(types: any) {
-    return function(target: any) {
-        target.aabb = apis[types]
-    }
-}
+import { UserLogin } from '../api/api';
 
-@proAjax('UserLogin')
 export default class Login extends React.Component<any, any> {
     constructor(props: any) {
         super(props)
@@ -51,11 +45,17 @@ export default class Login extends React.Component<any, any> {
         }]
     }
 
-    sumbitClick = (params: any) => {
-        
+    sumbitClick = async(params: any) => {
+        const dataInfo = await UserLogin(params);
+        message[dataInfo.status](dataInfo.message);
+        if(dataInfo.status === 'success') {
+            sessionStorage.setItem('token', params.userName);
+            this.props.history.push('/main', {title: 'i am is success!'})
+        }
     }
 
     render() {
+        console.info(this.props, this.props.children, 222);
         return (
             <div className="loginBg">
                 <SearchForm fields={ this.Loginfields()} editBtn={this.editBtn()} submitClick={this.sumbitClick} />
@@ -63,7 +63,3 @@ export default class Login extends React.Component<any, any> {
         )
     }
 }
-
-
-
-console.info(Login.prototype, Login, 7777);

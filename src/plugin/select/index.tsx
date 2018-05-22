@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classList from 'classnames';
+import Pick from './pick';
 
 export default class Select extends React.Component<any, any>{
     constructor(props: any) {
@@ -10,17 +11,36 @@ export default class Select extends React.Component<any, any>{
             iData: [
                 [{label: '浙江', value: 'zhejiang'}, {label: '上海', value: 'shanghai'}, {label: '南京', value: 'nanjing'}, , {label: '北京', value: 'beijing'}],
                 [{label: '杭州', value: 'hangzhou', pvalue: 'zhejiang'}, {label: '浦东', value: 'pudong', pvalue: 'shanghai'}]
-            ]
-        }
+            ],
+            transformVla: 0
+        };
     }
+    public classMethod: any = {}
     selFocus = () => {
         this.setState((preStart: any, props: any) => {
             return {isactive: true}
         })
     }
+    touchStart = (event: any) => {
+        const touch = event.targetTouches[0];
+        this.classMethod =  {y: touch.pageY}
+    }
+    touchMove = (event: any) => {
+        if(event.targetTouches.length > 1) return;
+        const touch = event.targetTouches[0];
+        // this.classMethod['endPos'] = {y: touch.pageY - this.classMethod.y};
+        if(this.classMethod.endPos !== 0) {
+            this.setState({
+                transformVla: touch.pageY - this.classMethod.y
+            })
+        }
+    }
+    touchEnd = (e: any) => {
+        
+    }
 
     setModel = () => {
-        const { isactive, iData } = this.state;
+        const { isactive, iData, transformVla } = this.state;
         let componet: any = [];
         iData.map((items: any, is: number) => {
             let con: any[] = [];
@@ -32,9 +52,9 @@ export default class Select extends React.Component<any, any>{
                 con.push(childHtml)
             })
             componet.push(
-                <div className="am-picker-col" key={`${items}${is}`}>
+                <div className="am-picker-col" key={`${items}${is}`} onTouchEnd={this.touchEnd} onTouchMove={this.touchMove} onTouchStart={this.touchStart}>
                     <div className="am-picker-col-mask" style={{"backgroundSize": "100% 102px"}}></div>
-                    <div className='lists'>{con}</div>
+                    <div className='lists' style={{"transform": `translate3d(0px, ${transformVla}px, 0px)`}}>{con}</div>
                 </div>
             )
         })
@@ -62,8 +82,9 @@ export default class Select extends React.Component<any, any>{
         let { selVal, isactive } = this.state;
         return (
             <div>
-                <input onFocus={this.selFocus} defaultValue={selVal.join(' ')} />
-                { this.setModel() }
+                {/* <input onFocus={this.selFocus} defaultValue={selVal.join(' ')} />
+                { this.setModel() } */}
+                <Pick />
             </div>
         )
     }
