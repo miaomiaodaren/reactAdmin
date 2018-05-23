@@ -38,6 +38,14 @@ export default class Pick extends React.Component<any, any> {
         }
     }
 
+    private isTracking: boolean;
+    private itemHeight: number;
+    private clientHeight: number;
+    private contentHeight: number;
+    private minScrollTop: number;
+    private maxScrollTop: number;
+    
+    
     init() {
         assign(this, {
             isTracking: false,
@@ -61,7 +69,37 @@ export default class Pick extends React.Component<any, any> {
         });
         const { indicator, component, content } = this.refs;
         this.itemHeight = parseInt(getComputedStyle(indicator, 'height'), 10);
-        console.info(this, 888);
+        this.setDimensions(component.clientHeight, content.offsetHeight);
+        this.select(this.state.selectedValue, false);
+    }
+
+    selectByIndex(index: number, animate: boolean) {
+        if (index < 0 || index >= this.props.children.length) {
+          return;
+        }
+        this.scrollTop = this.minScrollTop + index * this.itemHeight;
+    
+        this.scrollTo(this.scrollTop, animate);
+    }
+
+    select(value:any, animate:boolean) {
+        const children:React.ReactNode = this.props.children;
+        for (let i = 0, len = children.length; i < len; i++) {
+          if (children[i].value === value) {
+            this.selectByIndex(i, animate);
+            return;
+          }
+        }
+        this.selectByIndex(0, animate);
+    }
+
+    setDimensions(clientHeight: number, contentHeight: number) {
+        this.clientHeight = clientHeight;
+        this.contentHeight = contentHeight;
+        const totalItemCount = this.props.children.length;
+        const clientItemCount = Math.round(this.clientHeight / this.itemHeight);
+        this.minScrollTop = -this.itemHeight * (clientItemCount / 2);
+        this.maxScrollTop = this.minScrollTop + totalItemCount * this.itemHeight - 0.1;
     }
 
     componentDidMount() {

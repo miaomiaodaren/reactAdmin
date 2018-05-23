@@ -91,7 +91,6 @@ export default class Select extends React.Component<any, any>{
             <div>
                 {/* <input onFocus={this.selFocus} defaultValue={selVal.join(' ')} />
                 { this.setModel() } */}
-                <Pick>{items}</Pick>
             </div>
         )
     }
