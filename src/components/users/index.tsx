@@ -8,7 +8,8 @@ import { asyncAddTodo, asyncAddUser, USERS } from '../../model/actions/user'
 import { RemoveU } from '../../api/api';   //接口地址
 import { withRouter, Prompt  } from 'react-router-dom';
 import * as PropTypes from 'prop-types';
-import {is, fromJS} from 'immutable'
+import {is, fromJS, Map} from 'immutable'
+import styled from 'styled-components';  //https://juejin.im/entry/59a57a2b5188252445327ac1  使用教程
 
 export interface UserProps {
     dispatch?: any;
@@ -268,7 +269,9 @@ class Users extends React.Component<UserProps, any> {
         return [{
             name: '取消',
             onClick: () => {
-               type === "add" ? this.setState({addDialog: false}) : this.setState({editDialog: false})
+                type === "add" ? 
+                    this.setState({addDialog: false}) : 
+                    this.setState({editDialog: false})
             },
             htmlType: 'button'
         }, {
@@ -276,12 +279,16 @@ class Users extends React.Component<UserProps, any> {
             type: "primary",
             htmlType: 'submit'
         }]
-    }  
+    }
+    aabb = (e: any, num: any) => {
+        console.info(e.ta, num, 2222);
+    }
 
     render() {
         const { todoList }: any = this.props;
         return (
             <div id="warp">
+                <div className="fufeng" onClick={(e) => this.aabb(e, 20)}>222<em>333</em></div>
                 <div className="users">
                     <SearchBar fields={ this.searchFields() } onOk={this.searcher} /> 
                     <Button onClick={ this.add } className="search" icon="user-add" >添加用户</Button>

@@ -27,8 +27,8 @@ export const DelBlogById = (params = {}) => fetchAjax(`/blog/delBlog`, 'POST', p
 //用户登录
 export const UserLogin = (params = {}) => fetchAjax(`/user/login`, 'POST', params);
 
-
-
+//上传图片
+export const ImgUpload = (params = {}) => fetchAjax(`/user/imgupload`, 'POST', params);
 
 
 

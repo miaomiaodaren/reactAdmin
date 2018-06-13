@@ -1,11 +1,12 @@
 /// <reference path="../../../declare_modules.d.ts" />
 import * as React from 'react';
 import { Row, Col, Card, Button, Input, Select, message } from 'antd';
+import * as PropTypes from 'prop-types';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 import draftToMarkdown from 'draftjs-to-markdown';
-import { EditorState, convertToRaw, ContentState } from 'draft-js';
+import { EditorState, convertToRaw, ContentState, CompositeDecorator } from 'draft-js';
 import htmlToDraft from 'html-to-draftjs';   //用来把html的数据还原成富文本框的格式
 import { getAsynTypeList } from '../../model/actions/blog';
 import { isEmptyObject } from '../../util/util'; 
@@ -13,7 +14,80 @@ import { connect } from 'react-redux';
 import { AddBlog, GetBlogList } from '../../api/api';
 import { withRouter } from 'react-router-dom';
 import { Dispatch } from 'redux';
+import styled from 'styled-components';
 
+
+const Edit = styled.div`
+    .home-editor{
+        pre{
+            margin: 0!important;
+        }
+        .public-DraftStyleDefault-block{
+            margin: 0;
+        }
+    }
+    
+`
+
+const ColorIcon = require('./tx.png');
+import { ChromePicker } from 'react-color';
+class ColorPic extends React.Component<any, any> {
+	constructor(props: any) {
+		super(props)
+		this.state = {
+			defColor: '#fff',
+			isChange: false
+		}
+	}
+    stopPropagation = (event: any) => {
+		event.stopPropagation();
+    };
+	
+	componentWillMount() {
+        const {color} = this.props.currentState;
+		this.setState({
+			defColor: color
+		})
+	}
+
+    onChange = (color: any) => {
+		const { onChange } = this.props;
+		this.setState({
+			defColor: color.hex,
+			isChange: true
+		})
+
+		// onChange('color', color.hex);
+	}
+	submitChange = () => {
+		const {isChange, defColor} = this.state;
+		const {onChange} = this.props;
+		if(isChange) {
+			this.setState({isChange: false})
+			onChange('color', defColor)
+		}
+	}
+    renderModal = () => {
+		const { color } = this.props.currentState;
+		const {defColor} = this.state;
+		return (
+			<div onClick={this.stopPropagation} style={{position: 'absolute', zIndex: 2}}>
+				<ChromePicker color={defColor} onChangeComplete={this.onChange} />
+			</div>
+		);
+    };
+    render() {
+		const { expanded, onExpandEvent } = this.props;
+		return (
+			<div aria-haspopup="true" aria-expanded={expanded} aria-label="rdw-color-picker">
+				<div onClick={onExpandEvent}>
+					<img src={ColorIcon} alt="" style={{width: 20, height: 20}}/>
+				</div>
+				{expanded ? this.renderModal() : this.submitChange()}
+			</div>
+		);
+    }
+}
 
 interface IContentPageProps {
     saveType?: any
@@ -41,8 +115,14 @@ const mapDispatchToProps = (dispatch: any) => {
 export default class blogEdit extends React.Component<any, any> {
     constructor(props: IContentPageProps) {
         super(props);
+        const compositeDecorator = new CompositeDecorator([
+            {
+                strategy: findFirstABC,
+                component: ABCSpan,
+            }
+        ]);
         this.state = {
-            editorState: '',
+            editorState: EditorState.createEmpty(compositeDecorator),
             typeList: '',
             title: void 0,
             type: void 0,
@@ -50,15 +130,16 @@ export default class blogEdit extends React.Component<any, any> {
         }
     }
 
+    public edit: any
+
     onEditorChange = (editorContent: any): void  => {
-        console.info(1)
         this.setState({
             editorContent
         })
     }
 
     onEditorStateChange = (editorState: string): void => {
-        console.info(2 )
+        console.info(editorState, 888);
         this.setState({
             editorState,
         });
@@ -85,6 +166,8 @@ export default class blogEdit extends React.Component<any, any> {
                         title, 
                         type, 
                         editorState,
+                    }, () => {
+                        console.info(editorState, 666)
                     });
                 }
             })
@@ -136,6 +219,10 @@ export default class blogEdit extends React.Component<any, any> {
         return components
     }
 
+    canFocus = () => {
+        this.edit.onEditorFocus();
+    }
+
     render() {
         const { editorContent, editorState, title, type } = this.state;
         return (
@@ -150,10 +237,10 @@ export default class blogEdit extends React.Component<any, any> {
                     </Select>
                     </Col>
                     <Col span={24}>
-                        <div className="cloud-box">
+                        <Edit className="cloud-box" onClick={this.canFocus}>
                             <Card title="富文本编辑器" bordered={true} >
-                                <Editor ref="editor"
-                                    editorState={editorState}
+                                <Editor ref={(ref: any) => this.edit = ref}
+                                    editorState={this.state.editorState}
                                     toolbarClassName="home-toolbar"
                                     wrapperClassName="home-wrapper"
                                     editorClassName="home-editor"
@@ -162,11 +249,13 @@ export default class blogEdit extends React.Component<any, any> {
                                         history: { inDropdown: true },
                                         list: { inDropdown: true },
                                         textAlign: { inDropdown: true },
-                                        // image: { uploadCallback: this.imageUploadCallBack },
-                                        
+										// image: { uploadCallback: this.imageUploadCallBack },
+										colorPicker: { 
+											component: ColorPic,
+                                        }
                                     }}
                                     onContentStateChange={this.onEditorChange}
-                                    placeholder="write it"
+                                    placeholder="Enter something..."
                                     spellCheck
                                     onFocus={() => {console.log('focus')}}
                                     onBlur={() => {console.log('blur')}}
@@ -174,7 +263,7 @@ export default class blogEdit extends React.Component<any, any> {
                                     localization={{ locale: 'zh', translations: {'generic.add': 'Add'} }}
                                 />
                             </Card>
-                        </div>
+                        </Edit>
                     </Col>
                     <Col span={24} className="editbutton">
                         <Button type="primary" onClick={this.addBlog}>确定</Button>
@@ -182,7 +271,10 @@ export default class blogEdit extends React.Component<any, any> {
                     </Col>
                     <Col span={7}>
                         <Card title="同步转换HTML" bordered={true}>
-                            <pre>{draftToHtml(editorContent)}</pre>
+                            {/* <pre>{draftToHtml(editorContent)}</pre> */}
+                            <pre>
+                                {draftToHtml(convertToRaw(editorState.getCurrentContent()))}
+                            </pre>
                         </Card>
                     </Col>
                     <Col span={7}>
@@ -196,9 +288,26 @@ export default class blogEdit extends React.Component<any, any> {
                         </Card>
                     </Col>
                 </Row>
+                <textarea
+                    disabled
+                    value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
+                />
             </div>
         )
     }
 }
 
+// 文本中的第一个ABC
+function findFirstABC(contentBlock: any, callback: any) {
+    const text = contentBlock.getText();
+    console.info(contentBlock, contentBlock.getText(), 777777776, text);
+    if (text.indexOf("abc") > 0) {
+        callback(text.indexOf("abc"), text.indexOf("abc") + 3);
+    }
 
+
+}
+// 标红色
+const ABCSpan = (props: any) => {
+    return <span style={{color:"red"}}>{props.children}</span>;
+};
