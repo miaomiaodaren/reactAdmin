@@ -18,6 +18,8 @@ export interface UserProps {
     userAdd?: any,
     todoList?: any[],
     adduser?: any[],
+    [propName: string]: any;     //包含任意数量的props属性传入，数量不详
+    [index: number]: string;     //可以通过索引得到类型
 }
 
 export interface Ele {
@@ -89,12 +91,16 @@ class Users extends React.Component<UserProps, any> {
             title: '用户名',
             key: 'name',   //传入给接口的参数
             type: 'input', 
-            defaultValue: ''
+            defaultValue: '',
+            labelWidth: 'auto',
+            width: '200'
         }, {
             title: '是否管理员',
             key: 'isAdmin',
             type: 'select',
             defaultValue: '全部',
+            labelWidth: 'auto',
+            width: '200',
             items: (): void => this.state.typeList.map((ele: any): any => ({
                 value: ele.value,
                 mean: ele.mean
@@ -288,7 +294,6 @@ class Users extends React.Component<UserProps, any> {
         const { todoList }: any = this.props;
         return (
             <div id="warp">
-                <div className="fufeng" onClick={(e) => this.aabb(e, 20)}>222<em>333</em></div>
                 <div className="users">
                     <SearchBar fields={ this.searchFields() } onOk={this.searcher} /> 
                     <Button onClick={ this.add } className="search" icon="user-add" >添加用户</Button>

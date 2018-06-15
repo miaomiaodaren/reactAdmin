@@ -32,13 +32,7 @@ export default class Home extends React.Component<Props, State> {
         super(props)
     }
     componentDidMount() {
-        console.info(this);
-        const headeDOM = this.refs.index_head_span,
-            indeDOM = this.refs.index_head;
-            // wid = headeDOM.getBoundingClientRect().width;
-            // indexwid = indeDom.getBoundingClientRect().width; 
     }
-
     setRoute = () => {
         let component: any[] = [];
         routes.map((route: any) => {
@@ -47,12 +41,11 @@ export default class Home extends React.Component<Props, State> {
         component.push(<Route component= {Errors}/>);
         return component
     }
-
     render() {
         return (
             <div className="admin_home">
-                <Sidebar />
-                <TopCompont />
+                {/* <Sidebar /> */}
+                <TopCompont topRoute={routes} />
                 <div id="main_right">
                     <Switch>
                         {this.setRoute()}

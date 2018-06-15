@@ -106,12 +106,10 @@ html,
 body {
   margin: 0;
   padding: 0;
+  background-color: #f7f7f7;
 }
 ul li {
   list-style: none;
-}
-#app .App {
-  background-color: #ececec;
 }
 :global(.h2) {
   color: blue;
@@ -166,11 +164,8 @@ ul li {
   box-sizing: border-box;
 }
 #main_right {
-  position: absolute;
-  top: 60px;
-  left: 190px;
-  right: 0;
-  bottom: 0;
+  width: 1200px;
+  margin: 30px auto;
   background-color: #fff;
   box-sizing: border-box;
 }

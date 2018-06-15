@@ -40,11 +40,12 @@ export default class SearchBar extends React.Component<any, searchInterface> {
             switch (field.type) {
                 case 'input':
                 default:
-                    component = (<Input value={this.state.fields[field.key]}  onChange={e => this.setField(field, e.target.value)} />)
+                    component = (<Input className={field.inputClass} value={this.state.fields[field.key]}  onChange={e => this.setField(field, e.target.value)} />)
                     break;
                 case 'select':
                     component = (<Select 
                         placeholder="请选择" 
+                        className={field.inputClass}
                         value = {this.state.fields[field.key] === undefined ? (field.defaultValue && field.defaultValue.toString()) : this.state.fields[field.key]}
                         mode = { field.multiple } style={{ width: '100%', }} onChange={(value) => {
                             field.onChange && field.onChange(value);

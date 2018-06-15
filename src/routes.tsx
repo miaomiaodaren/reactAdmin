@@ -12,17 +12,17 @@ import Main from './components/home/main'
 import Plugin from './plugin/index';        //插件路由
 
 const routes = [
-    { path: '/user', body: () => User },
-    { path: '/blog', body: () => Blog },
+    { path: '/user', body: () => User, name: '用户列表', sort: 2},
+    { path: '/blog', body: () => Blog, name: '博客列表', sort: 3},
     { path: '/blogedit/:id', body: () => BlogEdit },
     { path: '/blogedit',body: () => BlogEdit },
     { path: '/books', body: () => Books },
     { path: '/javalist', body: () => JavaList },
     { path: '/lineage/:name', body: () => Lineage },
-    { path: '/plugin', body: () => Plugin },
+    { path: '/plugin', body: () => Plugin, name: '插件列表', sort: 4},
     { path: '/plugin/:type', body: () => Plugin },
     { path: '/music', body: () => Music },
-    { path: '/', body: () => Main }
+    { path: '/', body: () => Main, name: '首页', sort: 1}
 ]
 
 export default routes

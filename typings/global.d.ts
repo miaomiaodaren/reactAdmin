@@ -1,5 +1,11 @@
 interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
+    mozCancelAnimationFrame: any;
+    mozRequestAnimationFrame: any;
+    oCancelAnimationFrame: any;
+    oRequestAnimationFrame: any;
+    msCancelAnimationFrame: any;
+    msRequestAnimationFrame: any;
 }
 
 declare module "*.png" {
@@ -35,3 +41,5 @@ declare module 'redux-devtools-dock-monitor'
 
 declare module 'qs';
 declare module 'react-color'
+
+declare module 'lodash'

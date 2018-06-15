@@ -174,6 +174,39 @@ export const isEmptyObject = (obj: any) => {
     return true;
 }
 
+//数组的sort实现之一， Array[num]排序
+export const arrSort = (arr: any[]) => {
+    let result = [].concat(arr);
+    for(let i = 0; i < result.length; i++) {
+        let min = result[i];
+        let minIndex = i;
+        for(let j = i + 1; j < result.length; j ++) {
+            if(min > result[j]) {
+                min = result[j];
+                minIndex = j;
+            }
+        }
+        result.splice(i, 0, min);
+        result.splice(minIndex + 1, 1);
+    }
+    return result
+}
+
+//參考undescore.js 的sortBy 以及 loadsh的 orderBy 函數，实现了数据根据某一个key值的排序。
+//算法思路是 先使用map遍历，返回一个value为item，且criter为key属性的arr,进行排序，排序完成之后，遍历新数组返回value的值。
+//同时第三个参数，不传是增序，传入desc 则是倒序。后续继续优化。
+export const orderBy = (arr: any[], dec: string, order='asc') => {
+    return arr.map((item, index) => {
+        return {value: item, criter: item[dec]}
+    }).sort((left: any, right: any): any => {
+        let a = left.criter;
+        let b = right.criter;
+        return order === 'desc' ? a < b : a > b
+    }).map((item: any) => {
+        return item['value']
+    })
+}
+
 //清空对象
 // 把obj中的对象的value值清空掉，如果值是boolean,则改为false
 export const clears = (obj: any) => {
@@ -718,18 +751,18 @@ export const mobileType = () => {
 // }
 
 // //动画requestAnimationFrame的一个hack方法，在做文字无缝滚动的时候用到了，在引用之后要先触发一下，如果使用requise,则可以 requise(xxx)(); 来直接触发
-// export const animationFrame = () => {
-//     window.cancelAnimationFrame = function () {
-//         return window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame || window.oCancelAnimationFrame || window.msCancelAnimationFrame || function (id) {
-//             return window.clearTimeout(id);
-//         };
-//     }();
-//     window.requestAnimationFrame = function () {
-//         return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
-//             return window.setTimeout(callback, 1000 / 60);
-//         };
-//     }();
-// };
+export const animationFrame = () => {
+    window.cancelAnimationFrame = function () {
+        return window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame || window.oCancelAnimationFrame || window.msCancelAnimationFrame || function (id: any) {
+            return window.clearTimeout(id);
+        };
+    }();
+    window.requestAnimationFrame = function () {
+        return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback: any) {
+            return window.setTimeout(callback, 1000 / 60);
+        };
+    }();
+};
 
 //对象序列化，类似qs
 export const stringfyQs = (obj: any) => {
@@ -911,3 +944,8 @@ const isInteger = (obj: any) => {
 //     return operation(a, b, digits, 'divide')
 // }
 
+
+
+export const numAmation: Function = (start: number, end: number, times: number): void => {
+    
+} 

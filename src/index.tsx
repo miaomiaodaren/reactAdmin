@@ -14,8 +14,9 @@ import {
 
 const store = createStore(rootReducer);
 
-import './main.less'
 import 'antd/dist/antd.less'
+import './static/base.css'
+import './main.less'
 
 import Home from './components/home/index'
 import App from './app'
