@@ -13,7 +13,7 @@ export default class NumAmation extends React.Component<any, any> {
         time: PropTypes.number,
     }
     static defaultProps = {
-        time: 5000,
+        time: 2000,
     }
     private ct: any;
     private timestamp = 0;
@@ -32,6 +32,7 @@ export default class NumAmation extends React.Component<any, any> {
     
     //使用requestAnimationFrame时,fun1会带一个参数为这个频率的数字，可以用来做时间差
     numCount = (timestamp?: any) => {
+        console.info(3, timestamp, this.starttime);
         const {startNum, showNum} = this.state;
         const {count, time} = this.props;
         if(!this.starttime) {
@@ -43,6 +44,7 @@ export default class NumAmation extends React.Component<any, any> {
             this.setState((preStart: any) => {
                 return {showNum: count}
             }, () => {
+                console.info('isclear');
                 window.cancelAnimationFrame(this.ct);
                 return false
             })
@@ -50,7 +52,6 @@ export default class NumAmation extends React.Component<any, any> {
             this.setState((preStart: any) => {
                 return {showNum: endtimes}
             }, () => {
-                console.info(showNum, 7777, timestamp, this.starttime);
                 window.requestAnimationFrame(this.numCount);
             })
         }

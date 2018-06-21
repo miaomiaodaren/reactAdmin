@@ -11,11 +11,10 @@ import htmlToDraft from 'html-to-draftjs';   //用来把html的数据还原成�
 import { getAsynTypeList } from '../../model/actions/blog';
 import { isEmptyObject } from '../../util/util'; 
 import { connect } from 'react-redux';
-import { AddBlog, GetBlogList } from '../../api/api';
+import { AddBlog, GetBlogList, ImgUpload } from '../../api/api';
 import { withRouter } from 'react-router-dom';
 import { Dispatch } from 'redux';
 import styled from 'styled-components';
-
 
 const Edit = styled.div`
     .home-editor{
@@ -26,7 +25,6 @@ const Edit = styled.div`
             margin: 0;
         }
     }
-    
 `
 
 const ColorIcon = require('./tx.png');
@@ -167,7 +165,8 @@ export default class blogEdit extends React.Component<any, any> {
                         type, 
                         editorState,
                     }, () => {
-                        console.info(editorState, 666)
+                        //在修改结束之后，动态获取焦点
+                        this.edit.focusEditor()
                     });
                 }
             })
@@ -223,10 +222,20 @@ export default class blogEdit extends React.Component<any, any> {
         this.edit.onEditorFocus();
     }
 
+    //富文本编辑器图片上传
+    uploadImageCallBack = async(file: any) => {
+        // const data = await ImgUpload({file});
+        const formData = new FormData();
+        formData.append('name', 'fufeng');
+        formData.append('age', 28);
+        formData.append('image', '')
+        console.info(data, 7777);
+    }
+
     render() {
         const { editorContent, editorState, title, type } = this.state;
         return (
-            <div className="warp">
+            <div className="warp" style={{padding: 30}}>
                 <Row gutter={16}>
                     <Col span={6}>
                         <Input placeholder="标题" style={{marginBottom: 20}}  value={title} onChange={e => this.setField('title', e.target.value)} />
@@ -249,7 +258,7 @@ export default class blogEdit extends React.Component<any, any> {
                                         history: { inDropdown: true },
                                         list: { inDropdown: true },
                                         textAlign: { inDropdown: true },
-										// image: { uploadCallback: this.imageUploadCallBack },
+                                        image: { uploadCallback: this.uploadImageCallBack, alt: { present: false, mandatory: false } },
 										colorPicker: { 
 											component: ColorPic,
                                         }
@@ -288,10 +297,6 @@ export default class blogEdit extends React.Component<any, any> {
                         </Card>
                     </Col>
                 </Row>
-                <textarea
-                    disabled
-                    value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
-                />
             </div>
         )
     }

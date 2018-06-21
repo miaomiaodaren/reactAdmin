@@ -32,6 +32,9 @@ export default class Main extends React.Component<any, any> {
     constructor(props: any) {
         super(props)
     }
+    componentDidMount() {
+       
+    }
     render() {
         return (
             <HomeMain>
@@ -40,10 +43,10 @@ export default class Main extends React.Component<any, any> {
                         <Col span={8}>
                             <p>用户数量</p>
                             <p className="userCount">
-                                <span><NumAmation count={1210000} /></span>个
+                                <span><NumAmation count={121} /></span>个
                             </p>
                         </Col>
-                        {/* <Col span={8}>
+                        <Col span={8}>
                             <p>文章数量</p>
                             <p className="blogCount">
                                 <span><NumAmation count={121} /></span>个
@@ -54,7 +57,7 @@ export default class Main extends React.Component<any, any> {
                             <p className="pluginCount">
                                 <span><NumAmation count={121} /></span>个
                             </p>
-                        </Col> */}
+                        </Col>
                     </Row>
                 </div>
             </HomeMain>

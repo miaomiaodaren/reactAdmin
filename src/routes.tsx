@@ -9,12 +9,14 @@ import Lineage from './components/javalist/lineage';
 import Music from './components/music/login';
 import Login from './components/login';
 import Main from './components/home/main'
+import BlogCon from './components/blog/blogcon';
 import Plugin from './plugin/index';        //插件路由
 
 const routes = [
     { path: '/user', body: () => User, name: '用户列表', sort: 2},
     { path: '/blog', body: () => Blog, name: '博客列表', sort: 3},
     { path: '/blogedit/:id', body: () => BlogEdit },
+    { path: '/blogcon/:id', body: () => BlogCon},
     { path: '/blogedit',body: () => BlogEdit },
     { path: '/books', body: () => Books },
     { path: '/javalist', body: () => JavaList },

@@ -28,7 +28,7 @@ export default class upload extends React.Component<any, any> {
     render() {
         return (
             <div>
-                <Upload {...props} multiple={true}>
+                <Upload {...props} multiple={true} name="sbs">
                     <Button>
                         <Icon type="upload" /> Click to Upload
                     </Button>

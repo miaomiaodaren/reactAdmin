@@ -86,7 +86,7 @@ class Blog extends React.Component<any, any> {
             title: '标题',
             key: 'title',
             className: 'column-title',
-            render: (text: any, record: any, index: any) => <Link to={`/blogedit/${record._id}`}>{text}</Link>,
+            render: (text: any, record: any, index: any) => <Link to={`/blogcon/${record._id}`}>{text}</Link>,
         }, {
             dataIndex: 'addtime',
             title: '用户名',

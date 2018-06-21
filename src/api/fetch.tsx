@@ -1,8 +1,6 @@
 import axios from 'axios';
 import {stringify, parse} from 'qs';
 
-
-
 declare global {
     interface Window { decodeURIComponent: any; }
 }
@@ -33,7 +31,7 @@ const getUrlPrmt = (url: string)=> {
 
 const pardata = (data: any, type: string) => {
     let d = type === 'GET' ? { method: type, headers: { "Content-type": 'application/json' }} :
-        { method: type, data: data, headers: { "Content-type": 'application/json' }}
+        { method: type, data: stringify(data) }
     return d;
 }
 
