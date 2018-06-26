@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { GetBlogList } from '../../api/api';
 import styled from 'styled-components';
+import * as moment from 'moment';
 
 const BlogMain = styled.div`
     padding: 30px;
@@ -65,7 +66,7 @@ export default class BlogCon extends React.Component<any, any> {
                         <h2>{component.title}</h2>
                         <div className="blog_typeof">
                             <span>所属分类: {component.type}</span>
-                            <span>发布日期: {component.addtime}</span>
+                            <span>发布日期: {moment(component.addtime).format('YYYY-MM-DD')}</span>
                         </div>
                         <div className="blog_main">
                             {this.showhtml(component.content)}
