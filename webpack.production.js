@@ -43,11 +43,11 @@ const productionConfig = {
                     'less-loader',
                 ],
                 include: /components/,
-            },
+            }
         ],
     },
     plugins: [
-        new CleanWebpackPlugin(['dist/*.*']),
+        new CleanWebpackPlugin(['dist/*.*', 'dist/css/*.*']),
         new webpack.optimize.UglifyJsPlugin({
             // 最紧凑的输出
             beautify: false,

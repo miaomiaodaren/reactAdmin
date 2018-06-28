@@ -4,6 +4,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var utils = require('./utils.js');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { CheckerPlugin } = require('awesome-typescript-loader');
+const tsImportPluginFactory = require('ts-import-plugin');
 
 //生成JS的目录地址(默认:)
 const jsDir = 'js/';
@@ -22,7 +23,7 @@ module.exports = {
     //入口文件
     entry: {
         app: ['babel-polyfill', path.resolve(__dirname, 'src/index.tsx')],
-        vendor: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'react-router-dom']
+        vendor: ['react', 'react-dom', 'redux', 'react-redux', 'react-router', 'react-router-dom', 'moment']
     },
     //出口文件
     output: {
@@ -57,7 +58,7 @@ module.exports = {
            {
                 test: /\.(t|j)sx?$/,
                 exclude: /node_modules/,
-                use: ['babel-loader', 'awesome-typescript-loader']
+                use: ['babel-loader', 'awesome-typescript-loader'],
             },
             // {
             //     test: /\.js[x]?$/,

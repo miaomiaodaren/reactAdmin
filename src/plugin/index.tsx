@@ -15,7 +15,8 @@ class Plugin extends React.Component<any, any>{
                 {name: '编辑器', url: 'edit'}, 
                 {name: '文件上传', url: 'upload'},
                 {name: '弹出层', url: 'modal'},
-                {name: '打字机效果', url: 'textwarit'}
+                {name: '文字打印效果', url: 'textwrite'},
+                {name: '返回顶部', url: 'scrollToTop'}
                 // {name: '联级选择框', url: 'cascader'},
                 // {name: '文本输入框', url: 'input'},
                 // {name: '图片轮播', url: 'swipt'},
