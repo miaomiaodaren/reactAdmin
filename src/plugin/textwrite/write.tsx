@@ -44,7 +44,6 @@ export default class WriteText extends React.Component<any, any> {
         if(isString(arrcon)) {
             const substring = arrcon.substr(text.length, 1);
             this.setState((preState: any) => (
-                // {text: `${preState.text}${substring}`}
                 {text: preState.text.push(substring)}
             ))
         } else if(isArray(arrcon)) {
