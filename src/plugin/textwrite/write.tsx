@@ -154,6 +154,14 @@ export default class WriteText extends React.Component<any, any> {
     componentDidMount() {
         this.writeRender()
     }
+
+    componentWillUnmount() {
+        this.textindex = null;
+        this.setState = (state,callback) => {
+            return;
+        };
+    }
+
     render() {
         const {text} = this.state;
         return(

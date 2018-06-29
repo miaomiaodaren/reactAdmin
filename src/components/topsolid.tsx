@@ -38,7 +38,7 @@ export default class Topsolid extends React.Component<any, any> {
             this.setState({
                 sctop: `${(Percentage * 100).toFixed(2)}%`
             })
-        }, 100, true))
+        }, 10, true))
     }
 
     render() {
