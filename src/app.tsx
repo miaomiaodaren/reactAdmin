@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Switch, Route, Link, Router, Redirect } from 'react-router-dom'
 import news from './components/news/index'
-
 import { Provider } from 'react-redux';
 import rootReducer from './model/reducers/index'
 import { createStore } from 'redux';

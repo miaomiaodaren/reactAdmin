@@ -37,7 +37,7 @@ export default class RadioGroup extends React.Component<RadioProps, any> {
         let cMap: any[] = [], 
             len: number = React.Children.count(children);
         if(len) {
-            React.Children.map(children, (item: React.ReactChild, index: number) => {
+            React.Children.map(children, (item: any, index: number) => {
                 cMap.push(React.cloneElement(item, {
                     checkedVal: value,
                     handChange: (val: any) => {this.setState({value: val}, () => { onChange && onChange(this.state.value)})},

@@ -7,7 +7,7 @@ import { GetBlogList, GetBlogTypeList, AddBlogType } from '../../api/api';
 import { fetchBlogList, delfetchBlog, typelistedit, savetypelist, getAsynTypeList } from '../../model/actions/blog';
 import { Switch, Route, Link, withRouter } from 'react-router-dom'
 import { isEmptyObject } from '../../util/util'
-import * as moment from 'moment';
+import moment from 'moment';
 
 import history from "../../util/history";   //在4.0的react-router没有暴露browserHistory的时候可以用。 history.push("/user"); 进行跳转
 
@@ -37,6 +37,7 @@ class Blog extends React.Component<any, any> {
             ],
             total: 0,
             typeDialog: false,    //博客类别添加弹出框 
+            pageSize: 10,  //每页显示10条
         }
     }
 
@@ -65,7 +66,7 @@ class Blog extends React.Component<any, any> {
 
     componentDidMount() {
         const {BolgList, alltypeList, GetAllTypes} = this.props;
-        BolgList();
+        BolgList({page: 1, pagesize: 10});
         // //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
         if(isEmptyObject(alltypeList)) {
             GetAllTypes().then((res: any[]) => {
@@ -111,7 +112,7 @@ class Blog extends React.Component<any, any> {
     }
 
     seach = (params: any) => {
-        this.props.BolgList({...params});
+        this.props.BolgList({page: 1, pagesize: 10, ...params});
     }
 
     //跳转到添加用户页面
@@ -177,8 +178,14 @@ class Blog extends React.Component<any, any> {
         }]
     }
 
+    pagechange = (page: number, pageSize:number) => {
+        this.props.BolgList({page, pagesize: pageSize})
+    }
+
+
     render() {
         let { BlogList } = this.props;
+        const {pageSize} = this.state;
         (BlogList.data || []).forEach((item: any) => {
             item.addtime = moment(item.addtime).format('YYYY-MM-DD');
         });
@@ -194,10 +201,12 @@ class Blog extends React.Component<any, any> {
                         <TableCom header={ this.tableHeader()} ref="istable" data={ BlogList && BlogList.data } 
                             rowClass="tableclass"
                             action={ this.state.actionList }
-                            pagination={ true } pageSize={ 10 }
-                            total={ this.state.total }
+                            pagination={ true } pageSize={ pageSize }
+                            total={ BlogList.count }
                             onCtrlClick= {this.tableAction}
                             loading = { BlogList.loading || false }
+                            onChange={this.pagechange}
+                            current= {BlogList.page}
                         />
                     </div>
                 </div>

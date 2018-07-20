@@ -1,6 +1,6 @@
 import { handleActions } from 'redux-actions';   //用户模块state的管理
 
-const blogList = {}
+const blogList = {count: 0}
 
 export const saveBlogList = handleActions({
     'request blog list'(state: any, action: any) {
@@ -8,7 +8,7 @@ export const saveBlogList = handleActions({
     },
     'receive blog list'(state: any, action: any) {
         const { res } = action.payload;
-        return { data: res.result.data, loading: false }
+        return { data: res.result.data, loading: false, count: res.result.count, page: res.result.page, pagesize: res.result.pagesize }
     },
     'receive blog del'(state: any, action: any) {
         return { loading: false }

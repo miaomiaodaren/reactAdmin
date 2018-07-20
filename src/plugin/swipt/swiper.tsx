@@ -44,7 +44,7 @@ export default class SwiperDemo extends React.Component<any, any> {
         let aacount: React.ReactChild[] = [], newSlide: any[] = [];
         let cache: React.ReactChild[] = [];
         const len = React.Children.count(this.props.children);
-        React.Children.map(this.props.children, (item: React.ReactChild, index: number) => {
+        React.Children.map(this.props.children, (item: any, index: number) => {
             if(typeof item === 'string') {return false}
             aacount.push(React.cloneElement(item, {
                 style: {width: '300px', height: '150px', display: 'inline-block'},

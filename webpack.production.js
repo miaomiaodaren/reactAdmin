@@ -3,8 +3,9 @@ var merge = require('@ersinfotech/merge');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 //加载JS模块压缩编译插件
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-var webpackConfig = require('./webpack.config');
+const webpackConfig = require('./webpack.config');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 
 var path = require('path');
 process.env.NODE_ENV = 'production';
@@ -27,7 +28,7 @@ const productionConfig = {
                         ],
                     }
                 ),
-                exclude: /components/,
+                exclude: [/components/],
             },
             {
                 test: /\.less$/, 
@@ -72,6 +73,15 @@ const productionConfig = {
             filename: 'css/[name].[contenthash].css',
             allChunks: true
         }), // 单独打包CSS
+        new CompressionWebpackPlugin({ //gzip 压缩
+            asset: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: new RegExp(
+                '\\.(js|css)$'    //压缩 js 与 css
+            ),
+            threshold: 10240,
+            minRatio: 0.8
+        })
     ]
 }
 

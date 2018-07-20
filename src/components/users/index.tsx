@@ -6,14 +6,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { asyncAddTodo, asyncAddUser, USERS } from '../../model/actions/user'
 import { RemoveU } from '../../api/api';   //接口地址
-import { withRouter, Prompt  } from 'react-router-dom';
+import { withRouter, Prompt, RouteComponentProps  } from 'react-router-dom';
 import * as PropTypes from 'prop-types';
 import {is, fromJS, Map} from 'immutable'
 import styled from 'styled-components';  //https://juejin.im/entry/59a57a2b5188252445327ac1  使用教程
 
 export interface UserProps {
     dispatch?: any;
-    myName?: string;
     userList?: any,
     userAdd?: any,
     todoList?: any[],
@@ -26,6 +25,7 @@ export interface Ele {
     value?: any;
     mean?: any;
 }
+
 
 const mapStateToProps  = (state: any) => ({
     todoList: state.Users,
@@ -43,14 +43,13 @@ const mapDispatchToProps = (dispatch: any) => {
     }
 }
 
-@connect(mapStateToProps, mapDispatchToProps)
-class Users extends React.Component<UserProps, any> {
+
+
+class Users extends React.Component<any, any> {
     static defaultProps = {
-        myName: 'fufeng',
     }
 
     static propTypes = {
-        myName: PropTypes.string,
         todoList: PropTypes.any,
         dispatch: PropTypes.node,
         userList: PropTypes.any,
@@ -290,7 +289,7 @@ class Users extends React.Component<UserProps, any> {
         console.info(e.ta, num, 2222);
     }
 
-    render() {
+    render() : JSX.Element | false  {
         const { todoList }: any = this.props;
         return (
             <div id="warp">
@@ -319,4 +318,4 @@ class Users extends React.Component<UserProps, any> {
 
 
 //connect()(Users) 是用来把dispatch注册到props，但是当第二个参数传入了方法，则dispatch不会再注册到props中
-export default withRouter<any>(Users)
+export default withRouter<any>(connect(mapStateToProps, mapDispatchToProps)(Users))

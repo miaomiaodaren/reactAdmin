@@ -3,20 +3,22 @@
     "outDir": "./dist/",        //输出目录
     "sourceMap": true,          //：把 ts 文件编译成 js 文件的时候，同时生成对应的sourceMap文件
     "noImplicitAny": true,      //noImplicitAny：如果为true的话，TypeScript 编译器无法推断出类型时，它仍然会生成 JavaScript 文件，但是它也会报告一个错误。为了找到错误还是设置为true比较好。
-    "module": "commonjs",       //代码规范，也可以选amd。   commonjs
-    "target": "es5",
+    // "module": "commonjs",       //代码规范，也可以选amd。   commonjs
+    "target": "es2017",
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "es6", "dom.iterable", "scripthost", "es2017"],
-    "moduleresolution": "node",
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
   },
+  "compileOnSave": false,
+  "buildOnSave": false,
   "include": [
     "./src/**/*"
   ],
   "exclude": [
-      // "node_modules",
+      "node_modules",
   ],
   "typeRoots": [
       "Models", "typings", "node_modules/@types"

@@ -5,6 +5,7 @@ import Sidebar from './left'
 import TopCompont from './top'
 import Errors from '../404'
 import routes from '../../routes';
+import Sticky from '../../plugin/sticky/sticky'
 
 export interface Props extends React.Props<Home> {}
 export interface State {}
@@ -38,14 +39,16 @@ export default class Home extends React.Component<Props, State> {
         routes.map((route: any) => {
             component.push(<PrivateRoute path={route.path} key={route.path} component={route.body()} />)
         })
-        component.push(<Route component= {Errors}/>);
+        component.push(<Route key={'error'} component= {Errors}/>);
         return component
     }
     render() {
         return (
             <div className="admin_home">
                 {/* <Sidebar /> */}
-                <TopCompont topRoute={routes} />
+                <Sticky>
+                    <TopCompont topRoute={routes} />
+                </Sticky>
                 <div id="main_right">
                     <Switch>
                         {this.setRoute()}
