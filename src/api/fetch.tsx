@@ -38,7 +38,7 @@ const pardata = (data: any, type: string) => {
 const instance = axios.create({
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     timeout: 30000,
-    baseURL: process.env.NODE_ENV === "development" ? '/api' : '',
+    baseURL: process.env.NODE_ENV === "development" ? '/api' : '/api',   //在服务器也设置了api的nginx配置，所以这边暂时去掉。
 })
 
 instance.interceptors.request.use((config: any) => {

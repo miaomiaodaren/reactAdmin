@@ -36,9 +36,9 @@ export default class Topsolid extends React.Component<any, any> {
             let sHeight = Math.max(offsetHeight- viewPortHeight, 0);
             let Percentage = sHeight ? document.documentElement.scrollTop / sHeight : 0;
             this.setState({
-                sctop: `${(Percentage* 100).toFixed(2)}%`
+                sctop: `${(Percentage * 100).toFixed(2)}%`
             })
-        }, 100, true))
+        }, 10, true))
     }
 
     render() {

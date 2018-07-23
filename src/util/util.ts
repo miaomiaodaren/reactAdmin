@@ -133,6 +133,7 @@ export function delHtmlTag(str: string) {
 //正则获取二个标签之间的内容
 export function getTabsCon(str: string) {
     // return str.replace(/<pre (.|\n)*(?=<\/pre>)/, "").replace(/ /g, "");
+    // return str.replace(/<(.|\n)*?>/g, '');       // (+,*)都为贪婪匹配,会尽可能匹配更多的参数, 后面加一个?, 可以改成非贪婪模式，匹配最小的符合的。
     return str.replace(/<pre(.|\n)*<\/pre>/, "");
 }
 

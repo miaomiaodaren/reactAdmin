@@ -4,12 +4,13 @@
         "transform-decorators-legacy",
         "react-hot-loader/babel",
         "transform-runtime",
-        "transform-class-properties"
+        "transform-class-properties",
+        ["import", {"libraryName": "antd", "style": "css"}]
     ],
     "env": {
-      "development": {
-           
-      }
+        "development": {
+            
+        }
     }
 }
 
