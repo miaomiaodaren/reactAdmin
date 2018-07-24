@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classList from 'classnames';
-import Pick from './pick';
+// import Pick from './pick';
 
 export default class Select extends React.Component<any, any>{
     constructor(props: any) {

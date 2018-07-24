@@ -3,31 +3,8 @@ import {is, fromJS, Map, List} from 'immutable'
 import styled from 'styled-components';
 import {Row, Col} from 'antd';
 import NumAmation from '../../plugin/numtotal/index';
+import MainList from './mainlist';
 
-const HomeMain = styled.div`
-    .home_main_header{
-        padding: 20px;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        display: block;
-        text-align: center;
-        font-size: 20px;
-        .userCount, .blogCount, .pluginCount{
-            color: #fc463f;
-            font-size: 14px;
-            span{
-                font-size: 30px;
-            }
-        }
-        .blogCount{
-            color: #5db423;
-        }
-        .pluginCount{
-            color: #ff9c00;
-        }
-    }
-`
 export default class Main extends React.Component<any, any> {
     constructor(props: any) {
         super(props)
@@ -60,7 +37,35 @@ export default class Main extends React.Component<any, any> {
                         </Col>
                     </Row>
                 </div>
+                <div className="bloglist">
+                    <MainList />
+                </div>
             </HomeMain>
         )
     }
 }
+
+const HomeMain = styled.div`
+    .home_main_header{
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        .userCount, .blogCount, .pluginCount{
+            color: #fc463f;
+            font-size: 14px;
+            span{
+                font-size: 30px;
+            }
+        }
+        .blogCount{
+            color: #5db423;
+        }
+        .pluginCount{
+            color: #ff9c00;
+        }
+    }
+`

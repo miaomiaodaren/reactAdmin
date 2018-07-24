@@ -88,7 +88,9 @@ class ColorPic extends React.Component<any, any> {
 }
 
 interface IContentPageProps {
-    saveType?: any
+    saveType?: any,
+    GetAllTypes?: any,
+    alltypeList?: any
 }
 
 interface isf {
@@ -109,9 +111,10 @@ const mapDispatchToProps = (dispatch: any) => {
     }
 }
 
-@connect(mapStateToProps, mapDispatchToProps)
-export default class blogEdit extends React.Component<any, any> {
-    constructor(props: IContentPageProps) {
+// @connect(mapStateToProps, mapDispatchToProps)
+
+class blogEdit extends React.Component<any, any> {
+    constructor(props: any) {
         super(props);
         const compositeDecorator = new CompositeDecorator([
             {
@@ -227,9 +230,8 @@ export default class blogEdit extends React.Component<any, any> {
         // const data = await ImgUpload({file});
         const formData = new FormData();
         formData.append('name', 'fufeng');
-        formData.append('age', 28);
+        formData.append('age', '28');
         formData.append('image', '')
-        console.info(data, 7777);
     }
 
     render() {
@@ -316,3 +318,5 @@ function findFirstABC(contentBlock: any, callback: any) {
 const ABCSpan = (props: any) => {
     return <span style={{color:"red"}}>{props.children}</span>;
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(blogEdit)

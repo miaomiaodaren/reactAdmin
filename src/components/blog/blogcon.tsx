@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { GetBlogList } from '../../api/api';
 import styled from 'styled-components';
-import * as moment from 'moment';
+import moment from 'moment';
 
 const BlogMain = styled.div`
     padding: 30px;

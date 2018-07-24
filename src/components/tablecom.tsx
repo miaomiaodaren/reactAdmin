@@ -14,6 +14,8 @@ interface Props {
     pageSize?: number,
     rowClass?: any,
     loading?: boolean,
+    onChange?: any,
+    current?: number
 }
 
 export default class TableCom extends React.Component<Props, any> {
@@ -69,8 +71,8 @@ export default class TableCom extends React.Component<Props, any> {
                 pagination={this.props.pagination !== false ? {
                     total: this.props.total,
                     pageSize: this.props.pageSize,
-                    current: this.state.currentPage,
-                    onChange: this.onPageChangeHandler,
+                    current: this.props.current,
+                    onChange: this.props.onChange,
                     showTotal(total, range) {
                         // return <span className={styles.pageTotal}>共<span className={styles.count}>{total}</span>条</span>;
                         return <span>共<span>{total}</span>条</span>;

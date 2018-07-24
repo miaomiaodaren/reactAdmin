@@ -10,8 +10,6 @@ const Pheight = document.body.clientHeight;
 const LoginBg = styled.div`
     width: 100%;
     height: ${Pheight}px;
-    background: url('//api.i-meto.com/bing?new') center no-repeat;
-    background-size: cover;
 `
 const LoginDiv = styled.div`
     width: 400px;

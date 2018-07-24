@@ -58,7 +58,7 @@ module.exports = {
            {
                 test: /\.(t|j)sx?$/,
                 exclude: /node_modules/,
-                use: ['babel-loader', 'awesome-typescript-loader'],
+                use: ['babel-loader', 'ts-loader'],
             },
             // {
             //     test: /\.js[x]?$/,
@@ -109,7 +109,7 @@ module.exports = {
             test: /\.(pdf)/,
             loader: 'file',
         }, {
-            test: /\.(swf|xap)/,
+            test: /\.(swf|xap|mp3)/,
             loader: 'file',
         }],
     },

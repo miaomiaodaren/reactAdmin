@@ -6,6 +6,7 @@ import { Tabs } from 'antd';
 const TabPane = Tabs.TabPane;
 import CssList from './csslist';
 import JsList from './jslist';
+import html from './html';
 
 interface JAVAPROPS {
     BlogList?: any,
@@ -27,8 +28,8 @@ class JavaList extends React.Component<JAVAPROPS, any> {
         if(!isArrayLislk(typeList)) {
             typelistedit({}, (data: any) => {
                 this.setState({
-                    tabList: this.packComponent(data.list) || [],
-                    activeKey: data.list[0]._id
+                    tabList: this.packComponent(data.result.res) || [],
+                    activeKey: data.result.res[0]._id
                 })
             })(this.props.dispatch)   
         } else {
@@ -53,13 +54,14 @@ class JavaList extends React.Component<JAVAPROPS, any> {
     setPackDom = (temp: any) => {
         const tempList: any = {
             'css': CssList,
-            'javascript': JsList
+            'javascript': JsList,
+            html
         };
         const Istemp = tempList[temp];
         if(!Istemp) {
             return temp
         }
-        return (<Istemp></Istemp>)
+        return (<Istemp title={temp}></Istemp>)
     }
     setTypeDom = (typelist: any) => {
         //动态生成分类的列表数据
@@ -76,7 +78,7 @@ class JavaList extends React.Component<JAVAPROPS, any> {
     render() {
         return (
             <div className="javaList">
-                <Tabs onChange={this.tabOnChange} activeKey={this.state.activeKey} type="card">
+                <Tabs onChange={this.tabOnChange} activeKey={this.state.activeKey} type="line" tabPosition="left">
                     {this.state.tabList.map((pane: any) => <TabPane className="tabs_Panes" tab={pane.name} key={pane._id} forceRender={false} closable={pane.closable}>
                         {this.setPackDom(pane.name)}
                     </TabPane>)}

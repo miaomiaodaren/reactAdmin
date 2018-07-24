@@ -36,7 +36,7 @@ class Plugin extends React.Component<any, any>{
     render() {
         const { liEach } = this;
         let ispath = this.props.location.pathname.split('/')[2];
-        const asyncLoadRoute = (pathName: string) => import(`./${pathName}`);
+        const asyncLoadRoute = (pathName: string) => require(`./${pathName}`);
         return (
             <div id="plugin_main">
                 {liEach()}

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { findDOMNode } from 'react-dom'
-import * as ClipboardJS from 'clipboard';
+import ClipboardJS from 'clipboard';
 
 class Copy extends React.Component<any, any>{
     constructor(props: any) {
