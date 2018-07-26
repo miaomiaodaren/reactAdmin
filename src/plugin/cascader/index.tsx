@@ -1,7 +1,7 @@
 import * as React from 'react'
 // import Cascader from './cascader'
-import 'rc-cascader/assets/index.css';
-import RcCascader from 'rc-cascader';
+// import 'rc-cascader/assets/index.css';
+// import RcCascader from 'rc-cascader';
 
 class Cas extends React.Component<any, any> {
     constructor(props: any) {
@@ -38,7 +38,7 @@ class Cas extends React.Component<any, any> {
         }
     }
     componentDidMount() {
-        console.info(RcCascader, 2222)
+        // console.info(RcCascader, 2222)
     }
     changes = (v: any) => {
         console.info(v);
@@ -51,7 +51,7 @@ class Cas extends React.Component<any, any> {
         const {option, defvalue} = this.state;
         return (
            <div>
-               <RcCascader options={option} onChange={(val: any)=> this.changes(val)}  value={defvalue}><input value={defvalue} readOnly/></RcCascader>
+               {/* <RcCascader options={option} onChange={(val: any)=> this.changes(val)}  value={defvalue}><input value={defvalue} readOnly/></RcCascader> */}
            </div>
         )
     }

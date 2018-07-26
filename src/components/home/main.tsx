@@ -10,7 +10,6 @@ export default class Main extends React.Component<any, any> {
         super(props)
     }
     componentDidMount() {
-       
     }
     render() {
         return (
@@ -54,6 +53,7 @@ const HomeMain = styled.div`
         display: block;
         text-align: center;
         font-size: 20px;
+        background-color: #fff;
         .userCount, .blogCount, .pluginCount{
             color: #fc463f;
             font-size: 14px;
@@ -67,5 +67,8 @@ const HomeMain = styled.div`
         .pluginCount{
             color: #ff9c00;
         }
+    }
+    .bloglist{
+        margin-bottom: 30px;
     }
 `

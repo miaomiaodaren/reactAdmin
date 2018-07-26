@@ -64,12 +64,17 @@ export default class Login extends React.Component<any, any> {
     }
 
     sumbitClick = async(params: any) => {
-        const dataInfo = await UserLogin(params);
-        message[dataInfo.status](dataInfo.message);
-        if(dataInfo.status === 'success') {
-            sessionStorage.setItem('token', params.userName);
-            this.props.history.push('/main', {title: 'i am is success!'})
+        try{
+            const dataInfo = await UserLogin(params);
+            message.success(dataInfo.message);
+            if(dataInfo.status === 'success') {
+                sessionStorage.setItem('token', params.userName);
+                this.props.history.push('/main', {title: 'i am is success!'})
+            }
+        }catch(err) {
+            message.error(err)
         }
+        
     }
 
     render() {
