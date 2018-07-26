@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {Row, Col} from 'antd';
 import NumAmation from '../../plugin/numtotal/index';
 import MainList from './mainlist';
+import ScrolltoTop from '../../plugin/scrollToTop/scrolltop'
 
 export default class Main extends React.Component<any, any> {
     constructor(props: any) {
@@ -12,6 +13,7 @@ export default class Main extends React.Component<any, any> {
     componentDidMount() {
     }
     render() {
+        console.info(this.props, 555);
         return (
             <HomeMain>
                 <div className="home_main_header">
@@ -39,6 +41,7 @@ export default class Main extends React.Component<any, any> {
                 <div className="bloglist">
                     <MainList />
                 </div>
+                <ScrolltoTop />
             </HomeMain>
         )
     }

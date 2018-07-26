@@ -10,6 +10,7 @@ import Music from './components/music/login';
 import Login from './components/login';
 import Main from './components/home/main'
 import BlogCon from './components/blog/blogcon';
+import Error from './components/404';
 import Plugin from './plugin/index';        //插件路由
 
 const routes = [
@@ -24,7 +25,8 @@ const routes = [
     { path: '/plugin', body: () => Plugin, name: '插件列表', sort: 4},
     { path: '/plugin/:type', body: () => Plugin },
     { path: '/music', body: () => Music },
-    { path: '/', body: () => Main, name: '首页', sort: 1}
+    { path: '/index', body: () => Main, name: '首页', sort: 1},
+    {body: () => Error, key: 'error' },
 ]
 
 export default routes

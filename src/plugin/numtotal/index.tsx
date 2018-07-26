@@ -32,7 +32,7 @@ export default class NumAmation extends React.Component<any, any> {
     
     //使用requestAnimationFrame时,fun1会带一个参数为这个频率的数字，可以用来做时间差
     numCount = (timestamp?: any) => {
-        console.info(3, timestamp, this.starttime);
+        // console.info(3, timestamp, this.starttime);
         const {startNum, showNum} = this.state;
         const {count, time} = this.props;
         if(!this.starttime) {

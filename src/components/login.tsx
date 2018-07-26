@@ -69,7 +69,7 @@ export default class Login extends React.Component<any, any> {
             message.success(dataInfo.message);
             if(dataInfo.status === 'success') {
                 sessionStorage.setItem('token', params.userName);
-                this.props.history.push('/main', {title: 'i am is success!'})
+                this.props.history.push('/index', {title: 'i am is success!'})
             }
         }catch(err) {
             message.error(err)

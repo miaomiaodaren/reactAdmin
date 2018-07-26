@@ -291,3 +291,35 @@ ul li {
         }
     }
 }
+
+.example-appear{
+    transform: translate3D(100%, 0, 0);
+    transition: all 3000ms linear;
+}
+.example-appear-active{
+    transform: translate3D(0, 0, 0);
+}
+
+.example-enter {
+    transform: translate3D(100%, 0, 0);
+    transition: all 3000ms linear;
+}
+
+.example-enter.example-enter-active {
+    transform: translate3D(0, 0, 0);
+}
+
+
+.example-leave {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 1;
+    transform: translate3D(0, 0, 0);
+    transition: all 3000ms linear;
+}
+
+.example-leave.example-leave-active    {
+    opacity: 0.01;
+    transform: translate3D(-100%, 0, 0);
+}

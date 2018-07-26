@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { connect } from 'react-redux'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import Sidebar from './left'
 import TopCompont from './top'
 import Errors from '../404'
 import routes from '../../routes';
-import Sticky from '../../plugin/sticky/sticky'
+import Sticky from '../../plugin/sticky/sticky';
+import styled from 'styled-components';
 
 export interface Props extends React.Props<Home> {}
 export interface State {}
@@ -16,10 +15,11 @@ const isLogin = () => {
 }
 
 const PrivateRoute = ({component: Component, ...rest}: any) => {
+    // rest.exact = rest.path === '/' ? true : false;
     return (
-        <Route exact {...rest} render={ props =>
+        <Route {...rest} exact={true} render={ props =>
             isLogin() ? (
-                <Component {...props} />
+                <Component  {...props} />
             ) : (
                 <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
             )
@@ -28,7 +28,7 @@ const PrivateRoute = ({component: Component, ...rest}: any) => {
 } 
 
 
-export default class Home extends React.Component<Props, State> {
+export default class Home extends React.Component<any, any> {
     constructor(props: any) {
         super(props)
     }
@@ -37,14 +37,14 @@ export default class Home extends React.Component<Props, State> {
     setRoute = () => {
         let component: any[] = [];
         routes.map((route: any) => {
-            component.push(<PrivateRoute path={route.path} key={route.path} component={route.body()} />)
+            component.push(<PrivateRoute path={route.path} name='222' key={route.path || route.key} component={route.body()} />)
         })
-        component.push(<Route key={'error'} component= {Errors}/>);
+        // component.push(<Route key={'error'} component= {Errors}/>);
         return component
     }
     render() {
         return (
-            <div className="admin_home">
+            <Homemain className="admin_home">
                 {/* <Sidebar /> */}
                 <Sticky>
                     <TopCompont topRoute={routes} />
@@ -54,7 +54,11 @@ export default class Home extends React.Component<Props, State> {
                         {this.setRoute()}
                     </Switch>
                 </div>
-            </div>
+            </Homemain>
         )
     }
 }
+
+const Homemain = styled.div`
+
+`
