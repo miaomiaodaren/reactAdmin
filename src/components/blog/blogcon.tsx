@@ -5,6 +5,7 @@ import moment from 'moment';
 
 const BlogMain = styled.div`
     padding: 30px;
+    background-color: #fff;
     h2{
         text-align: center;
         line-height: 80px;

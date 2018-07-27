@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Upload, Icon, message, Button } from 'antd';
 import { ImgUpload } from '../../api/api';
 
+import Uploadss from './upload'
+
 const props = {
     name: 'file',
     action: '/api/user/imgupload',
@@ -33,6 +35,12 @@ export default class upload extends React.Component<any, any> {
                         <Icon type="upload" /> Click to Upload
                     </Button>
                 </Upload>
+
+                <br />
+                <br />
+                <Uploadss>
+                    文件上传
+                </Uploadss>
             </div>
         )
     }

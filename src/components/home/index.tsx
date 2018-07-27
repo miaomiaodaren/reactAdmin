@@ -6,6 +6,8 @@ import routes from '../../routes';
 import Sticky from '../../plugin/sticky/sticky';
 import styled from 'styled-components';
 
+const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+
 export interface Props extends React.Props<Home> {}
 export interface State {}
 

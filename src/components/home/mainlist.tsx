@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import propsType from 'prop-types';
 import {Pagination, Spin} from 'antd';
 import {GetBlogList} from '../../api/api';
+import {Link} from 'react-router-dom'
 
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
@@ -16,6 +17,7 @@ export default class List extends React.Component<any, any>{
             page: 1,
             pagesize: 10,
             listcount: 0,
+            isloading: false
         }
     }
 
@@ -32,6 +34,7 @@ export default class List extends React.Component<any, any>{
     }
 
     getlist = async(page: number) => {
+        this.setState({isloading: true})
         try{
             const {status, result} = await GetBlogList({page, pagesize: 10});
             if(status === 'success') {
@@ -44,12 +47,14 @@ export default class List extends React.Component<any, any>{
                     list: result.data,
                     page,
                     pagesize: parseInt(result.pagesize),
-                    listcount: result.count
+                    listcount: result.count,
+                    isloading: false
                 }, () => {
                     document.documentElement.scrollTop = 0;
                 })
             }
         } catch(err) {
+            this.setState({isloading: false})
             console.info(err)
         }
     }
@@ -61,14 +66,14 @@ export default class List extends React.Component<any, any>{
 
     render() {
         console.info(this.props, 4444);
-        const {list, page, pagesize, listcount} = this.state;
+        const {list, page, pagesize, listcount, isloading} = this.state;
         return (
             <ListMain>
-                <Spin className="spin" />
+                {isloading ? <Spin className="spin"  /> : ''}
                 <ul className="blog_list">
                     {list.map((item: any) => {
                         return (<li key={item._id}>
-                            <h2>{item.title}</h2>
+                            <h2><Link to={`/blogcon/${item._id}`}>{item.title}</Link></h2>
                             <div className="blog_about">
                                 {/* <ReactCSSTransitionGroup transitionName="example"  transitionAppear={true} transitionAppearTimeout={5000} transitionEnterTimeout={5000} transitionLeaveTimeout={5000} >
                                     <Aa></Aa>
@@ -77,7 +82,7 @@ export default class List extends React.Component<any, any>{
                                 <span>添加日期: {item.addtime}</span>
                             </div>
                             <div className="blog_test">
-                                {this.showhtml(item.about)}...查看更多
+                                {this.showhtml(item.about)}...<Link to={`/blogcon/${item._id}`}>查看更多</Link>
                             </div>
                         </li>)
                     })}
@@ -101,6 +106,7 @@ const ListMain = styled.div`
     }
     .blog_list{
         background-color: #eee;
+        margin-top: 30px;
         li{
             min-height: 100px;
             margin-bottom: 20px;
