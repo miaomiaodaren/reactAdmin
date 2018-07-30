@@ -24,9 +24,35 @@ const props = {
             message.error(`${info.file.name} file upload failed.`);
         }
     },
+    
+};
+
+const props1 = {
+    name: 'file',
+    action: '/api/user/imgupload',
+    autoUpload: true,
+    headers: {
+        authorization: 'authorization-text',
+    },
+    data: {
+        name: 'fufeng',
+        id: '22',
+    },
+    onChange(file: any, fileList: any[]) {
+        console.info(file, fileList, 'i am is change')
+    },
+    onSuccess(res: any, file: any, FileList: any) {
+        console.info(res, file, FileList, 'i am is success');
+    },
+    showFileList: true,
+    Cropper: true,          //是否需要剪裁
 };
 
 export default class upload extends React.Component<any, any> {
+    changes = (file: any, fileList: any[]) => {
+        console.info(file, fileList, 'i am is change')
+    }
+
     render() {
         return (
             <div>
@@ -38,7 +64,7 @@ export default class upload extends React.Component<any, any> {
 
                 <br />
                 <br />
-                <Uploadss>
+                <Uploadss {...props1}>
                     文件上传
                 </Uploadss>
             </div>

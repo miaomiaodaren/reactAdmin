@@ -20,7 +20,7 @@
   "exclude": [
       "node_modules",
   ],
-  "typeRoots": [
-      "Models", "typings", "node_modules/@types"
-  ]
+  // "typeRoots": [
+  //     "Models", "typings", "node_modules/@types"
+  // ]
 }

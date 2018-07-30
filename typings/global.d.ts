@@ -40,6 +40,11 @@ declare module 'redux-devtools-log-monitor'
 declare module 'redux-devtools-dock-monitor'
 
 declare module 'qs';
-declare module 'react-color'
+declare module 'react-color';
 
-declare module 'lodash'
+declare module 'lodash';
+
+declare module 'animated';
+
+
+declare module 'react-cropper'
