@@ -46,6 +46,7 @@ const props1 = {
     },
     showFileList: true,
     Cropper: true,          //是否需要剪裁
+    drag: true,             //支持拖动上传
 };
 
 export default class upload extends React.Component<any, any> {
@@ -56,14 +57,13 @@ export default class upload extends React.Component<any, any> {
     render() {
         return (
             <div>
-                <Upload {...props} multiple={true} name="sbs">
+                {/* <Upload {...props} multiple={true} name="sbs">
                     <Button>
                         <Icon type="upload" /> Click to Upload
                     </Button>
                 </Upload>
-
                 <br />
-                <br />
+                <br /> */}
                 <Uploadss {...props1}>
                     文件上传
                 </Uploadss>

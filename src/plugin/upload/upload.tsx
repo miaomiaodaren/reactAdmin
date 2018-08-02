@@ -58,10 +58,10 @@ export default class Uploadss extends React.Component<any, any> {
     onHandleSuccess = (res: any, file: any, FileList?: any[]) => {
         const { fileList } = this.state;
         let _file = this.getFile(file);
+        console.info('i am is succes', _file, file);
         if(_file) {
             _file.status = "success",
             _file.response = res;
-
             setTimeout(() => {
                 this.setState({fileList}, () => {
                     this.props.onSuccess && this.props.onSuccess(res, _file, fileList);
@@ -82,6 +82,7 @@ export default class Uploadss extends React.Component<any, any> {
     }
 
     onError = (e: any, file: any) => {
+        console.info(this.state, 'i am is error');
         const {fileList} = this.state;
         let _file = this.getFile(file);
         if(_file) {
@@ -130,25 +131,24 @@ export default class Uploadss extends React.Component<any, any> {
             _file.url = window.URL.createObjectURL(file)            //新建图片缩略图
         } catch(err) {return}
 
-        fileList.push(_file);
-        this.setState({
-            fileList,
-            tempIndex,
-            croppervisible: Cropper ? true : false,
-            croppuid: Cropper ? _file : undefined
-        }, () => {
-            if(Cropper) {
-                console.info(this.state.croppuid, 7777);
-            } else {
-                console.info(Cropper, 99999);
+        if(Cropper) {
+            this.setState({
+                croppervisible: Cropper ? true : false,
+                croppuid: Cropper ? _file : undefined
+            })
+        } else {
+            fileList.push(_file);
+            this.setState({
+                fileList,
+                tempIndex,
+            }, () => {
                 if(autoUpload) this.upload(file);                       //如果是自动上传的,则直接触发
-            }
-        })
+            })
+        }
     }
 
     uploadFiles = (files: any[]): void => {
-        console.info(33, files);
-        const {multiple, autoUpload} = this.props;
+        const {multiple, autoUpload, Cropper} = this.props;
         let postFiles = Array.prototype.slice.call(files);
         if(postFiles.length === 0) {return;}
         if(!multiple) {postFiles = postFiles.slice(0, 1)};          //如果不支持多选, 则只选取第一个
@@ -178,41 +178,85 @@ export default class Uploadss extends React.Component<any, any> {
     }
 
     onOk = () => {
+        let {fileList, tempIndex, croppuid} = this.state;
+        const {autoUpload} = this.props;
         let dataurl = (this.refs.cropper as any).getCroppedCanvas().toDataURL();
-        let blob = dataURLtoFile(dataurl, this.state.croppuid.name);
+        let blob: any = dataURLtoFile(dataurl, this.state.croppuid.name);
         console.info(blob, 876548765);
-        this.upload(blob)
+        croppuid.raw = blob;
+        blob.uid = croppuid.uid;
+        try {
+            croppuid.url = window.URL.createObjectURL(blob)            //新建图片缩略图
+        } catch(err) {return}
+        fileList.push(croppuid);
+        this.setState({
+            fileList,
+            tempIndex,
+            croppuid,
+            croppervisible: false
+        }, () => {
+           this.upload(blob); 
+        })
     }
 
     render() {
-        const {accept, multiple} = this.props;
+        const {accept, multiple, drag} = this.props;
         const {fileList} = this.state;
         console.info(this.props.showFileList, 888, fileList, this.state.croppuid && this.state.croppuid);
         return (
             <Uploads>
-                <div className="upload" onClick={this.handleClick}>
-                    {this.props.children}
-                    <input className="upload_input" type="file" ref="input" onChange={e => this.handleChange(e)} multiple={false}  />
-                </div>
                 {
                     this.props.showFileList ? <div className="fileList">
                         {fileList.map((item: any) => {
-                            return (<div key={item.name}>
-                                <span>{item.name}</span> <span>{item.status === 'success' ? '成功' : item.status === 'uploading' ? '上传中' : '失败'}</span>
-                                <img style={{width: '100px', height: '100px', display: 'inline-block'}} src={item.url}/>
-                            </div>)
+                            return (
+                                // <div key={item.name}>
+                                    // <span>{item.name}</span> <span>{item.status === 'success' ? '成功' : item.status === 'uploading' ? '上传中' : '失败'}</span>
+                                <img src={item.url}/>
+                                // </div>
+                            )
                         })}
                     </div> : ''
                 }
+                <div className="upload" onClick={this.handleClick}>
+                    {drag ? <div className="drag" 
+                        onDragEnter={(event) => {event.preventDefault(); console.info(event.target, '我进入了这个元素')}}
+                        onDragOver={(event) => {event.preventDefault(); console.info(event.target, '我在这个范围内进行移动')}}
+                        onDragLeave = {(event) => {event.preventDefault(); console.info(event.target, '我离开了这个拖动范围')}}
+                        onDrop={(e:any) => {e.preventDefault(); alert(1); this.uploadFiles(e.dataTransfer.files)}}>
+                        {this.props.children}
+                    </div> : this.props.children}
+                    <input className="upload_input" type="file" ref="input" onChange={e => this.handleChange(e)} multiple={false}  />
+                </div>
                 <Modal title="Basic Modal" visible={this.state.croppervisible} onOk={this.onOk} onCancel={() => this.setState({croppervisible: false})}>
                     <Cropper
                         ref='cropper'
                         src= {this.state.croppuid && this.state.croppuid.url}
                         style={{height: 400, width: '100%'}}
-                        aspectRatio={16 / 9}
+                        aspectRatio={5 / 5}
                         guides={true}
                         crop={this._crop} />
                 </Modal>
+                {/* <br />
+                <br />
+                <div className="bbb" id="bbb"
+                    draggable={true} 
+                    onDragStart={(event: any) => {console.info(event.target, '我开始拖动了');  event.dataTransfer.setData('Text', event.target.id)}}
+                    onDrag={(event: any) => {console.info(event.target, '我正在拖放中')}}
+                    onDragEnd={(event: any) => {console.info(event.target, '我结束了拖放')}}
+                >21312312</div> */}
+                {/* 展示文件拖动效果的实现 (移动端不兼容) */}
+                {/* <br />
+                <br />
+                <div style={{width: '200px', height: '200px', border: '1px solid #ddd'}} 
+                    onDragEnter={(event) => {console.info(event.target, '我进入了这个元素')}}
+                    onDragOver={(event) => {event.preventDefault(); console.info(event.target, '我在这个范围内进行移动')}}
+                    onDragLeave = {(event) => {console.info(event.target, '我离开了这个拖动范围')}}
+                    onDrop={(event) => { 
+                        event.preventDefault(); 
+                        console.info(event.target, '我在对象中进行了放置'); 
+                        var data = event.dataTransfer.getData("Text");
+                        (event.target as HTMLElement).appendChild(document.getElementById(data))}}
+                ></div> */}
             </Uploads>
         )
     }
@@ -221,5 +265,23 @@ export default class Uploadss extends React.Component<any, any> {
 const Uploads = styled.div`
     .upload_input{
         display: none;
+    }
+    .upload{
+        width: 200px;
+        height: 200px;
+        border: 1px solid #ddd;
+        display: inline-block;
+        text-align: center;
+        line-height: 200px;
+    }
+    .fileList{
+        display: inline-block;
+        img {
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+            margin-right: 30px;
+            border: 1px solid #ddd;
+        }
     }
 `
