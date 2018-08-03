@@ -7,6 +7,7 @@ import Sticky from '../../plugin/sticky/sticky';
 import styled from 'styled-components';
 
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+import axios from 'axios';
 
 export interface Props extends React.Props<Home> {}
 export interface State {}
@@ -34,7 +35,9 @@ export default class Home extends React.Component<any, any> {
     constructor(props: any) {
         super(props)
     }
-    componentDidMount() {
+    async componentDidMount() {
+        const datainfo = await axios.get('/api/user/getsign?url=' + document.location.href);
+        console.info(datainfo, 777777777777777);
     }
     setRoute = () => {
         let component: any[] = [];
