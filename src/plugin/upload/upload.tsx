@@ -46,6 +46,8 @@ export default class Uploadss extends React.Component<any, any> {
         }
     }
 
+
+
     //根据uid查找文件
     getFile = (file: any) => {
         if (file) {
