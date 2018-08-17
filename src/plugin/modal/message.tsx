@@ -9,9 +9,9 @@ type ConfigOption = {
     children?: ConfigContent
     duration?: number,      //秒娄 
     maxCount?: number,      //最多几个
-
     suc_btn?: () => void,
-    error_btn ?: () => void
+    error_btn ?: () => void,
+    type?: string
 }
 
 
@@ -42,7 +42,7 @@ function notice(option:ConfigOption) {
     const div = document.createElement('div');
     first_div.appendChild(div);
     div.className = Style.message;
-    const componet = React.createElement(Model, Object.assign({}, {...option}, {...Options}, {willUnmount: () => {
+    const componet = React.createElement(Model, Object.assign({}, {...Options}, {...option},  {willUnmount: () => {
         ReactDOM.unmountComponentAtNode(div);
         first_div.removeChild(div);
     }}))
@@ -51,14 +51,15 @@ function notice(option:ConfigOption) {
 
 export default {
     info(content: ConfigContent, duration?: number) {
-        let op = {children: content, duration}
+        let op = {children: content, duration, type: 'info'}
         return notice(op); 
     },
     config(option: ConfigOption) {
         Options = {...option}
     },
-    alert(options: ConfigAlert) {
-        return notice(options); 
+    alert(options: any) {
+        let op = {...options, children: options.content, type: 'alert', duration: 0}
+        return notice(op); 
     }
 }
 
