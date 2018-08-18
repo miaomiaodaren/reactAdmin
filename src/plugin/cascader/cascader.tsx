@@ -48,7 +48,7 @@ class Cas extends React.Component<any, State> {
         if(state.menuVisible != menuVisible) {
             if(menuVisible) {
                 if(!this.popperJS) {
-                    this.popperJS = new PopperJS(findDOMNode(inputs), findDOMNode(menu), {
+                    this.popperJS = new PopperJS((findDOMNode(inputs)as any), (findDOMNode(menu)as any), {
                         modifiers: {
                             applyStyle: {
                                 gpuAcceleration: false,

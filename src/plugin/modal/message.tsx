@@ -57,9 +57,9 @@ export default {
     config(option: ConfigOption) {
         Options = {...option}
     },
-    alert(options: ConfigAlert) {
-        return notice(options); 
-    }
+    // alert(options: ConfigAlert) {
+    //     return notice(options); 
+    // }
 }
 
 
