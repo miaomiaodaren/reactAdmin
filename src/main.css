@@ -114,6 +114,10 @@ ul li {
 :global(.h2) {
   color: blue;
 }
+.admin_home {
+  background-color: #eee;
+  height: 100%;
+}
 #leftMenu {
   position: fixed;
   top: 0;
@@ -166,7 +170,6 @@ ul li {
 #main_right {
   width: 1200px;
   margin: 30px auto;
-  background-color: #fff;
   box-sizing: border-box;
 }
 #main_right .searchbar {
@@ -234,6 +237,7 @@ ul li {
 }
 #main_right .javaList {
   margin: 20px;
+  padding: 20px;
 }
 #main_right .javaList #cssbd ul {
   display: flex;
@@ -414,4 +418,57 @@ ul li {
   color: #000;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.example-appear {
+  transform: translate3D(100%, 0, 0);
+  transition: all 300ms linear;
+}
+.example-appear-active {
+  transform: translate3D(0, 0, 0);
+}
+.example-enter {
+  transform: translate3D(100%, 0, 0);
+  transition: all 3000ms linear;
+}
+.example-enter.example-enter-active {
+  transform: translate3D(0, 0, 0);
+}
+.example-leave {
+  opacity: 1;
+}
+.example-leave.example-leave-active {
+  opacity: 0;
+}
+.alert_btn {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.alert_success {
+  width: 60px;
+  height: 35px;
+  background-color: #1e89e0;
+  color: #fff;
+  display: inline-block;
+  line-height: 35px;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  flex: none;
+}
+.alert_error {
+  width: 60px;
+  height: 35px;
+  background-color: #fff;
+  color: #000;
+  display: inline-block;
+  line-height: 35px;
+  text-align: center;
+  border-radius: 5px;
+  margin-right: 15px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  flex: none;
 }

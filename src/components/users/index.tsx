@@ -11,6 +11,9 @@ import * as PropTypes from 'prop-types';
 import {is, fromJS, Map} from 'immutable'
 import styled from 'styled-components';  //https://juejin.im/entry/59a57a2b5188252445327ac1  使用教程
 
+import {GET} from '../../decorator/http'
+import {aa, bb} from '../../decorator/test';    //装饰器测试
+
 export interface UserProps {
     dispatch?: any;
     userList?: any,
@@ -42,7 +45,6 @@ const mapDispatchToProps = (dispatch: any) => {
         }
     }
 }
-
 
 
 class Users extends React.Component<any, any> {
@@ -83,6 +85,8 @@ class Users extends React.Component<any, any> {
             editData: {},
             selectid: ''    //选择的按钮
         }
+        this.descorpt = this.descorpt.bind(this);
+        this.dectest = this.dectest.bind(this);
     }
     
     searchFields = (): any[] => {
@@ -191,15 +195,25 @@ class Users extends React.Component<any, any> {
         }]
     }
 
+    @GET('/api/type/Gettype')
+    descorpt(res:any) {
+        console.info(res, '我觉得我会成功')
+    }
+    
+
+
     gUserList = (obj: any) => {
         this.props.userList({ ...obj });
     }
     componentWillMount() {
         //WillMount是在完成首次渲染之前调用，此时可以修改组件的state
     }
+    
     componentDidMount() {
         //在此使用了redux的connect的第二个参数，可以直接封装一个方法，然后直接在页面实现action的方法
         this.props.userList();
+        this.descorpt(222)
+        this.dectest()
     }
 
     shouldComponentUpdate(nextProps:UserProps, nextState: any) {
@@ -289,6 +303,12 @@ class Users extends React.Component<any, any> {
         console.info(e.ta, num, 2222);
     }
 
+    @aa
+    @bb
+    dectest(res?: any) {
+        console.info('testdec', res);
+    }
+
     render() : JSX.Element | false  {
         console.info(this.props, 555);
         const { todoList }: any = this.props;
@@ -299,7 +319,7 @@ class Users extends React.Component<any, any> {
                     <Button onClick={ this.add } className="search" icon="user-add" >添加用户</Button>
                 </div>
                 <div className="tableBox">
-                    <div style={{ padding: 20 }}>
+                    <div style={{ padding: 20, backgroundColor: '#fff' }}>
                         <TableCom header={ this.tableHeader()} ref="istable" data={ todoList.list } 
                             rowClass="tableclass"
                             action={ this.state.actionList }

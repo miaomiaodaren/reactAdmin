@@ -197,7 +197,7 @@ class Blog extends React.Component<any, any> {
                     <Button onClick={ this.addtype } className="search" icon="user-add" style={{marginLeft: 20}}>添加分类</Button>
                 </div>
                 <div className="tableBox">
-                    <div style={{ padding: 20 }}>
+                    <div style={{ padding: 20, backgroundColor: '#fff' }}>
                         <TableCom header={ this.tableHeader()} ref="istable" data={ BlogList && BlogList.data } 
                             rowClass="tableclass"
                             action={ this.state.actionList }

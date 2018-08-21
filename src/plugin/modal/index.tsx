@@ -20,12 +20,17 @@ export default class ModleDemo extends React.Component<any, any> {
         Message.info('This is a normal message', 12);
     }
 
-
+    butclick2 = () => {
+        Message.alert({
+            content: 'dfafdsafsdafsadf'
+        });
+    }
 
     render() {
         return(
             <div>
                 <button onClick={this.butclick}>1312312312</button>
+                <button onClick={this.butclick2}>222222</button>
             </div>
         )
     }

@@ -10,7 +10,6 @@ import { hot } from 'react-hot-loader';
 import Home from './components/home/index'
 import Login from './components/login'
 
-
 class App extends React.Component {
     constructor(props: any) {
         super(props);
