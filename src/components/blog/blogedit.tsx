@@ -105,8 +105,9 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        GetAllTypes: async(data: any = {}, callback?: any) => {
-            return await getAsynTypeList(data, callback)(dispatch)
+        GetAllTypes: (data: object = {}, callback?: () => void) => {
+            console.info(data, 'isdata');
+            return getAsynTypeList(data, callback)(dispatch)
         }
     }
 }
@@ -176,6 +177,7 @@ class blogEdit extends React.Component<any, any> {
         }
         //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
         if(isEmptyObject(alltypeList)) {
+            console.info('join');
             GetAllTypes().then((res: any[]) => {
                 this.setState({
                     typeList: res || []

@@ -171,6 +171,7 @@ ul li {
   width: 1200px;
   margin: 30px auto;
   box-sizing: border-box;
+  display: flex;
 }
 #main_right .searchbar {
   width: 100%;
@@ -264,6 +265,9 @@ ul li {
 }
 #main_right #lineage .css_main .ishide {
   display: none;
+}
+#main_right > div {
+  flex: 1;
 }
 @keyframes rotate {
   0% {
