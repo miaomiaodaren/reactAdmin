@@ -22,6 +22,7 @@ export const getAsynTypeList = (data: any = {}, callback?: (data: any[]) => void
     return async (dispatch: any) => {
         try{
             let { result } = await GetBlogTypeList(data);
+            console.info(result, data, 'i is async')
             await dispatch({
                 type: 'GETALLTYPELIST',
                 list: result.res || [],

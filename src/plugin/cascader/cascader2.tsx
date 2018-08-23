@@ -30,7 +30,6 @@ export default class Cascaders extends React.Component<any, any>{
     inputclick = () => {
         const {isshow} = this.state;
         if(!isshow) {
-            console.info('222')
             this.setState({
                 isshow: true
             })
@@ -41,15 +40,6 @@ export default class Cascaders extends React.Component<any, any>{
         const {selectValue} = this.state;
         this.selectVal = this.selectVal.slice(0, index);
         this.selectVal.push(value);
-        // if('children' in item) {
-        //     this.setState({
-        //         chagneValue: this.selectVal
-        //     }, () => {
-        //         this.creact(item.children, index + 1);
-        //     })
-        // } else {
-        //     this.setState({selectValue: this.selectVal})
-        // }
         this.setState({selectValue: this.selectVal})
     }
 
@@ -62,18 +52,6 @@ export default class Cascaders extends React.Component<any, any>{
         // this.creact(options, 0)
         // var aa = arrayTreeFilter(this.state.option, (o:any, level) => o[this.getFieldName('value')] === activeValue[level], { childrenKeyName: this.getFieldName('children') })
     }
-
-    creact = (items: any, index: number) => {
-        this.Dom = this.Dom.slice(0, index);
-        let data = items.map((item: any) => {
-            item['index'] = index;
-            return (<li key={item.label} className={`${2} `} onClick={() => this.liclick(item.value, item, item.index)}>{item.label} {item.index}</li>)
-        })
-        this.index ++
-        this.Dom.push(<ul key={this.index} className={`${this.index}`}>{data}</ul>);
-        this.setState({select: this.Dom})
-    }
-
 
     getFieldName = (name: any) => {
         let defaultFieldNames: any = { label: 'label', value: 'value', children: 'children' };

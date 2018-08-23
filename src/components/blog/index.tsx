@@ -69,7 +69,7 @@ class Blog extends React.Component<any, any> {
         BolgList({page: 1, pagesize: 10});
         // //在加载的时候会先执行一次获取博客列表.此时因别处要使用，把代码数据放到redux中，方便后面的调用
         if(isEmptyObject(alltypeList)) {
-            GetAllTypes().then((res: any[]) => {
+            GetAllTypes({}).then((res: any[]) => {
                 this.setState({
                     typeList: res || []
                 })
@@ -227,7 +227,7 @@ const mapDispatchToProps = (dispatch: any) => {
         BolgList: (params: any = {}) => {
             fetchBlogList(params)(dispatch)
         },
-        GetAllTypes: async(data: any = {}, callback?: any) => {
+        GetAllTypes: async(data: any = {}, callback?: () => void ) => {
             return await getAsynTypeList(data, callback)(dispatch)
         }
     }

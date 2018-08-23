@@ -3,40 +3,6 @@ import { GetBlogList } from '../../api/api';
 import styled from 'styled-components';
 import moment from 'moment';
 
-const BlogMain = styled.div`
-    padding: 30px;
-    background-color: #fff;
-    h2{
-        text-align: center;
-        line-height: 80px;
-    }
-    .blog_typeof{
-        display: flex;
-        flex-direction: row;
-        span{
-            flex: 1;
-            display: inline-block;
-            text-align: center;
-        }
-    }
-    .blog_main{
-        font-size: 14px;
-        margin-top: 30px;
-    }
-    pre{
-        padding: 1em;
-        border: none;
-        overflow: auto;
-        line-height: 1.45;
-        max-height: 35em;
-        position: relative;
-        background: url('/src/static/blueprint.png') #F6F6F6;
-        -webkit-background-size: 30px,30px;
-        background-size: 30px,30px;
-        font-size: 13px;
-    }
-`
-
 export default class BlogCon extends React.Component<any, any> {
     constructor(props: any) {
         super(props)
@@ -78,3 +44,37 @@ export default class BlogCon extends React.Component<any, any> {
         )
     }
 }
+
+const BlogMain = styled.div`
+    padding: 30px;
+    background-color: #fff;
+    h2{
+        text-align: center;
+        line-height: 80px;
+    }
+    .blog_typeof{
+        display: flex;
+        flex-direction: row;
+        span{
+            flex: 1;
+            display: inline-block;
+            text-align: center;
+        }
+    }
+    .blog_main{
+        font-size: 14px;
+        margin-top: 30px;
+    }
+    pre{
+        padding: 1em;
+        border: none;
+        overflow: auto;
+        line-height: 1.45;
+        max-height: 35em;
+        position: relative;
+        background: url('/src/static/blueprint.png') #F6F6F6;
+        -webkit-background-size: 30px,30px;
+        background-size: 30px,30px;
+        font-size: 13px;
+    }
+`

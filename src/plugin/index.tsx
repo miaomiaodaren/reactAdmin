@@ -12,14 +12,14 @@ class Plugin extends React.Component<any, any>{
                 {name: '评分', url: 'rate'},
                 {name: '进度条', url: 'progress'},
                 {name: '三级联动', url: 'select'},
-                {name: '编辑器', url: 'edit'}, 
+                // {name: '编辑器', url: 'edit'}, 
                 {name: '文件上传', url: 'upload'},
                 {name: '弹出层', url: 'modal'},
                 {name: '文字打印效果', url: 'textwrite'},
                 {name: '返回顶部', url: 'scrollToTop'},
                 {name: '距边悬浮', url: 'sticky'},
                 {name: '联级选择框', url: 'cascader'},
-                // {name: '文本输入框', url: 'input'},
+                {name: '日期时间选择框', url: 'datepicker'},
                 // {name: '图片轮播', url: 'swipt'},
             ]
         }
