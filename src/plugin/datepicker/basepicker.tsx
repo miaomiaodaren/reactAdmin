@@ -38,7 +38,7 @@ export default class BasePicker extends React.Component<BaseProps, any>{
                         <input type="text" value={seleceValue} onFocus={this.inputfocus}></input>
                     </div>
                     <div className="picker_table">
-                        <DateTable value={seleceValue} data={date}/>
+                        <DateTable value={seleceValue} date={date}/>
                     </div>
                 </div>
             </div>

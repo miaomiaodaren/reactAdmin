@@ -1,17 +1,18 @@
 import * as React from 'react'
 import Model from './modal';
 import * as ReactDOM from 'react-dom'
-import Style from './message.less'
 
 
 type ConfigContent = React.ReactNode | string;
-type ConfigOption = {
+export type ConfigOption = {
     children?: ConfigContent
     duration?: number,      //秒娄 
-    maxCount?: number,      //最多几个
+    maxCount?: number,      //最多会在页面上显示几个，后面的会把头部的顶掉
     suc_btn?: () => void,
-    error_btn ?: () => void,
-    type?: string
+    error_btn ?: boolean,
+    type?: "alert" | "info" | "config" | string,
+    mask?: true,             //是否显示遮罩层
+    position?: "top" | 'left' | 'right' | 'bottom' | 'center'
 }
 
 
@@ -41,7 +42,7 @@ function notice(option:ConfigOption) {
     }
     const div = document.createElement('div');
     first_div.appendChild(div);
-    div.className = Style.message;
+    div.className = `message ${option.position}`;
     const componet = React.createElement(Model, Object.assign({}, {...Options}, {...option},  {willUnmount: () => {
         ReactDOM.unmountComponentAtNode(div);
         first_div.removeChild(div);
@@ -50,8 +51,14 @@ function notice(option:ConfigOption) {
 }
 
 export default {
-    info(content: ConfigContent, duration?: number) {
-        let op = {children: content, duration, type: 'info'}
+    info(content: ConfigContent, duration?: number, options?: object) {
+        console.info(arguments.length, 'leng')
+        let op: object;
+        if(typeof duration === 'object' && arguments.length === 2) {
+            op = {children: content, duration, type: 'info'}
+        } else {
+            op = {children: content, duration, type: 'info', ...options}
+        }
         return notice(op); 
     },
     config(option: ConfigOption) {

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { GetBlogList } from '../../api/api';
 import styled from 'styled-components';
 import moment from 'moment';
+import ScrollTop from '../../plugin/scrollToTop/scrolltop'
 
 export default class BlogCon extends React.Component<any, any> {
     constructor(props: any) {
@@ -40,6 +41,7 @@ export default class BlogCon extends React.Component<any, any> {
                         </div>
                     </React.Fragment>
                 })}
+                <ScrollTop />
             </BlogMain>
         )
     }

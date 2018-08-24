@@ -227,8 +227,8 @@ const mapDispatchToProps = (dispatch: any) => {
         BolgList: (params: any = {}) => {
             fetchBlogList(params)(dispatch)
         },
-        GetAllTypes: async(data: any = {}, callback?: () => void ) => {
-            return await getAsynTypeList(data, callback)(dispatch)
+        GetAllTypes: (data: object = {}, callback?: () => void ) => {
+            return getAsynTypeList(data, callback)(dispatch)
         }
     }
 }

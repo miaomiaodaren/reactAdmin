@@ -93,6 +93,7 @@ ul li {
     // background-color: #fff;
     box-sizing: border-box;
     display: flex;
+    background-color: #fff;
     .searchbar { //搜索框总样式
         width: 100%;
         text-align: right;
@@ -363,4 +364,97 @@ ul li {
     border: 1px solid #ddd;
     cursor: pointer;
     flex: none;
+}
+
+
+
+.f_message{
+    .message{
+        padding: 10px 16px;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        background: #fff;
+        display: inline-block;
+        pointer-events: all;
+        position: absolute;
+        z-index: 999;
+        h4{
+            font-size: 50px;
+            color: #000;
+        }
+        &.top{
+            animation: topanimation .2s linear;
+            animation-fill-mode: forwards;
+            animation-iteration-count: 1;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        &.left{
+            left: 0;
+            animation: leftanimation .2s linear;
+            animation-fill-mode: forwards;
+            animation-iteration-count: 1;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        &.right{
+            right: 0;
+            animation: rightanimation .2s linear;
+            animation-fill-mode: forwards;
+            animation-iteration-count: 1;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        &.bottom{
+            bottom: 0;
+            animation: bottomanimation .2s linear;
+            animation-fill-mode: forwards;
+            animation-iteration-count: 1;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        &.center{
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+@keyframes topanimation {
+    form{opacity: 0; top: 0px}
+    to{opacity: 1; top: 50px}
+}
+@-webkit-keyframes topanimation{
+    form{opacity: 0; top: 0px}
+    to{opacity: 1; top: 50px}
+}
+
+@keyframes leftanimation {
+    form{opacity: 0; left: 0px}
+    to{opacity: 1; left: 50px}
+}
+@-webkit-keyframes leftanimation{
+    form{opacity: 0; left: 0px}
+    to{opacity: 1; left: 50px}
+}
+
+@keyframes rightanimation {
+    form{opacity: 0; right: 0px}
+    to{opacity: 1; right: 50px}
+}
+@-webkit-keyframes rightanimation{
+    form{opacity: 0; right: 0px}
+    to{opacity: 1; right: 50px}
+}
+
+@keyframes bottomanimation {
+    form{opacity: 0; bottom: 0px}
+    to{opacity: 1; bottom: 50px}
+}
+@-webkit-keyframes bottomanimation{
+    form{opacity: 0; bottom: 0px}
+    to{opacity: 1; bottom: 50px}
 }
