@@ -1,6 +1,6 @@
 import fetchAjax from './fetch';
 
-//用户登入接口测试
+//用户登入接口测试1
 export const Loging = (params = {}) => fetchAjax(`/users/reginer`, 'GET', params);
 
 //获取所有用户列表
