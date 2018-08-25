@@ -17,7 +17,7 @@ export default class ModleDemo extends React.Component<any, any> {
     }
 
     butclick = () => {
-        Message.info('This is a normal message', 12);
+        Message.info('This is a normal message', 2, {position: 'bottom'});
     }
 
     butclick2 = () => {

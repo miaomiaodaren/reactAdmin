@@ -16,3 +16,19 @@
   font-size: 50px;
   color: #000;
 }
+.message.top {
+  position: absolute;
+  top: 10px;
+}
+.message.left {
+  position: absolute;
+  top: 10px;
+}
+.message.right {
+  position: absolute;
+  top: 10px;
+}
+.message.bottom {
+  position: absolute;
+  top: 10px;
+}
