@@ -952,6 +952,8 @@ export const numAmation: Function = (start: number, end: number, times: number):
 } 
 
 
+
+//做联级动效时用的一个
 export const arrayTreeFilter = <T>(
     data: T[],
     filterFn: (item: T, level: number) => boolean,
@@ -965,10 +967,10 @@ export const arrayTreeFilter = <T>(
     var level = 0;
     do {
         var foundItem: T = children.filter(function(item) {
-        return filterFn(item, level);
+            return filterFn(item, level);
         })[0];
         if (!foundItem) {
-        break;
+            break;
         }
         result.push(foundItem);
         children = (foundItem as any)[options.childrenKeyName] || [];

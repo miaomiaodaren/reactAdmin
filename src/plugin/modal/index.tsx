@@ -12,12 +12,13 @@ export default class ModleDemo extends React.Component<any, any> {
         //全局注册
         Message.config({
             duration: 5,
-            maxCount: 3
+            maxCount: 3,
+            defaultModel: MsgAlert
         });
     }
 
     butclick = () => {
-        Message.info('This is a normal message', 2, {position: 'bottom'});
+        Message.info('This is a normal message1111', 21, {position: 'bottom'});
     }
 
     butclick2 = () => {
@@ -34,4 +35,15 @@ export default class ModleDemo extends React.Component<any, any> {
             </div>
         )
     }
+}
+
+
+
+const MsgAlert = (props: any) => {
+    const {children} = props;
+    console.info(props, 'props')
+    return (<div>
+        {children}
+        <span>我只是一个小小的通用框架</span>
+    </div>)
 }

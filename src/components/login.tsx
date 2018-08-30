@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 import { SearchForm } from './searchbar';
 import { message } from 'antd';
@@ -6,25 +6,6 @@ import { UserLogin } from '../api/api';
 import styled from 'styled-components';
 
 const Pheight = document.body.clientHeight;
-
-const LoginBg = styled.div`
-    width: 100%;
-    height: ${Pheight}px;
-`
-const LoginDiv = styled.div`
-    width: 400px;
-    height: 300px;
-    position: absolute;
-    margin: auto;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border: 1px solid #ddd;
-    background-color: #fff;
-    padding: 30px;
-`
-
 export default class Login extends React.Component<any, any> {
     constructor(props: any) {
         super(props)
@@ -80,10 +61,35 @@ export default class Login extends React.Component<any, any> {
     render() {
         return (
             <LoginBg className="loginBg">
-                <LoginDiv>
+                <LoginDiv className="login_main">
+                    <h2>用户登录</h2>
                     <SearchForm fields={ this.Loginfields()} editBtn={this.editBtn()} submitClick={this.sumbitClick} />
                 </LoginDiv>
             </LoginBg>
         )
     }
 }
+
+const LoginBg = styled.div`
+    width: 100%;
+    height: ${Pheight}px;
+    background-color: #f0f2f5;
+    h2{
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+`
+const LoginDiv = styled.div`
+    width: 400px;
+    height: 300px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 30px;
+`

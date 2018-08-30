@@ -1,14 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
 import {ConfigOption} from './message'
 
-interface tsModel {
+export interface tsModel {
     duration?: number,
     suc_but_text?: string,
     err_but_text?: string,
-    willUnmount: () => void,
+    willUnmount?: () => void,
     suc_btn_callback?: Function,
     err_btn_callback?: Function,
 }
@@ -53,25 +52,30 @@ export default class Modal extends React.Component<ConfigOption & tsModel, any> 
         this.colse();
     }
 
+    errclick = () => {
+        const {err_btn_callback} = this.props;
+        err_btn_callback && err_btn_callback();
+        this.colse()
+    }
+
     alertBtn = () => {
         const {type, error_btn, suc_btn_callback, suc_but_text, err_but_text} = this.props;
         if(type !== 'alert') return '';
         let component = [];
         let com = (
             <div className="alert_btn">
-                {error_btn ? <div className="alert_error">{err_but_text}</div> : ''}
-                <div className="alert_success" onClick={this.succlick}>{suc_but_text}</div>
+                <div className="alert_success msg_button" onClick={this.succlick}>{suc_but_text}</div>
+                <div className="alert_error msg_button" onClick={this.errclick}>{err_but_text}</div>
             </div>
         )
         return com
     }
 
     render() {
-        console.info(this.props, 66);
         const {type} = this.props;
         return (
             <React.Fragment>
-                {this.props.children}
+                <div className="model_text">{this.props.children}</div>
                 {this.alertBtn()}
             </React.Fragment>
         )

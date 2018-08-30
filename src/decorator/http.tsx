@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {stringify, parse} from 'qs'
 
 
 export const GET = (...args: any[]) => request('get', args);
@@ -24,8 +25,8 @@ function _ParamsParse(args: any[]) {
         }
     } else {
         let _newargs = Array.prototype.slice.call(args, 1, 2);
-        if(typeof _newargs === 'object') {
-            _params = _newargs
+        if(typeof _newargs[0] === 'object') {
+            _params = _newargs[0]
         }
     }
     return {
@@ -43,6 +44,7 @@ function _ParamsParse(args: any[]) {
  * @param {*} descriptor 该属性的描述对象
  */
 const _Request = (args:any) => (target: any, property: string, descriptor: any) => {
+    console.info(args, 3333);
     console.info(target, property, descriptor, 6666, target.Create);
     if (!descriptor) {
         process.env.NODE_ENV !== 'production' && console.warn(`http options only works on methods`);
@@ -58,10 +60,9 @@ const _Request = (args:any) => (target: any, property: string, descriptor: any) 
         if(args.method === 'get') {
             config.params = args.params
         } else if(args.method === 'post') {
-            config.data = args.params
+            config.data = stringify(args.params)
         }
         const req = axios(config);
-        console.info(args, 777777777, req)
         req.then((res: any) => {
             oldVal.call(this, res.data)
         }).catch((err: any) => {

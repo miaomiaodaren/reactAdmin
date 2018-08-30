@@ -172,6 +172,8 @@ ul li {
   margin: 30px auto;
   box-sizing: border-box;
   display: flex;
+}
+#main_right #warp {
   background-color: #fff;
 }
 #main_right .searchbar {
@@ -444,38 +446,40 @@ ul li {
 .example-leave.example-leave-active {
   opacity: 0;
 }
-.alert_btn {
-  padding: 10px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.alert_success {
-  width: 60px;
-  height: 35px;
-  background-color: #1e89e0;
-  color: #fff;
+.switch_main {
   display: inline-block;
-  line-height: 35px;
-  text-align: center;
-  border-radius: 5px;
-  border: 1px solid #ddd;
   cursor: pointer;
-  flex: none;
 }
-.alert_error {
-  width: 60px;
+.switch_main .switch {
+  width: 70px;
   height: 35px;
+  border: 1px solid #ddd;
+  border-radius: 18px;
+  background-color: #aaa;
+  position: relative;
+  opacity: 1;
+}
+.switch_main .switch .switch_active {
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  transition: all .5s ease;
   background-color: #fff;
-  color: #000;
-  display: inline-block;
-  line-height: 35px;
+  position: absolute;
+  right: 35px;
+  top: 1px;
+}
+.switch_main .switch.active {
+  background-color: #1e89e0;
+}
+.switch_main .switch.active .switch_active {
+  right: 0;
+}
+.switch_main .switch.disabled {
+  opacity: .7;
+}
+.f_message .model_text {
   text-align: center;
-  border-radius: 5px;
-  margin-right: 15px;
-  border: 1px solid #ddd;
-  cursor: pointer;
-  flex: none;
 }
 .f_message .message {
   padding: 10px 16px;
@@ -528,6 +532,44 @@ ul li {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.f_message .message .alert_btn {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.f_message .message .alert_btn .msg_button {
+  width: 100px;
+  height: 40px;
+  margin-right: 15px;
+}
+.f_message .message .alert_btn .msg_button.alert_success {
+  width: 60px;
+  height: 35px;
+  background-color: #1e89e0;
+  color: #fff;
+  display: inline-block;
+  line-height: 35px;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  flex: none;
+}
+.f_message .message .alert_btn .msg_button.alert_error {
+  width: 60px;
+  height: 35px;
+  background-color: #fff;
+  color: #000;
+  display: inline-block;
+  line-height: 35px;
+  text-align: center;
+  border-radius: 5px;
+  margin-right: 15px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  flex: none;
 }
 @keyframes topanimation {
   form {
@@ -608,4 +650,24 @@ ul li {
     opacity: 1;
     bottom: 50px;
   }
+}
+@media screen and (max-device-width: 750px) {
+  .login_main {
+    width: 90% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0 !important;
+    flex-direction: column;
+    background-color: inherit !important;
+  }
+}
+.buttons {
+  text-align: center;
+}
+.field .input .title {
+  width: 20% !important;
+}
+.field .input .input {
+  width: 80% !important;
 }

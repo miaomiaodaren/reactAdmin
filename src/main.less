@@ -93,7 +93,10 @@ ul li {
     // background-color: #fff;
     box-sizing: border-box;
     display: flex;
-    background-color: #fff;
+    // background-color: #fff;
+    #warp{
+        background-color: #fff;
+    }
     .searchbar { //搜索框总样式
         width: 100%;
         text-align: right;
@@ -331,44 +334,47 @@ ul li {
 
 
 
-.alert_btn{
-    padding: 10px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.alert_success{
-    width: 60px;
-    height: 35px;
-    background-color: @bgColor;
-    color: #fff;
+//switch 开关样式
+.switch_main{
     display: inline-block;
-    line-height: 35px;
-    text-align: center;
-    border-radius: 5px;
-    border: 1px solid #ddd;
     cursor: pointer;
-    flex: none;
+    .switch{
+        width: 70px;
+        height: 35px;
+        border: 1px solid #ddd;
+        border-radius: 18px;
+        background-color: #aaa;
+        position: relative;
+        // box-sizing: border-box;
+        opacity: 1;
+        .switch_active{
+            width: 31px;
+            height: 31px;
+            border-radius: 50%;
+            transition: all .5s ease;
+            background-color: #fff;
+            position: absolute;
+            right: 35px;
+            top: 1px;
+        }
+        &.active{
+            background-color: @bgColor;
+            .switch_active{
+                right: 0;
+            }
+        }
+        &.disabled{
+            opacity: .7;
+        }
+    }
 }
 
-.alert_error{
-    width: 60px;
-    height: 35px;
-    background-color: #fff;
-    color: #000;
-    display: inline-block;
-    line-height: 35px;
-    text-align: center;
-    border-radius: 5px;
-    margin-right: 15px;
-    border: 1px solid #ddd;
-    cursor: pointer;
-    flex: none;
-}
 
-
-
+//弹窗组件公用样式
 .f_message{
+    .model_text{
+        text-align: center;
+    }
     .message{
         padding: 10px 16px;
         border-radius: 4px;
@@ -419,6 +425,44 @@ ul li {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+        }   
+        .alert_btn{
+            padding: 10px 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            .msg_button{
+                width: 100px;
+                height: 40px;
+                margin-right: 15px;
+                &.alert_success{
+                    width: 60px;
+                    height: 35px;
+                    background-color: @bgColor;
+                    color: #fff;
+                    display: inline-block;
+                    line-height: 35px;
+                    text-align: center;
+                    border-radius: 5px;
+                    border: 1px solid #ddd;
+                    cursor: pointer;
+                    flex: none;
+                }
+                &.alert_error{
+                    width: 60px;
+                    height: 35px;
+                    background-color: #fff;
+                    color: #000;
+                    display: inline-block;
+                    line-height: 35px;
+                    text-align: center;
+                    border-radius: 5px;
+                    margin-right: 15px;
+                    border: 1px solid #ddd;
+                    cursor: pointer;
+                    flex: none;
+                }
+            }
         }
     }
 }
@@ -457,4 +501,31 @@ ul li {
 @-webkit-keyframes bottomanimation{
     form{opacity: 0; bottom: 0px}
     to{opacity: 1; bottom: 50px}
+}
+
+@media screen and (max-device-width: 750px) {
+    .login_main{
+        width: 90% !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0 !important;
+        flex-direction: column;
+        background-color: inherit !important;
+    }
+}
+
+.buttons{
+    text-align: center;
+}
+
+.field{
+    .input{
+        .title{
+            width: 20% !important;
+        }
+        .input{
+            width: 80% !important;
+        }
+    }
 }

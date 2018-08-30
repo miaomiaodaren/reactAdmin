@@ -20,6 +20,8 @@ class Plugin extends React.Component<any, any>{
                 {name: '距边悬浮', url: 'sticky'},
                 {name: '联级选择框', url: 'cascader'},
                 {name: '日期时间选择框', url: 'datepicker'},
+                {name: '倒计时', url: 'CountDown'},
+                {name: '按钮开关', url: 'Switch'},
                 // {name: '图片轮播', url: 'swipt'},
             ]
         }

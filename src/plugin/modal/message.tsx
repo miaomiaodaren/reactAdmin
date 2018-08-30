@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Model from './modal';
+import Model, {TsModel} from './modal';
 import * as ReactDOM from 'react-dom'
 
 
@@ -12,7 +12,9 @@ export type ConfigOption = {
     error_btn ?: boolean,
     type?: "alert" | "info" | "config" | string,
     mask?: true,             //是否显示遮罩层
-    position?: "top" | 'left' | 'right' | 'bottom' | 'center'
+    position?: "top" | 'left' | 'right' | 'bottom' | 'center',
+    defaultModel?: any,
+    willUnmount?: () => void
 }
 
 
@@ -42,13 +44,14 @@ function notice(option:ConfigOption) {
     }
     const div = document.createElement('div');
     first_div.appendChild(div);
-    div.className = `message ${option.position}`;
-    const componet = React.createElement(Model, Object.assign({}, {...Options}, {...option},  {willUnmount: () => {
+    div.className = `message ${option.position || 'center'}`;
+    const componet = React.createElement(WapComponent, Object.assign({}, {...Options}, {...option},  {willUnmount: () => {
         ReactDOM.unmountComponentAtNode(div);
         first_div.removeChild(div);
     }}))
     ReactDOM.render(componet, div)
 }
+// Options.defaultModel ? Options.defaultModel : Model
 
 export default {
     info(content: ConfigContent, duration?: number, options?: object) {
@@ -70,6 +73,26 @@ export default {
     }
 }
 
+class WapComponent extends Model {
+    constructor(props:ConfigOption & TsModel) {
+        super(props)
+    }
+
+    // componentDidMount() {
+    //     console.info(this.props, 'isporps', this)
+    // }
+
+    render() {
+        console.info(this, 'this aa is ', this.alertBtn());
+        const WarModel: any = this.props.defaultModel ? Options.defaultModel : Model
+        return (
+            <React.Fragment>
+                <WarModel {...this.props}/>
+                {this.alertBtn()}
+            </React.Fragment>
+        )
+    }
+}
 
 
 

@@ -11,8 +11,8 @@ import * as PropTypes from 'prop-types';
 import {is, fromJS, Map} from 'immutable'
 import styled from 'styled-components';  //https://juejin.im/entry/59a57a2b5188252445327ac1  使用教程
 
-import {GET} from '../../decorator/http'
-import {aa, bb} from '../../decorator/test';    //装饰器测试
+import {GET,POST} from '../../decorator/http'
+import {aa, bb, cc, dd} from '../../decorator/test';    //装饰器测试
 
 export interface UserProps {
     dispatch?: any;
@@ -86,6 +86,7 @@ class Users extends React.Component<any, any> {
             selectid: ''    //选择的按钮
         }
         this.descorpt = this.descorpt.bind(this);
+        this.descorpt2 = this.descorpt2.bind(this);
         this.dectest = this.dectest.bind(this);
     }
     
@@ -199,6 +200,11 @@ class Users extends React.Component<any, any> {
     descorpt(res:any) {
         console.info(res, '我觉得我会成功')
     }
+
+    @POST('/api/type/Gettype', {name: 22, age: 33})
+    descorpt2(res?: object) {
+        console.info(res, '我觉得我会成功2')
+    }
     
 
 
@@ -213,6 +219,7 @@ class Users extends React.Component<any, any> {
         //在此使用了redux的connect的第二个参数，可以直接封装一个方法，然后直接在页面实现action的方法
         this.props.userList();
         this.descorpt(222)
+        this.descorpt2()
         this.dectest()
     }
 
@@ -303,8 +310,10 @@ class Users extends React.Component<any, any> {
         console.info(e.ta, num, 2222);
     }
 
-    @aa
-    @bb
+    // @aa
+    // @bb
+    @cc('i am is cc')
+    @dd('i am is dd')
     dectest(res?: any) {
         console.info('testdec', res);
     }

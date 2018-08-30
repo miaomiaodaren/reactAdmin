@@ -58,7 +58,6 @@ export default class Home extends React.Component<any, any> {
                         {this.setRoute()}
                     </Switch>
                 </div>
-                
             </Homemain>
         )
     }
