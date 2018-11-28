@@ -7,7 +7,7 @@ export default class DatePick extends Component {
     render() {
         return (
             <div>
-                <Picker />
+                <Picker seleceValue="2" />
             </div>
         )
     }

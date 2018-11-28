@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Model, {TsModel} from './modal';
+import {Modal, tsModel} from './modal';
 import * as ReactDOM from 'react-dom'
 
 
@@ -45,7 +45,7 @@ function notice(option:ConfigOption) {
     const div = document.createElement('div');
     first_div.appendChild(div);
     div.className = `message ${option.position || 'center'}`;
-    const componet = React.createElement(WapComponent, Object.assign({}, {...Options}, {...option},  {willUnmount: () => {
+    const componet = React.createElement(WapComponent as any, Object.assign({}, {...Options}, {...option},  {willUnmount: () => {
         ReactDOM.unmountComponentAtNode(div);
         first_div.removeChild(div);
     }}))
@@ -73,8 +73,8 @@ export default {
     }
 }
 
-class WapComponent extends Model {
-    constructor(props:ConfigOption & TsModel) {
+class WapComponent extends Modal {
+    constructor(props:ConfigOption & tsModel) {
         super(props)
     }
 
@@ -84,7 +84,7 @@ class WapComponent extends Model {
 
     render() {
         console.info(this, 'this aa is ', this.alertBtn());
-        const WarModel: any = this.props.defaultModel ? Options.defaultModel : Model
+        const WarModel: any = this.props.defaultModel ? Options.defaultModel : Modal
         return (
             <React.Fragment>
                 <WarModel {...this.props}/>

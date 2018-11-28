@@ -13,6 +13,10 @@ export function testAction() {
     return {type: 'TEXTACTION'}
 }
 
+export function infoList() {
+    return {type: 'INFOLIST'}
+}
+
 //异步active
 // function asyncActionTest() {
 //     return (dispatch: any) => {

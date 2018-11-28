@@ -12,7 +12,7 @@ interface BaseProps {
 
 export default class BasePicker extends React.Component<BaseProps, any>{
     static protoType = {
-        seleceValue: PropTypes.object
+        seleceValue: PropTypes.any
     }
     static defaultProps = {
         seleceValue: ''

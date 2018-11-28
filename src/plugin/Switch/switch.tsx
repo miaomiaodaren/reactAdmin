@@ -5,7 +5,9 @@ type SwitchProp = {
     defaultChecked?: boolean,
     disabled?: boolean,
     checked?: boolean,
-    onChange?: (check: boolean) => void
+    onChange?: (check: boolean) => void,
+    checkText?: string | number | HTMLDivElement,
+    uncheckText?: string | number | HTMLDivElement
 }
 
 type SwitchState = {
@@ -18,7 +20,9 @@ export default class Switch extends Component<SwitchProp, SwitchState> {
         defaultChecked: PropTypes.bool,
         disabled: PropTypes.bool,
         checked: PropTypes.bool,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        checkText: PropTypes.any,
+        uncheckText: PropTypes.any,
     }
 
     static defaultProp = {
@@ -76,15 +80,16 @@ export default class Switch extends Component<SwitchProp, SwitchState> {
     }
 
     render() {
-        const {checked, disabled, defaultChecked} = this.props;
-        const {swt_check} = this.state
+        const {checked, disabled, defaultChecked, checkText, uncheckText} = this.props;
+        const {swt_check} = this.state;
+        let component = swt_check ? checkText ? <span>{checkText}</span> : <span>{uncheckText}</span> : ''
         return (
             <div className="switch_main">
                  <div className={`switch ${(swt_check) ? 'active' : ''} ${disabled ? 'disabled' : ''}`} 
                     onKeyDown={this.selkey}
-                    onClick={() => this.toggleactive()}>
-                    ref={this.addnode}
+                    onClick={() => this.toggleactive()} ref={this.addnode}>
                     <div className={`switch_active`}></div>
+                    {component}
                  </div>
             </div>
         )

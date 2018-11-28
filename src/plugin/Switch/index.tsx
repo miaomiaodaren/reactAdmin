@@ -5,7 +5,7 @@ export default class Sw extends Component<any, object> {
     render() {
         return (
             <React.Fragment>
-                <Switch></Switch>
+                <Switch ></Switch>
             </React.Fragment>
             
         )

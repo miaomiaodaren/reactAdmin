@@ -8,8 +8,8 @@ class Copy extends React.Component<any, any>{
     }
     componentDidMount() {
         let btn = this.refs.copys;   
-        let aa = findDOMNode(btn);
-        let isCopy = new ClipboardJS(aa);
+        let aa: Element | null | Text = findDOMNode(btn);
+        let isCopy = new ClipboardJS(aa as Element);
         isCopy.on('success', function(e: any) {
             alert(`成功了${e}`)
         });

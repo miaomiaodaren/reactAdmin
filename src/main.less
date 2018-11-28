@@ -354,13 +354,13 @@ ul li {
             transition: all .5s ease;
             background-color: #fff;
             position: absolute;
-            right: 35px;
+            right: 36px;
             top: 1px;
         }
         &.active{
             background-color: @bgColor;
             .switch_active{
-                right: 0;
+                right: 1px;
             }
         }
         &.disabled{
@@ -527,5 +527,15 @@ ul li {
         .input{
             width: 80% !important;
         }
+    }
+}
+
+
+.css_list_warptop{
+    display: flex;
+    justify-items: flex-start;
+    flex-direction: row;
+    .csslist_top{
+        flex: auto;
     }
 }

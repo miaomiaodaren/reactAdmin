@@ -13,7 +13,7 @@ export interface tsModel {
 }
 
 
-export default class Modal extends React.Component<ConfigOption & tsModel, any> {
+export class Modal extends React.Component<ConfigOption & tsModel, any> {
     constructor(props: tsModel) {
         super(props)
     }

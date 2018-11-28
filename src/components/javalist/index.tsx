@@ -8,10 +8,13 @@ import CssList from './csslist';
 import JsList from './jslist';
 import html from './html';
 
+import { mainStateType } from '../../model/reducers/jstt'
+
 interface JAVAPROPS {
     BlogList?: any,
     saveType?: any,
     dispatch?: any
+    csstts?: mainStateType
 }
 
 class JavaList extends React.Component<JAVAPROPS, any> {
@@ -20,6 +23,7 @@ class JavaList extends React.Component<JAVAPROPS, any> {
         this.state = {
             tabList: [],
             activeKey: '',
+            selectInfo : this.props.csstts.name[0]
         }
     }
     componentWillMount() {
@@ -76,11 +80,24 @@ class JavaList extends React.Component<JAVAPROPS, any> {
         this.setState({activeKey})
     }
     render() {
+        const { csstts } = this.props;
         return (
             <div className="javaList">
                 <Tabs onChange={this.tabOnChange} activeKey={this.state.activeKey} type="line" tabPosition="left">
                     {this.state.tabList.map((pane: any) => <TabPane className="tabs_Panes" tab={pane.name} key={pane._id} forceRender={false} closable={pane.closable}>
-                        {this.setPackDom(pane.name)}
+                        <div className="css_list_warptop" key={this.state.activeKey}>
+                            { (() => {
+                                const components: any[] = [];
+                                csstts['name'].map((item: string, index: number) => {
+                                    components.push(<div key={item} className="csslist_top">
+                                        <div className="info_tab_header" onClick={() => {this.setState({selectInfo: item})}}>{item}</div>
+                                        {item === this.state.selectInfo ? <div className="info_tab_main">this is {this.state.selectInfo}</div> : void 0}
+                                    </div>)
+                                })
+                                return components
+                            })()}
+                        </div>
+                        {this.setPackDom(pane.name)} 
                     </TabPane>)}
                 </Tabs>
             </div>
@@ -91,6 +108,7 @@ class JavaList extends React.Component<JAVAPROPS, any> {
 const mapStateToProps = (state: any) => ({
     BlogList: state.saveBlogList,
     saveType: state.saveType,
+    csstts: state.CssTtReducer
 })
 
 const mapDispatchToProps = (dispatch: any) => {

@@ -1,8 +1,8 @@
 import * as React from 'react';
 // import cssJson from './css.json';
-import { Button } from 'antd';
+import { Button, Tabs } from 'antd';
 import { isArrayLislk, each, gettype } from '../../util/util';
-import { csstt, cssAttrAction } from '../../model/actions/jstt';
+import { csstt, cssAttrAction, infoList } from '../../model/actions/jstt';
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -25,7 +25,8 @@ class csslist extends React.Component<PROPS, any> {
     constructor(props: any) {
         super(props)
         this.state = {
-            cssType: {}
+            cssType: {},
+            
         }
     }
     componentWillMount() {
@@ -48,10 +49,13 @@ class csslist extends React.Component<PROPS, any> {
         return temps
     }
     render() {
+        const {csstts} = this.props;
         return(
             <div className="csslist">
                 {/* <Button type="primary" onClick={() => this.props.createAjaxAction()}>Primary</Button>
                 <Button type="primary" onClick={() => console.info(this.props)}>showProps</Button> */}
+                
+                {this.state.selectInfo}
                 <section id="cssbd">
                     {this.cerateCssDom()}
                 </section>

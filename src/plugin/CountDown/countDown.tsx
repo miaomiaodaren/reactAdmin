@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ReactElement, ReactHTMLElement, ReactFragment } from 'react';
 
 export interface ICountDownProps {
-    format?: (time: number) => void;
     target: Date | number;
+    format?: (time: number) => void;
     onEnd?: () => void;
     style?: React.CSSProperties;
 }
@@ -66,7 +66,7 @@ class CountDown extends React.Component<ICountDownProps, {lastTime: number}>{
         }, this.interval)
     }
 
-    defaultFormat = (time: number) => {
+    defaultFormat = (time: number): any => {
         const hours = 60 * 60 * 1000;
         const minutes = 60 * 1000;
         const h = Math.floor(time / hours);
@@ -82,8 +82,13 @@ class CountDown extends React.Component<ICountDownProps, {lastTime: number}>{
     render() {
         const { format = this.defaultFormat, onEnd, ...rest } = this.props;
         const { lastTime } = this.state;
-        const result = format(lastTime);
-        return (<div>{result}</div>)
+        const result: any = format(lastTime);
+        return (
+            // <div className="aa">{result}</div>
+            <React.Fragment>
+                {result}
+            </React.Fragment>
+        )
     }
 }
 
