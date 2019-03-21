@@ -1,5 +1,5 @@
 import * as api from '../api/api';
-import React from 'react';
+import * as React from 'react';
 
 export interface Api {
     [index: number]: string;     //可以通过索引得到类型

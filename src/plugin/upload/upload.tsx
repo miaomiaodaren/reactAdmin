@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import Prototype from 'prop-types'
 import styled from 'styled-components'
 import uploadajax from './ajax'

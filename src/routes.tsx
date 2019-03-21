@@ -12,6 +12,7 @@ import Main from './components/home/main'
 import BlogCon from './components/blog/blogcon';
 import Error from './components/404';
 import Plugin from './plugin/index';        //插件路由
+import ZipCode from './components/zipcode/index';   // 批量生成下载二维码
 
 const routes = [
     { path: '/user', body: () => User, name: '用户列表', sort: 2},
@@ -25,6 +26,7 @@ const routes = [
     { path: '/plugin', body: () => Plugin, name: '插件列表', sort: 4},
     { path: '/plugin/:type', body: () => Plugin },
     { path: '/music', body: () => Music },
+    { path: '/qrcode', body: () => ZipCode, sort: 6 },
     { path: '/index', body: () => Main, name: '首页', sort: 1},
     {body: () => Error, key: 'error' },
 ]

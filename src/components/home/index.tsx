@@ -21,15 +21,19 @@ const PrivateRoute = ({component: Component, ...rest}: any) => {
     // rest.exact = rest.path === '/' ? true : false;
     return (
         <Route {...rest} exact={true} render={ props =>
-            isLogin() ? (
-                <Component  {...props} />
-            ) : (
-                <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
-            )
+            // isLogin() ? (
+            //     <Component  {...props} />
+            // ) : (
+            //     <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
+            // ) 
+            // 暂时去掉路由
+            <Component  {...props} />
         }/>
     )
 } 
 
+// 在未来hook的版本中可以这样写
+// export const SearchComponent: React.SFC<ISearchProps> = ({xx, xx}) => {}
 
 export default class Home extends React.Component<any, any> {
     constructor(props: any) {

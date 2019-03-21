@@ -1,17 +1,17 @@
-import React from 'react';
-import PropsTypes from 'prop-types';
+import * as React from 'react';
+import propsType from 'prop-types';
 import styled from 'styled-components';
 
 export default class Htmler extends React.Component<any, any> {
     constructor(props: any) {
         super(props)
     }
-    static propTypes = {
-        title: PropsTypes.string,
-    }
-    static defaultProps = {
-        title: ''
-    }
+    // static propTypes = {
+    //     title: propsType.any
+    // }
+    // static defaultProps = {
+    //     title: '1'
+    // }
 
     render() {
         return (
